@@ -1,4 +1,4 @@
-grammar Gram; \\Fichier commun grammaire du projet
+grammar Algol60; \\Fichier commun grammaire du projet
 
 options{
 	backtrack =false; //LL(k)
