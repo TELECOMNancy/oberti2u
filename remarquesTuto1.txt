@@ -1,0 +1,50 @@
+
+
+tristoon.github.io/algol60-grammar-tncy/
+
+=> Au debut du fichier:
+
+  grammar algol60;
+
+  options{
+    language = Java;
+    output = AST;
+    backtrack = false;
+    k = 1;
+  }
+
+=> Recursivité Gauche:
+  Ex1:
+    A -> A , B
+         B    //ambigue
+
+    Sans la Recursivité:
+    A -> BC
+    C -> , A | $
+
+  Ex2:
+    A -> A + A
+         A x A
+         B
+
+    Strategie resolution:
+      a : a('+'a)? | a('*' a)? | B  // ? = 0 ou 1 fois
+
+      a1 : c a2;
+      a2 :  '+' c1 a2 | ;
+      c1 : B c2;
+      c2 : '*' B c2 | ;
+                       //  + = repetition de 1 à n fois
+      a: c ('+' c)*;   //  * = repetition de 0 à n fois
+      c: B ('*' B)*;
+
+  => Ambiguité:
+    stat : 'if' exp 'then' stat ('else' stat)? | exp ; // dangly else
+    exp : ... ;
+
+    Strategie possible:
+      stat : 'if' exp 'then' stat2 ('else' stat)? | exp ;
+                                  /\
+                                  ||
+                                  options{greedy = true}
+      stat2 : 'if' exp 'then' stat2 ('else' stat)? | exp ;
