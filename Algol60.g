@@ -1,35 +1,97 @@
-grammar Algol60; \\Fichier commun grammaire du projet
+grammar algol60;
 
-options{
-	backtrack =false; //LL(k)
-	k=1;
+options{k=1;
+language = Java;
+backtrack =false;
+output=AST;
+ASTLabelType=CommonTree;
 }
 
-prog : block | compound statement //tentative de derecursivation et de factorisation d'un bout de grammaire de masswerk.at pour tenter de rendre la grammaire LL(1) (le fichier ne compile pas)																  
+prog : 'BEGIN'c
+	|(label':')+'BEGIN'c;
+	
+compound_tail : stat b;
 
-block : unlabelled block | label ':' block
+b : 'END'
+   |';'compound_tail;
 
+c : compound_tail
+   |decl';'d;
+   
+d : (decl';')*compound_tail;
 
-unlabelled block : block head ';' compound tail
+decl : loot typeD
+     | switchDecl
+     | typeD;
+     
+loot : type
+     | 'own type';
+  
+type : 'real' //terminaux ‡ complÈter
+     | 'int'
+     | 'bool';
+     
+typeD : procedDecl
+      | arrayDecl
+      | typeList;
+      
+switchDecl : 'switch' id ':=' switchList;
 
+switchList : designExpr(','designExpr)*;
+      
+procedDecl : 'procedure' procedureHeading procedureBody;
 
-block head : 'BEGIN' declaration block head'
+procedureBody : stat;
 
-block head':  | ; declaration block head' // apr√®s derecursivation, factorisation et reduction de la regle d'origine
+designExpr : 'b';
 
-compound statement : unlabelled compound | label:compound statement
+procedureHeading : id formalParamPart ';' valuePart specPart;
 
-unlabelled compound : 'BEGIN' compound tail
+valuePart : 'value' idList ';'
+	  | ;
+	 
+idList : id(','id)*;
 
-compound tail : statement 'END' | statement ; compound tail
+specPart : (specifier idList)*;
 
-// On voit qu'il y a ambiguit√© au niveau de block head' (SD non disjoints)
+specifier : type s
+	  | 'string'
+	  | 'label'
+	  | 'switch'
+	  | 'procedure';
+	  
+s : 'array'
+  | 'proced'
+  | ;
 
+formalParamPart : 
+                | '('formalParamList')';
+                
+formalParamList : id(paramDelimiter id)*;
 
+paramDelimiter : ',' | ';';
 
-			
+arrayDecl : 'array' arrayList;
 
+arrayList : (arraySeg)*;
 
+arraySeg : id as;
 
+as : '['boundPairList']'','arraySeg;
 
+boundPairList : boundPair(','boundPair)*;
+
+boundPair : arithmeticExpr ':' arithmeticExpr;
+
+arithmeticExpr : 'a';
+
+typeList : simpleVar(','simpleVar)*;
+
+simpleVar : id;
+
+id : 'id';   
+
+label : 'b';
+
+stat : 'c';
 
