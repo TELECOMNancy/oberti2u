@@ -46,7 +46,7 @@ c : ifClause if b
    
 cAux : (','id)*';'d
      | statAuxAux b
-     //| ':'(id':')*clause b //unsignInt':'(id':')*clause b (on a 1 cas d'écriture en plus (qui n'est jamais atteint ?)
+     //| ':'(id':')*clause b //unsignInt':'(id':')*clause b (on a 1 cas d'criture en plus (qui n'est jamais atteint ?)
      | ':'cAuxAux;
         
 cAuxAux : id cAuxAuxAux
@@ -80,7 +80,7 @@ decl : loot typeD
 loot : type
      | 'own type';
   
-type : 'real' //terminaux à compléter
+type : 'real' //terminaux  complter
      | 'int'
      | 'bool';
      
@@ -121,7 +121,7 @@ formalParamList : id(paramDelimiter id)*;
 
 paramDelimiter : ',' | ')' letterString '(';
 
-letterString : 'e'; //à modifier
+letterString : 'e'; // modifier
 
 arrayDecl : 'array' arrayList;
 
@@ -135,9 +135,9 @@ boundPairList : boundPair(','boundPair)*;
 
 boundPair : arithmeticExpr ':' arithmeticExpr;
 
-arithmeticExpr : 'a'; //à modifier
+arithmeticExpr : 'a'; // modifier
 
-id : 'g';   //à modifier
+id : 'g';   // modifier
 
 //Block 3
 
@@ -204,7 +204,7 @@ assignStat : leftList assignAux;
 assignAux : arithmeticExpr
           | boolExpr;
    	   
-leftList : id varAux'='leftListAux //à remonter dans assignStat
+leftList : id varAux'='leftListAux // remonter dans assignStat
 	 | id':='leftListAux;
 	 
 leftListAux : id varAux':='leftListAux
@@ -214,7 +214,7 @@ leftListAux : id varAux':='leftListAux
 varAux : '['subscriptList']'
        | ;
        
-subscriptList : 'a'; // à modifier
+subscriptList : 'a'; //  modifier
 
 actualParamPart : '('actualParamList')'
 		| ;
@@ -238,15 +238,15 @@ subscriptExpr : arithmeticExpr;
 		 
 ifClause : 'If' boolExpr 'Then';
       
-unsignInt : 'b'; // à modifier
+unsignInt : 'b'; //  modifier
 
-boolExpr : 'e' ; //à modifier
+boolExpr : 'e' ; // modifier
 
-string : 'a'; //à modifier
+string : 'a'; // modifier
 
 //block 4
 
-expr : 'a'; //à modifier
+expr : 'a'; // modifier
 
 
 
