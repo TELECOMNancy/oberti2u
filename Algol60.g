@@ -4,23 +4,72 @@ options{k=1;
 language = Java;
 backtrack =false;
 output=AST;
-ASTLabelType=CommonTree;
+//ASTidType=CommonTree;
 }
 
 //Block 1
 
 prog : 'BEGIN'c
-	|(label':')+'BEGIN'c;
+	|(id':')+'BEGIN'c;
 	
-compound_tail : stat b;
+compound_tail : ifClause if b
+     | forClause stat b
+     | gotoStat b
+     | b
+     |'begin'c b;
+     //|id compound_tailAux;
+
+compound_tailAux :  statAuxAux b
+ 		| ':'cAuxAux ;
+ 
+//compound_tailAuxAux : id compound_tailAuxAuxAux
+//		    | ifClause if b 
+  //     	     | forClause stat b
+    //   	     | gotoStat b
+      // 	     | b
+       //	     | 'begin'c b;
+
+//compound_tailAuxAuxAux : ':'compound_tailAuxAux
+//		       | clauseAux b;
 
 b : 'END'
-   |';'compound_tail;
+   |';'compound_tail
+   |';'id compound_tailAux;
 
-c : compound_tail
+c : ifClause if b
+   | forClause stat b
+   | gotoStat b
+   | b
+   |'begin'c b
+   |id cAux
    |decl';'d;
    
-d : (decl';')*compound_tail;
+cAux : (','id)*';'d
+     | statAuxAux b
+     //| ':'(id':')*clause b //unsignInt':'(id':')*clause b (on a 1 cas d'écriture en plus (qui n'est jamais atteint ?)
+     | ':'cAuxAux;
+        
+cAuxAux : id cAuxAuxAux
+       |ifClause if b 
+       | forClause stat b
+       | gotoStat b
+       | b
+       | 'begin'c b;
+       
+cAuxAuxAux : ':'cAuxAux
+	   | clauseAux b;
+   
+/*d : (decl';')+compound_tail
+  | (id(','id)*';')+compound_tail
+  | compound_tail;*/
+  
+d : (decl';')+dAux
+  | (id(','id)*';')+dAux
+    | compound_tail id compound_tailAux
+  | id compound_tailAux;
+  
+dAux : compound_tail
+      | id compound_tailAux; 
 
 //Block 2
 
@@ -36,8 +85,7 @@ type : 'real' //terminaux à compléter
      | 'bool';
      
 typeD : procedDecl
-      | arrayDecl
-      | typeList;
+      | arrayDecl;
       
 switchDecl : 'switch' id ':=' switchList;
 
@@ -58,7 +106,7 @@ specPart : (specifier idList)*;
 
 specifier : type s
 	  | 'string'
-	  | 'label'
+	  | 'id'
 	  | 'switch'
 	  | 'procedure';
 	  
@@ -89,37 +137,35 @@ boundPair : arithmeticExpr ':' arithmeticExpr;
 
 arithmeticExpr : 'a'; //à modifier
 
-typeList : simpleVar(','simpleVar)*;
-
-simpleVar : id;
-
-id : 'id';   //à modifier
+id : 'g';   //à modifier
 
 //Block 3
 
 stat : ifClause if
      | forClause stat
-     | var':='leftListAux assignAux
      | gotoStat
-     |
+     | 
      |'begin'c
-     |unsignInt':'(label':')*clause
      |id statAuxAux;
      
+statAux : actualParamPart
+	| ':'(id':')*clause;
+     
 statAuxAux : statAux
-	   | ':='leftListAux assignAux;
+	   | ':='leftListAux assignAux
+   	| varAux':='leftListAux assignAux;
 
 if : uncondStat unAux
    | forStat;
    
 uncondStat : basicStat
            | 'begin'c
-           | (label':')+'begin'c;
+           | (id':')+'begin'c;
            
-basicStat : unlabelBasicStat
-	  | label ':' basicStat;
+basicStat : unidBasicStat
+	  | id ':' basicStat;
 	  
-unlabelBasicStat : assignStat
+unidBasicStat : assignStat
 		 | gotoStat
 		 | 
 		 | id actualParamPart;
@@ -128,9 +174,9 @@ unAux : 'Else' stat
       | ;
       
 forStat : forClause stat
-        | label ':' forStat;
+        | id ':' forStat;
         
-forClause : 'for' var ':=' forList 'do' ;
+forClause : 'for' id varAux ':=' forList 'do' ;
 
 forList : forListElem(','forListElem)*;
 
@@ -141,34 +187,34 @@ forListElemAux : 'step' arithmeticExpr 'until' arithmeticExpr
 	       | ;
 	       
 gotoStat : 'GOTO' designExpr;
-     
-statAux : actualParamPart
-	| ':'(label':')*clause;
 	
 clause : ifClause if 
        | forClause stat
-       | var':='leftListAux assignAux
        | gotoStat
        |
        | id clauseAux
        | 'begin'c;
        
 clauseAux : ':='leftListAux assignAux
-	  | actualParamPart;
+	  | actualParamPart
+	  | varAux':='leftListAux assignAux;
        
 assignStat : leftList assignAux;
 
 assignAux : arithmeticExpr
           | boolExpr;
    	   
-leftList : var'='leftListAux //à remonter dans assignStat
+leftList : id varAux'='leftListAux //à remonter dans assignStat
 	 | id':='leftListAux;
 	 
-leftListAux : var':='leftListAux
+leftListAux : id varAux':='leftListAux
 	    | id':='leftListAux
 	    | ;
 
-var : 'a'; //à modifier
+varAux : '['subscriptList']'
+       | ;
+       
+subscriptList : 'a'; // à modifier
 
 actualParamPart : '('actualParamList')'
 		| ;
@@ -178,14 +224,11 @@ actualParamList : actualParam(paramDelimiter actualParam)*;
 actualParam : string
 	    | expr
 	    | id;
-
-label : id 
-      | unsignInt ;
       
 designExpr : simpleDesignExpr
 	   | ifClause simpleDesignExpr 'Else' designExpr;
 	  
-simpleDesignExpr : label
+simpleDesignExpr : id
 		 | switchDesignator
 		 | '('designExpr')';
 		 
@@ -204,3 +247,8 @@ string : 'a'; //à modifier
 //block 4
 
 expr : 'a'; //à modifier
+
+
+
+
+
