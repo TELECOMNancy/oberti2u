@@ -7,7 +7,7 @@ backtrack= false;
 } 
 
 
-/// cheching de expression et mise en place des opérations
+/// cheching de expression et mise en place des oprations
 prog	:	prog1 
 	;
 	
@@ -23,7 +23,9 @@ identifier2
 	:	'G'
 	;
 
-prog1	:	 begin EOF
+prog1	:	 begin EOFidentifier2
+	:	'G'
+	;
                  |(label ':')+ begin
                  ;
 label	:	 identifier2
@@ -68,7 +70,9 @@ boundp	:	expression ':' expression
 	;
 	
 
-typedeclaration: typeliste
+typedeclaration: typelisteidentifier2
+	:	'G'
+	;
 |'ARRAY' arraylist
 |procedure
 ;
