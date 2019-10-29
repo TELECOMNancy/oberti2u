@@ -1,4 +1,5 @@
-grammar Algol;
+grammar algol600;
+
 options{ k=1;
 language= Java;
 output=AST;
@@ -7,7 +8,7 @@ backtrack= false;
 } 
 
 
-/// cheching de expression et mise en place des opérations
+/// cheching de expression et mise en place des opÃ©rations
 prog	:	prog1 
 	;
 	
@@ -24,22 +25,28 @@ simpleAR:	simpleARi(':=' simpleARi)*
 simpleARi:	multExp(('+' | '-') multExp)*
 	;
 	
-
+multExp :	mult(('*' | '/') mult)*
+	;
 	
-multExp	:	powExp('POW' powExp)*
+mult	:	powExp('POW' powExp)*
 	;
 	
 powExp	:	identifier actualparametrepart
          |'(' expression ')'
-         |INT
+         | INT
 	;
 	
 identifier
-	:	'G'
+	:	ID identifierAux
+	;
+	
+identifierAux 
+	: 	
+	|	INT
 	;
 	
 
-prog1	:	 begin EOF
+prog1	:	 begin
                  |(label ':')+ begin
                  ;
 label	:	 identifier
@@ -55,7 +62,7 @@ type	:	'REAL'|'INTEGER'|'BOOLEAN'
 typeliste
 	:	identifier t;
 	
-t	:	','t
+t	:	','typeliste
 	|	
 	;
 
@@ -162,7 +169,7 @@ ifclause:	 'IF' expression 'THEN'
 declaration
 	:	localorown typedeclaration| typedeclaration|switchdec
 	;
-begin	:	'BEGIN' d
+begin	:	'BEGIN' d 
         ;
 
 	
@@ -201,6 +208,7 @@ f	:	localorown typedeclaration ';' f //(prendre l'initiative de boucler ici sur 
          |procedure ';' compoundT
          |switchdec ';' compoundT
          |
+         | prog1
         // | identifier rs 'END' 
         // |identifier rs ';' compoundT 
 	;
@@ -422,3 +430,5 @@ fragment
 UNICODE_ESC
     :   '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
     ;
+
+
