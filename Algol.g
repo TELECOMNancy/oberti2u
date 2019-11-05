@@ -1,4 +1,4 @@
-grammar Algol;
+grammar AL;
 options{ k=1;
 language= Java;
 output=AST;
@@ -7,28 +7,110 @@ backtrack= false;
 } 
 
 
-/// cheching de expression et mise en place des oprations
-prog	:	prog1 
+tokens{
+TYPE;
+LOCAL;
+SWITCH;
+DEC;
+BEGIN;
+IF;
+THEN;
+COMMENT;
+EQV;
+LESS;
+PLUS;
+PLUS;
+MULT;
+DIV;
+NOT;
+EQ;
+GREATER;
+TRUE;
+FALSE;
+FOR;
+IF;
+GOTO;
+ELSE;
+THEN;
+PROG;
+}
+
+///// pour combler le souci des forelement j'ai mis un identifer pour que lui s'occupe des liste d'identifier et q'un autre s'occupe de
+
+
+/// cheching de expression et mise en place des opérations
+prog	:	prog1 ->^(PROG prog1)
 	;
 	
 expression
-	:	'U'
+	:	simpleAR | ifclause ei
+	;
+	
+ei	:	simpleDesign 'ELSE'
+	;
+	
+simpleAR:	simpleARi(':='^ simpleARi)*
+	;
+	
+simpleARi:	multExp(('+' ^| '-'^) multExp)*
+	;
+	
+
+	
+multExp	:	powExp('POW'^ powExp)*
+	;
+	
+powExp	:	identifier actualparametrepart//->^(identifier actualparametrepart)
+         |'(' expression ')'
+         |INT
+         |
+	;
+	
+
+	
+expression2
+	:	simpleAR2 | ifclause ei
+	;
+	
+ei2	:	simpleDesign 'ELSE'
+	;
+	
+simpleAR2:	simpleARi2(':=' simpleARi2)*
+	;
+	
+simpleARi2:	multExp2(('+' ^| '-'^) multExp2)*
+	;
+	
+
+	
+multExp2	:	powExp2('POW'^ powExp2)*
+	;
+	
+powExp2	:
+         | identifier
+         |INT
 	;
 	
 identifier
-	:	'G'
+	:	ID o
 	;
 	
-identifier2
-	:	'G'
+o	:	INT
+                |'[' expression (',' expression)*']'
+                |
 	;
 
-prog1	:	 begin EOFidentifier2
-	:	'G'
+                
+               // |'[' INT le arrayseg on peut remplacer cela par un id
+	
+d	:	declaration ';' (declaration ';')* compoundT->^(DEC declaration compoundT)+
+	|	compoundT->^(compoundT)
 	;
-                 |(label ':')+ begin
+
+prog1	:	  begin EOF->^(BEGIN begin)
+                 |(label ':')+ begin->^(BEGIN begin)
                  ;
-label	:	 identifier2
+label	:	 identifier
                 ;
 
 localorown
@@ -41,22 +123,26 @@ type	:	'REAL'|'INTEGER'|'BOOLEAN'
 typeliste
 	:	identifier t;
 	
-t	:	','t
+t	:	','typeliste
 	|	
 	;
 
 arraylist
-	:	arrayseg a
+	:	arrayseg2 a
 	;
 
-a	:	',' arrayseg a
+a	:	',' identifier a
 	|	
 	;
 
-arrayseg:	identifier r;
+//arrayseg:	identifier r;//plus besoin de ça
 
-r	:	'[' boundplist']'
-	|	',' arrayseg
+//r	:	'[' boundplist']'
+	//|	',' arrayseg
+	//;
+	
+arrayseg2
+	:	(identifier ',') ID '[' boundplist ']'
 	;
 	
 boundplist
@@ -66,14 +152,17 @@ boundplist
 z	:	',' boundp z
 	|	
 	;
-boundp	:	expression ':' expression
+boundp	:	simpleARi ':' simpleARi
 	;
 	
 
-typedeclaration: typelisteidentifier2
-	:	'G'
-	;
+typedeclaration: typeliste
 |'ARRAY' arraylist
+|procedure
+;
+
+
+typedeclaration2:'ARRAY' arraylist
 |procedure
 ;
 
@@ -91,7 +180,7 @@ s	:	 ',' designExp s
  	;
  	
  procedurehead
- 	: expression formalparameterpart ';' valuepart specificationpart
+ 	: identifier formalparameterpart ';' valuepart specificationpart
  	;
  
 formalparameterpart : | '(' formalparameterlist ')'
@@ -103,7 +192,12 @@ formalparameterpart : | '(' formalparameterlist ')'
 	//; 
 	
 specificationpart
-	:specifier identifier ';' specificationpart
+	:specifier identifierlist ';' specificationpart
+	|
+	;
+	
+identifierlist
+	:	identifier (','identifier)*
 	;
 	
 specifier
@@ -133,30 +227,92 @@ valuepart :'VALUE' identifier
 	
  	
 designExp
-	:	 label
-	|'(' designExp ')'
-	|ifclause designExp 'ELSE' designExp
+	:	simpleDesign
+	|ifclause simpleDesign 'ELSE' designExp
 	;
 	
-ifclause:	 'IF' expression 'THEN'
+simpleDesign
+	:	 identifier
+	|'(' designExp ')'
+	;
+	
+//g2	:	|'['
+	//;
+	
+	
+ifclause:	 'IF' expression 'THEN'->^(IF expression THEN)
         ;
                  
 declaration
-	:	localorown typedeclaration| typedeclaration|switchdec
+	:	localorown typedeclaration->^(LOCAL)
+	            | typedeclaration2->^(TYPE)
+	            |switchdec->^(SWITCH) 
 	;
-begin	:	'BEGIN' d
+begin	:	'BEGIN' d->^('BEGIN' d)
         ;
 
+//d	:	declaration ';' (declaration ';')* compoundT->^(DEC declaration)+
+	//|	compoundT->^(compoundT)
+	//;
 	
-d	:declaration e
-	|	compoundT
+//d	:declaration ';' f
+	//|	compoundT
+//	;
+	
+//d	:	localorown typedeclaration ';' f
+         //| identifier di
+        // |'ARRAY' arraylist ';'f
+         //|procedure ';' f
+        // |switchdec ';' f
+        // | identifier rs 'END' 
+        // |identifier rs ';' compoundT 
+	//;
+
+/*di	:	',' (identifier ',')* ';' f
+	|  ':' m c
+	|':='  simpleAR c
+	|	'(' actualparametrepart ')' c
+	|';' f
+	| 'END'
 	;
 	
-e	:	';' f
+*/
+	
+//dii	:	compoundT 
+//             | declaration ';' compoundT
+	//;
+	
+	
+//e	:	';' f
+	//;
+/*	
+f	:	localorown typedeclaration ';' f //(prendre l'initiative de boucler ici sur d
+         | identifier fi
+         |'ARRAY' arraylist ';'compoundT
+         |procedure ';' compoundT
+         |switchdec ';' compoundT
+         |
+        // | identifier rs 'END' 
+        // |identifier rs ';' compoundT 
 	;
-f	:	declaration ';' compoundT
-	|	compoundT
+	
+	
+*/
+
+/*fi	:	',' (identifier ',')* ';' compoundT
+	|  ':' m c
+	|':='  simpleAR c
+	|	'(' actualparametrepart ')' c
+	|';' compoundT
+	| 'END'
+	
 	;
+	
+	*/
+	
+//f	:	declaration ';' compoundT
+	//|	compoundT
+	//;
 	
 	
 	///ps ce que tu as fais c'est de la merde devant typeliste c'est pas expression mais identifier
@@ -178,6 +334,7 @@ statement
 	|ifclause j
 	|forclause statement
 	|begin
+	|actualparametrepart
 	;
 	
 rs	:	cc
@@ -188,7 +345,7 @@ m	:	label ':' m
 	|	gotostatement
 	|ifclause j
 	|forclause statement
-	|begin
+	|begin 
 	|cc
 	;
 
@@ -201,22 +358,22 @@ st	:identifier cc
 // premier souci les labels et les identifiers soit on regroupe tout en un seul soit on di
 	
 forclause
-	:	'FOR' expression ':=' forlist 'DO'
+	:	'FOR' simpleARi ':=' forlist 'DO'
 	;
 	
-forlist	:	forlistelement n
+forlist	:
+               forlistelement (',' forlistelement)*
 	;
 	
-n	:	',' forlistelement n
-	|	
-	;
+//n	:	(',' forlistelement)*
+	//;
 	
 forlistelement
-	:expression q
+	:simpleARi q
 	;
 
-q	:|'STEP'expression 'UNTIL'expression
-           |expression 'WHILE'expression
+q	:|'STEP'simpleARi 'UNTIL'expression
+         |'WHILE'expression
            ;
           
 	
@@ -244,14 +401,14 @@ y	:	identifier cc
 	//:	identifier cc | gotostatement|
 	//;
 	
-j	:	forclause statement | identifier u | | gotostatement |begin
+j	:	forclause statement | identifier u | |  gotostatement|begin///j'ai enleve vide
 	;
 
 //u	:w k| ':' forstatement (label ':')* forstatement
 	//;
 	
 	
-u	:	cc
+u	:	cc k
 	|	':' w
 	;
 
@@ -276,9 +433,11 @@ w	:	forstatement (label ':')* forstatement
 	
 
 	
-cc	:	':=' l expression
+cc	:	':='  simpleAR
 	|	actualparametrepart
 	; 
+
+
 actualparametrepart
 	:	'(' actualparalist')'
 	|
@@ -294,11 +453,11 @@ p
 	;
 
 actualpara
-	:	identifier
+	:	expression2
 	;
-l	:	leftpart l
-        |
-	;
+//l	:	leftpart l
+ //       |
+	//;
 	
 leftpart:	identifier ':='
 	;
@@ -327,7 +486,7 @@ FLOAT
     ;
 
 COMMENT
-    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    :   'COMMENT' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
     |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
 
