@@ -1,4 +1,4 @@
-grammar FINAL;
+grammar Algol;
 options{ k=1;
 language= Java;
 output=AST;
@@ -12,22 +12,32 @@ backtrack= false;
 tokens{
 SPECIFICATION ;
 LISTFOR;
-LABEL;
-PARENTHESE;
+BORNESUPP='UNTIL';
+PAS='STEP';
+LABEL='LABEL';
+WHILE='WHILE';
+POWER='POWER';
+PARENTHESEO='(';
+PARENTHESEF=')';
 CALL;
 BORNE=':';
-ASSIGENMENT;
+ASSIGENMENT=':=';
 FORLISTELEMENT;
 BLOCK;
-TYPE;
-LOCAL;
+TYPEINT='INTEGER';
+TYPEREAL='REAL';
+TYPEBOOL='BOOLEAN';
+LOCAL='OWN';
 SWITCH='SWITCH';
+PROCEDURE='PROCEDURE';
 DEC;
 BEGIN='BEGIN';
 IF='IF';
 THEN='THEN';
 LISTARG;
 //COMMENT='COMMENT';
+IMPL='IMPL';
+
 EQV='EQUIV';
 LESS='LESS';
 PLUS='+';
@@ -35,9 +45,12 @@ MULT='*';
 DIV='/';
 NOT='NOT';
 EQUAL='EQUAL';
+NOTEQUAL='NOTEQUAL';
+NOTGREATER='NOTGREATER';
+NOTLESS='NOTLESS';
 GREATER='GREATER';
-TRUE;
-FALSE;
+TRUE='TRUE';
+FALSE='FALSE';
 LISTPARA;
 FOR='FOR';
 GOTO='GOTO';
@@ -298,7 +311,7 @@ formalpara
           //| '('  ':' '('
 	//;
 	
-valuepart :'VALUE' identifier2->^('VALUE' identifier2)
+valuepart :'VALUE' identifier2 ->^('VALUE' identifier2)
           |
 ;
 
