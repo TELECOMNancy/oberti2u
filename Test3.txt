@@ -1,0 +1,21 @@
+BEGIN
+PROCEDURE Transpose (b) Order: (n); VALUE n;
+ARRAY b; INTEGER n;
+BEGIN REAL w; INTEGER i, k, b, b;
+ b := NOT b;
+Label: b:=b;
+ IF R EQUAL NOT(b AND (b OR NOT c))
+   THEN label:GOTO L1
+ELSE 
+ b:=c;
+FOR i := 1 STEP 1 UNTIL n DO
+    FOR k := 1+i STEP 1 UNTIL n DO
+        BEGIN w:=b[i,k];
+                b[i,k]:=b[k,i];
+                b[k,i]:=w
+        END
+END
+ print(w,c,c);
+  b[k,i]:=w
+END
+<EOF>
