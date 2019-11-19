@@ -271,7 +271,7 @@ statement
 	:memoire->memoire
 	|gotostatement->gotostatement
 	|comment
-	|'IF' expression 'THEN' instructionsIf (options {greedy=true;} :'ELSE' statement)->^(IF expression ^(THEN instructionsIf) ^('ELSE' statement))
+	|'IF' expression 'THEN' instructionsIf (options {greedy=true;} :'ELSE' statement)?->^(IF expression ^(THEN instructionsIf) ^('ELSE' statement)?)
 	|'FOR' simpleAr ':=' forlist 'DO' statement->^(FOR ^(ASSIGENMENT simpleAr ^(LISTFOR forlist)) ^('DO' statement))
 	|begin->begin
 	|actualparametrepart
