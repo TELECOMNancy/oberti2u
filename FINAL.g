@@ -6,9 +6,6 @@ ASTLabelType=CommonTree;
 backtrack= false;
 } 
 
-// Tu as réglé le problème des ifs et des for. On peut mettre deux type de noueud pour une règle(pense bête pour les identifiants qui te font chier) next step arranger les declaration(car mélanger avce les compoudnet finier les declaration de fonction)
-
-
 tokens{
 SPECIFICATION ;
 LISTFOR;
@@ -28,7 +25,6 @@ BEGIN='BEGIN';
 IF='IF';
 THEN='THEN';
 LISTARG;
-//COMMENT='COMMENT';
 EQV='EQUIV';
 LESS='LESS';
 PLUS='+';
@@ -55,133 +51,27 @@ ACCESS;
  CommonTree Idmemoire;
 }
 
-///// pour combler le souci des forelement j'ai mis un identifer pour que lui s'occupe des liste d'identifier et q'un autre s'occupe de
-
-
-/// cheching de expression et mise en place des opérations
 prog	:	prog1 ->^(PROG prog1)
 	;
 	
-	
-expression
-	:	simpleAR ->simpleAR
-	 | 'IF' expression 'THEN' simpleDesign 'ELSE' expression->^('IF' expression ^('THEN' simpleDesign ^('ELSE' expression)))
-	;
-	
-ei	:	simpleDesign 'ELSE'
-
-	;
-	
-	
-simpleAR:	simpleLOG(':='^ simpleLOgi2)*
-	;
-	
-simpleLOG
-	:	simpleLOgi22('EQUIV'^ simpleLOgi22)*
-	;
-	
-simpleLOgi22
-	:	simpleLOgi2('IMPL'^ simpleLOgi2)*
-	;
-	
-simpleLOgi2
-	:	simpleLOgi(('AND'^|'OR'^)simpleLOgi)*
-	;
-	
-simpleLOgi
-	:	simpleARi(('GREATER'¨^|'LESS'^|'EQUAL'^|'NOTLESS'^|'NOTGREATER'^|'NOTEQUAL'^)simpleARi)*
-	;
-	
-simpleARi:	multExp(('+'^|'-'^) multExp)*
-	;
-
-multExp:	multExp22(('*'^|'/'^)multExp22)*
-	;
-	
-
-	
-multExp22 :	powExp('POW'^ powExp)*
-	;
-	
-powExp	:	//ID (->ID) {Idmemoire=$powExp.tree;} beginwithID->beginwithID//actualparametrepart
-         |'(' expression ')'->expression
-         |INT
-         |STRING
-         |'FALSE'
-         |'TRUE'
-         |'NOT'^ powExp
-          |FLOAT
-         |ID (->ID) {Idmemoire=$powExp.tree;} beginwithID->beginwithID
-	;
-	
-	
-beginwithID
-	:	(->{Idmemoire}) actualparametrepart->actualparametrepart
-	|(->{Idmemoire})
-	|(->{Idmemoire})'['expression (',' expression ')'?)*']'->^(ARRAYACCESS  $beginwithID ^(ACCCESS expression+))   
-        //|(->{Idmemoire})
-	;
-	
-
-	
-expression2
-	:	simpleAR2 | 'IF' expression 'THEN' ei
-	;
-	
-//ei2	:	simpleDesign 'ELSE'
-	//;
-	
-simpleAR2:	infixLog(':='^ infixLog)*
-	;
-
-infixLog
-	:	simpleARi2(('OR'^|'AND'^)simpleARi2)*
-	;
-	
-simpleARi2:	multExp33(('+' ^| '-'^) multExp33)*
-	;
-	
-multExp33
-	:	multExp2(('*' ^| '/'^) multExp2 )*
-	;
-	
-multExp2	:	powExp2('POWER'^ powExp2)*
-	;
-	
-powExp2	:
-         | ID (->ID) {Idmemoire=$powExp2.tree;} beginwithID -> beginwithID
-         |INT->INT
-         |STRING
-         | '(' expression2 ')'-> expression2
-	;
-	
-identifier
-	:	ID (->ID) {Idmemoire=$identifier.tree;} o->o
-	|INT
-	;
-	
-o	:	(->{Idmemoire})INT->^(INT)
-                |(->{Idmemoire})'['expression (',' expression)*']'->^(ARRAYACCESS  $o ^(ACCCESS expression+))   
-                |(->{Idmemoire})
-	;
-	
-            
-          
-               // |'[' INT le arrayseg on peut remplacer cela par un id
-	
-d	:	declaration ';' (declaration ';')* compoundT->^(DEC declaration)+ ^(BLOCK compoundT)
-	|	compoundT->^(BLOCK compoundT)
-	;
-
 prog1	:	  begin EOF->begin
                  |(label ':')+ begin->^(LABEL label+ begin)
                  ;
                  
+begin	:	'BEGIN' block->^(BEGIN block)
+        ;
                  
-
-
-localorown
-	:	type|'OWN' type
+ block	:	declaration ';' (declaration ';')* compoundT->^(DEC declaration)+ ^(BLOCK compoundT)
+	|	compoundT->^(BLOCK compoundT)
+	;
+	
+declaration
+	:	localorown typedeclaration
+	            | typedeclaration2->typedeclaration2
+	            |switchdec->switchdec
+	;
+	
+localorown  :	type|'OWN' type
 	;
 
 type	:	'REAL'
@@ -189,41 +79,24 @@ type	:	'REAL'
                 |'BOOLEAN'
 	;
 	
-typeliste
-	:	identifier (',' identifier)*->(identifier)+
-	;
-	
-//t	:	','typeliste
-	//|	
-	//;
-
-arraylist
-	:	arrayseg(','arrayseg)* ->(arrayseg)*//a
+typeliste      :	identifier (',' identifier)*->(identifier)+
 	;
 
-//a	:	',' arrayseg a
-	//|	
-	//;
+arraylist      :	arrayseg(','arrayseg)* ->(arrayseg)*
+	;
 
-arrayseg:	ID (->ID) {Idmemoire=$arrayseg.tree;} r-> r
-                     ;//plus besoin de ça
+arrayseg:	ID (->ID) {Idmemoire=$arrayseg.tree;} arrayConstructor-> arrayConstructor
+                     ;
 
-r	:	(->{Idmemoire})'[' boundplist']'-> $r boundplist
+arrayConstructor	:	(->{Idmemoire})'[' boundplist']'-> $arrayConstructor boundplist
 	|	(->{Idmemoire})',' arrayseg->arrayseg
 	;
-	
-//arrayseg2
-	//:	ID(','ID)* ('[' boundp (',' boundp)*']')*
-	//;
 	
 boundplist
 	:	boundp (',' boundp)*->(boundp)+
 	;
 	
-//z	:	',' boundp z
-	//|	
-	//;
-boundp	:	simpleARi ':' simpleARi->^(BORNE simpleARi simpleARi)
+boundp	:	simpleAr ':' simpleAr->^(BORNE simpleAr simpleAr)
 	;
 	
 
@@ -232,7 +105,7 @@ typedeclaration: typeliste
 |procedure->procedure
 ;
 
-
+//typeliste donne des Ids, compoundT donne également des Ids ce qui pourrait créer un conflit dans la règle declaration. Pour résoudre ce problème, on créé une règle typedeclaration2 qui empêche de déclarer quelque chose sans avoir mis un type auparavant
 typedeclaration2:'ARRAY' arraylist->^('ARRAY' arraylist)
 |procedure->procedure
 ;
@@ -242,11 +115,9 @@ switchdec
 	;
 	
 switchlist
-	:	 designExp (','designExp)*->designExp+;
+	:	 designExp (','designExp)*->designExp+
+	;
 
-//s	:	 ',' designExp s
-	//|	
-	//;
  procedure: 'PROCEDURE' procedurehead statement->^('PROCEDURE' procedurehead statement)
  	;
  	
@@ -258,14 +129,8 @@ formalparameterpart :
         | '(' formalparameterlist ')' (ID ':''(' formalparameterlist ')')*->^(LISTPARA formalparameterlist (formalparameterlist)*)
 	;
 	
-
-//specificationpart
-//	:	specificationpart1| specifier identifier ',' specificationpart1
-	//; 
-	
 specificationpart
 	:specifier identifierlist ';' (specifier identifierlist ';')*->^(SPECIFICATION (specifier identifierlist)+)
-	//|
 	;
 	
 identifierlist
@@ -274,109 +139,164 @@ identifierlist
 	
 specifier
 	:'STRING' 
-	| type  h->type
+	| type  specifierType->type
 	| 'ARRAY' 
 	| 'LABEL' 
-	
 	| 'SWITCH' | 'PROCEDURE'
 	;
 	
-h	:	| 'ARRAY'| 'PROCEDURE'|'INTEGER'
+specifierType	:	
+	| 'ARRAY'
+	| 'PROCEDURE'
 	;
 	
 formalparameterlist
 	:	formalpara (',' formalpara)*->formalpara+
 	;
-	
-/*g	:	paralim formalpara g
-	|	
-	;*/
 
 formalpara
 	:	expression2->expression2
 	;
-
-//paralim	:	','
-          //| '('  ':' '('
-	//;
 	
 valuepart :'VALUE' identifier2 ';'->^('VALUE' identifier2)
           |
-;
+	;
 
-identifier2
-	:	ID(','ID)*->ID*
+identifier2   :	ID(','ID)*->ID*
 	;
 	
+expression
+	:	simpleOp ->simpleOp
+	 | 'IF' expression 'THEN' simpleDesign 'ELSE' expression->^('IF' expression ^('THEN' simpleDesign ^('ELSE' expression)))
+	;
+	
+//Gestion des expressions logiques avec priorité des opérateurs
+
+simpleOp:	simpleLogEquiv(':='^ simpleLogAndOr)*
+	;
+	
+simpleLogEquiv
+	:	simpleLogImplication('EQUIV'^ simpleLogImplication)*
+	;
+	
+simpleLogImplication
+	:	simpleLogAndOr('IMPL'^ simpleLogAndOr)*
+	;
+	
+simpleLogAndOr
+	:	simpleLog(('AND'^|'OR'^)simpleLog)*
+	;
+	
+simpleLog
+	:	simpleAr(('GREATER'¨^|'LESS'^|'EQUAL'^|'NOTLESS'^|'NOTGREATER'^|'NOTEQUAL'^)simpleAr)*
+	;
+	
+//Gestion des expressions arithmétiques et logiques avec priorité des opérateurs
+	
+simpleAr:	multExp(('+'^|'-'^) multExp)*
+	;
+
+multExp:	multExpPower(('*'^|'/'^)multExpPower)*
+	;
+	
+multExpPower : atom('POW'^ atom)*
+	;
+	
+atom	:
+         |'(' expression ')'->expression
+         |INT
+         |STRING
+         |'FALSE'
+         |'TRUE'
+         |'NOT'^ atom
+          |FLOAT
+         |ID (->ID) {Idmemoire=$atom.tree;} beginwithID->beginwithID
+	;
+	
+beginwithID:(->{Idmemoire}) actualparametrepart->actualparametrepart
+	|(->{Idmemoire})
+	|(->{Idmemoire})'['expression (',' expression ')'?)*']'->^(ARRAYACCESS  $beginwithID ^(ACCCESS expression+))   
+	;
+	
+//Gestion des expressions arithmétiques (sans opérations logiques)
+	
+expression2
+	:	simpleARi2 
+	| 'IF' expression 'THEN' simpleDesign 'ELSE'
+	;
+	
+simpleARi2   :	multExp2(('+' ^| '-'^) multExp2)*
+	;
+	
+multExp2    :	multExpPower2(('*' ^| '/'^) multExpPower2 )*
+	;
+	
+multExpPower2:	atom2('POWER'^ atom2)*
+	;
+	
+atom2	:
+         | ID (->ID) {Idmemoire=$atom2.tree;} beginwithID -> beginwithID
+         |INT->INT
+         |STRING
+         | '(' expression2 ')'-> expression2
+	;
+	
+identifier
+	:	ID (->ID) {Idmemoire=$identifier.tree;} beginwithID2->beginwithID2
+	|INT
+	;
+	
+beginwithID2	:	(->{Idmemoire})INT->^(INT)
+                |(->{Idmemoire})'['expression (',' expression)*']'->^(ARRAYACCESS  $beginwithID2 ^(ACCCESS expression+))   
+                |(->{Idmemoire})
+	;
  	
-designExp
-	:	simpleDesign
+designExp   :	simpleDesign
 	|'IF' expression 'THEN' simpleDesign 'ELSE' designExp
 	;
 	
-simpleDesign
-	:	
+simpleDesign:	
 	|identifier 
 	|'(' designExp ')'
 	;
-
-	
-//ifclause:	 'IF' expression 'THEN'->^(IF expression THEN)
-//        ;
-                 
-declaration
-	:	localorown typedeclaration
-	            | typedeclaration2->typedeclaration2
-	            |switchdec->switchdec
-	;
-begin	:	'BEGIN' d->^(BEGIN d)
-        ;
-
 	
 compoundT
-	: statement c->statement c
+	: statement compoundTFacto->statement compoundTFacto
 	;
-c	:	 'END'->'END'|';' compoundT->compoundT
+	
+compoundTFacto	:	 'END'->'END'|';' compoundT->compoundT
 	;
 	
 statement
-	:	//identifier (':=' simpleAR)?(':'m)?-> (^(':='identifier simpleAR)?)?(^(':'m))?(actualparametrepart)?
-	 //ID(->ID) {Idmmoire=$statement.tree;} rs-> rs
-	 memoire->memoire
+	:memoire->memoire
 	|gotostatement->gotostatement
 	|comment
-	|'IF' expression 'THEN' j (options {greedy=true;} :'ELSE' statement)->^(IF expression ^(THEN j) ^('ELSE' statement))
-	|'FOR' simpleARi ':=' forlist 'DO' statement->^(FOR ^(ASSIGENMENT simpleARi ^(LISTFOR forlist)) ^('DO' statement))
+	|'IF' expression 'THEN' instructionsIf (options {greedy=true;} :'ELSE' statement)->^(IF expression ^(THEN instructionsIf) ^('ELSE' statement))
+	|'FOR' simpleAr ':=' forlist 'DO' statement->^(FOR ^(ASSIGENMENT simpleAr ^(LISTFOR forlist)) ^('DO' statement))
 	|begin->begin
 	|actualparametrepart
 	;
-	
-//thenelse	:	'THEN' 'FOR' simpleARi ':=' forlist 'DO' statement(options {greedy=true;}:'ELSE' statement)?->
 
-//(options {greedy = true;} : 'else' b=expSup)? 
-	//;
-memoire	:ID(->ID) {Idmemoire=$memoire.tree;} rs-> rs
+memoire	:ID(->ID) {Idmemoire=$memoire.tree;} statementWithID-> statementWithID
 	;
 	
 comment	:COMMENT2
 	;
 	
-rs	:	(->{Idmemoire})':=' simpleAR->^(ASSIGENMENT $rs simpleAR)
+statementWithID	:	(->{Idmemoire})':=' simpleOp->^(ASSIGENMENT $statementWithID simpleOp)
 	|	actualparametrepart2
-	|(->{Idmemoire})'['expression (',' expression)*']' ':=' simpleAR->^(ASSIGENMENT ^(ARRAYACCESS  $rs ^(ACCCESS expression+)) simpleAR)   
-        //|(->{Idmemoire})
-	|	(->{Idmemoire})':' m -> m//avant ici j'ai mi ':' (label ':')* st
+	|(->{Idmemoire})'['expression (',' expression)*']' ':=' simpleOp->^(ASSIGENMENT ^(ARRAYACCESS  $statementWithID ^(ACCCESS expression+)) simpleOp)   
+	|	(->{Idmemoire})':' statementWithLabel -> statementWithLabel
 	;
 	
-m	:	(->{Idmemoire}) label2/*{Idmemoire=$m.tree;} *//*v*/->^(LABEL $m label2)//':' m
-	|(->{Idmemoire})gotostatement->^(LABEL $m gotostatement)
+statementWithLabel	:	(->{Idmemoire}) label2->^(LABEL $statementWithLabel label2)
+	|(->{Idmemoire})gotostatement->^(LABEL $statementWithLabel gotostatement)
 	|comment
-	| (->{Idmemoire})'IF' expression 'THEN' j->^(LABEL $m ^(IF expression ^(THEN j)))
-	|(->{Idmemoire})'FOR' simpleARi ':=' forlist 'DO' statement->^(LABEL $m ^(FOR ^(ASSIGENMENT simpleARi forlist) ^('DO' statement)))
-	|(->{Idmemoire})begin->^(LABEL $m begin)
-	//|(->{Idmemoire})':='  simpleAR->^(LABEL $m begin)
+	| (->{Idmemoire})'IF' expression 'THEN' instructionsIf->^(LABEL $statementWithLabel ^(IF expression ^(THEN instructionsIf)))
+	|(->{Idmemoire})'FOR' simpleAr ':=' forlist 'DO' statement->^(LABEL $statementWithLabel ^(FOR ^(ASSIGENMENT simpleAr forlist) ^('DO' statement)))
+	|(->{Idmemoire})begin->^(LABEL $statementWithLabel begin)
 	|(->{Idmemoire})actualparametrepart2
-	|':'m->m
+	|':'statementWithLabel->statementWithLabel
 	
 	;
 	
@@ -384,102 +304,57 @@ m	:	(->{Idmemoire}) label2/*{Idmemoire=$m.tree;} *//*v*/->^(LABEL $m label2)//':
 label:	         ID  
                  |INT
                 ;
-                
-label2	:	ID(->ID) {Idmemoire=$label2.tree;} v->v
+
+label2	:	ID(->ID) {Idmemoire=$label2.tree;} statementLabelLoop->statementLabelLoop
                |INT
 	;
 	
-	
-	
-v	:	(->{Idmemoire})':='  simpleAR->^(':=' $v simpleAR)
+statementLabelLoop	:	(->{Idmemoire})':='  simpleOp->^(':=' $statementLabelLoop simpleOp)
 	    | actualparametrepart2
-	    |':'m->m
-          //|cc;
+	    |':'statementWithLabel->statementWithLabel
           ;
-
-//st	:identifier// cc
-//          | gotostatement
- //         |'IF' expression 'THEN' j
- //         | 'FOR' simpleARi ':=' forlist 'DO' statement
-	//;
-
 	
-//forclause
-	//:	'FOR' simpleARi ':=' forlist 'DO'
-	//;
-	
-forlist	:
-               forlistelement (','forlistelement)*->^(FORLISTELEMENT forlistelement)+
+forlist	: forlistelement (','forlistelement)*->^(FORLISTELEMENT forlistelement)+
 	;
 	
-	
-forlistelement
-	:expression q//->  simpleARi q
+forlistelement:expression typeFor
 	;
           
-q	:|'STEP'simpleARi 'UNTIL'expression->^('STEP' simpleARi ^('UNTIL' expression))
+typeFor	:|'STEP'simpleAr 'UNTIL'expression->^('STEP' simpleAr ^('UNTIL' expression))
          |'WHILE'expression ->^('WHILE' expression)
            ;
-          
-k	:	'ELSE' statement->^('ELSE' statement)
-                |
-	;
-
 	
-y	:	 ID (->ID) {Idmemoire=$y.tree;} r3->r3//cc
-	|	(->{Idmemoire}) gotostatement->^(LABEL $y gotostatement)
+instructionsIfWithLabel	:	 ID (->ID) {Idmemoire=$instructionsIfWithLabel.tree;} expressionWithId->expressionWithId//cc
+	|	(->{Idmemoire}) gotostatement->^(LABEL $instructionsIfWithLabel gotostatement)
 	|(->{Idmemoire})begin->begin
+	| 'FOR' simpleAr ':=' forlist 'DO' statement -> ^('FOR'  ^(':=' simpleAr forlist) ^('DO' statement))
 	|
 	;
-
-r3	:	(->{Idmemoire})u1
-	;
-
 	
-j	:	  'FOR' simpleARi ':=' forlist 'DO' statement -> ^('FOR'  ^(':=' simpleARi forlist) ^('DO' statement))
-                  | ID (->ID) {Idmemoire=$j.tree;} r2 -> r2 
-                //  | 
+instructionsIf	:	  'FOR' simpleAr ':=' forlist 'DO' statement -> ^('FOR'  ^(':=' simpleAr forlist) ^('DO' statement))
+                  | ID (->ID) {Idmemoire=$instructionsIf.tree;} instructionsIfWithID -> instructionsIfWithID 
                   |  gotostatement ->gotostatement 
-                  |begin ->begin ///j'ai enleve vide
+                  |begin ->begin
+                  |
 	;
 	
-r2	:	(->{Idmemoire})u1 ->u1 
-                |':' w->w
+instructionsIfWithID	:	(->{Idmemoire})expressionWithId ->expressionWithId 
+                |':' instructionsIfLabelLoop->instructionsIfLabelLoop
 	;
 
-u1	//cc k
-        :	(->{Idmemoire})':='  simpleAR ->^(ASSIGENMENT $u1 simpleAR )
+expressionWithId	 :	(->{Idmemoire})':='  simpleOp ->^(ASSIGENMENT $expressionWithId simpleOp )
 	|	(->{Idmemoire}) actualparametrepart2
 	;
-	
-//u	//cc k
-  //      :	(->{Idmemoire})':='  simpleAR ->^(ASSIGENMENT $u simpleAR )
-	//|	(->{Idmemoire}) actualparametrepart 
-	//|	':' w
-	//;
 
-w	:	///forstatement (label ':')* forstatement
-		(->{Idmemoire}) y ->y 
-	|':' w->w
+instructionsIfLabelLoop	:(->{Idmemoire}) instructionsIfWithLabel ->instructionsIfWithLabel 
+	|':' instructionsIfLabelLoop->instructionsIfLabelLoop
 	;
-
-	//
-//;
-
-
-
-
-	
-//cc	:	':='  simpleAR->^(':=' simpleAR)
-	//|	actualparametrepart
-	//; 
-
 
 actualparametrepart
 	:	(->{Idmemoire})'(' actualparalist')' (ID ':''(' actualparalist ')')* ->^(CALL $actualparametrepart actualparalist ^(LISTPARA ID actualparalist)*)
-	//|
 	;
 	
+//Cette règle donne le mot vide pour éviter des conflits
 actualparametrepart2
 	:	(->{Idmemoire})'(' actualparalist')' (ID ':''(' actualparalist ')')* ->^(CALL $actualparametrepart2 actualparalist ^(LISTPARA ID actualparalist)*)
 	|
@@ -489,31 +364,13 @@ actualparalist
 	: actualpara (',' actualpara)*->^(LISTARG actualpara*)
 	;
 	
-/*p
-	:	paralim actualpara p
-	|
-	;*/
-
 actualpara
 	:	expression2->expression2
 	;
-//l	:	leftpart l
- //       |
-	//;
-	
-//leftpart:	identifier ':='
-//	;
- 
  
 gotostatement
 	:	'GOTO' designExp-> ^('GOTO' designExp)
 	;
-	
-
-	
-//forstatement
-	//:	'a'
-	//;
 
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
@@ -526,15 +383,9 @@ FLOAT
     |   '.' ('0'..'9')+ EXPONENT?
     |   ('0'..'9')+ EXPONENT
     ;
-
-//COMMENT
- //   :   'COMMENT ' '\r'? ';' {$channel=HIDDEN;}
- //   ;
     
- 
  COMMENT2
-    :  .// 'COMMENT ' .*';' {$channel=HIDDEN;}
-    /*|*/   'COMMENT' ( options {greedy=false;} : . )* ';' {$channel=HIDDEN;}
+    : 'COMMENT' ( options {greedy=false;} : . )* ';' {$channel=HIDDEN;}
     ;
 
 WS  :   ( ' '
