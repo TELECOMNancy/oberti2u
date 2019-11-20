@@ -1,0 +1,58 @@
+
+- Une procédure : 
+BEGIN
+   INTEGER I, L, P;
+   INTEGER PROCEDURE SELECT(N,M,K);
+      VALUE N, M, K;
+      INTEGER N, M, K;
+      BEGIN
+         INTEGER L;
+         L := 10
+      END
+M:=4
+END
+
+
+- Un for, un commentaire et un array
+BEGIN
+	COMMENT array with square numbers ;
+	INTEGER ARRAY narr[1:100];
+	INTEGER i;
+	FOR i := 1 STEP 1 UNTIL 100 DO
+	BEGIN
+		nArr[i] := i*i
+	END;
+	n:=4
+END
+
+- IF imbriqués 
+BEGIN
+COMMENT : if inside if using begin...end;
+
+	INTEGER n, m;
+	ININTEGER(0,n);
+	IF n LESS 0 THEN 
+	BEGIN
+		IF n EQUAL 1 THEN m := -n ELSE m := -100
+	END
+	ELSE m := 0; 
+	m:=0
+END
+
+- Assignement complexe avec expression IF
+BEGIN
+COMMENT: if inside arithmetic expression;
+
+	INTEGER n, m;
+	
+	ININTEGER(0,n);
+	m := (IF n LESS 0 THEN n ELSE n); 
+	outinteger(1, m); outstring(1,"\n")
+END
+
+
+
+
+
+
+
