@@ -55,7 +55,7 @@ PROG='PROG';
 AND='AND';
 OR='OR';
 ARRAYACCESS;
-ARRAY;
+ARRAY='ARRAY';
 ACCESS;
 VALUE;
 NOTLESS;
@@ -138,7 +138,7 @@ switchlist
  	;
  	
  procedurehead
- 	: identifier formalparameterpart ';' valuepart specificationpart->identifier formalparameterpart valuepart specificationpart
+ 	: identifier formalparameterpart ';'! valuepart specificationpart//->identifier formalparameterpart valuepart specificationpart
  	;
  
 formalparameterpart : 
@@ -281,7 +281,7 @@ compoundT
 	: statement compoundTFacto->statement compoundTFacto
 	;
 	
-compoundTFacto	:	 'END'->END|';' compoundT->compoundT
+compoundTFacto	:	 'END'->END| ';' compoundT->compoundT
 	;
 	
 statement
