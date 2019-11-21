@@ -51,6 +51,161 @@ COMMENT: if inside arithmetic expression;
 END
 
 
+- Gros truc sale
+
+BEGIN
+COMMENT matrix copying;
+	REAL ARRAY aa[1:100,1:100];
+	REAL ARRAY bb[1:100,1:100];
+	INTEGER n, i, j;
+	
+	PROCEDURE outmatrix(channel, a, dim);
+	INTEGER channel;REAL b;INTEGER dim;
+	BEGIN
+		INTEGER i, j;
+		outinteger (channel, dim); 		
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			FOR j := 1 STEP 1 UNTIL dim DO 
+			outstring(channel,"\n")
+		END		
+	END;
+	
+	PROCEDURE matrCopy(a, b, dim);
+	REAL ARRAY a; REAL ARRAY b; INTEGER dim;
+	BEGIN
+		INTEGER i, j;
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			FOR j := 1 STEP 1 UNTIL dim DO  b[i,j] := a[i,j]
+		END		
+	END ;
+	
+	COMMENT matrix generation;
+	n := 10;
+	FOR i := 1 STEP 1 UNTIL n DO
+	BEGIN
+		FOR j := 1 STEP 1 UNTIL n DO
+		BEGIN
+			aa[i,j] := entier ( 100000 /i/j)
+		END
+	END ;
+	
+	outmatrix(1, aa, n);
+	outmatrix(1, bb, n);
+	matrCopy(aa, bb, n);
+	outmatrix(1, bb, n)
+		
+END
+
+
+- GROS TRUC ENCORE PLUS SALE
+
+BEGIN
+	
+	REAL ARRAY aa[1:100000];
+	INTEGER n;
+	REAL b, c;
+	
+	PROCEDURE vectRandom( v, ndim, seed);
+	REAL ARRAY v; INTEGER ndim, seed;
+	BEGIN
+		INTEGER i;
+		INTEGER m, a, b, s, r;
+		m := 32768; a := 805; b := 6925;
+		s := seed;
+		FOR i :=1 STEP 1 UNTIL ndim DO
+		BEGIN
+			s := s*a+b; r := entier(s/m); s := s - r*m; 
+			v[i] := (entier((s+1)/(m+1)*10000)) / 10000 
+		END
+	END;
+	
+	PROCEDURE statAverageStDev(a, dim, avr, std); 
+	REAL ARRAY a; INTEGER dim; REAL avr, std;
+	BEGIN
+		REAL s;
+		INTEGER i;
+		avr := 0;  std := 0;
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			avr := avr + a[i];
+			std := std + a[i]*a[i]
+		END;
+		avr := avr / dim;
+		std := (std - dim*avr*avr) / (dim-1);
+		std := sqrt (std )
+	END;
+	
+	n := 10000;
+	
+	vectRandom(aa, n, n);
+	statAverageStDev(aa, n, b, c);
+	
+	outstring (1,"average = ");  outreal (1, b );
+	outstring (1,"st. dev = ");  outreal (1, c );
+	outstring (1,"\n")
+	
+END
+
+
+- DERNIER GROS TRUC SALE
+
+BEGIN
+	
+	REAL ARRAY aa[1:100000];
+	REAL mini, maxi;
+	INTEGER ARRAY bins[1:100];
+	INTEGER i, n, nbins;
+	
+	PROCEDURE vectRandom( v, ndim, seed);
+	REAL ARRAY v; INTEGER ndim, seed;
+	BEGIN
+		INTEGER i;
+		INTEGER m, a, b, s, r;
+		m := 32768; a := 805; b := 6925;
+		s := seed;
+		FOR i :=1 STEP 1 UNTIL ndim DO
+		BEGIN
+			s := s*a+b; r := entier(s/m); s := s - r*m; 
+			v[i] := (entier((s+1)/(m+1)*10000)) / 10000 
+		END
+	END;
+	
+	PROCEDURE statHistogram(a, dim, b, nb, mi, ma); 
+	REAL ARRAY a; INTEGER dim; INTEGER ARRAY b; INTEGER nb; REAL mi, ma;
+		INTEGER i, k;
+		REAL d;
+                                            BEGIN
+		mi := a[1]; ma := a[1];
+		FOR i := 2 STEP 1 UNTIL dim DO
+		BEGIN
+			IF (mi GREATER a[i]) THEN mi := a[i];
+			IF(ma LESS a[i]) THEN ma := a[i]
+		END ;
+		d := (ma - mi) / nb;
+		FOR i := 1 STEP 1 UNTIL nb DO b[i] := 0;
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			k := entier ( a[i] / d) +1;
+			b[k] := b[k] + 1
+		END
+    
+	END ;
+	
+	n := 100000;
+	nbins := 20;
+	
+	vectRandom(aa, n, n);
+	statHistogram(aa, n, bins, nbins,  mini, maxi);
+	outstring (1, "mi ma: "); outreal (1, mini); outreal (1, maxi); outstring (1,"\n");
+	outstring (1, "histogram: ");
+	FOR i := 1 STEP 1 UNTIL nbins DO  outinteger (1, bins[i] );
+	outstring (1,"\n")
+	
+END
+
+
 
 
 
