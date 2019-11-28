@@ -205,6 +205,86 @@ BEGIN
 	
 END
 
+-Procédure avec arguments séparés :
+
+BEGIN
+COMMENT matrix copying;
+	REAL ARRAY aa[1:100,1:100];
+	REAL ARRAY bb[1:100,1:100];
+	INTEGER n, i, j;
+	
+	PROCEDURE outmatrix(channel, a, dim) taille:(n, m) resultat:(y) ;
+	INTEGER channel;REAL b;INTEGER dim; INTEGER n, m; REAL y;
+	BEGIN
+		INTEGER i, j;
+		outinteger (channel, dim); 		
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			FOR j := 1 STEP 1 UNTIL dim DO 
+			outstring(channel,"\n")
+		END		
+	END;
+	
+	PROCEDURE matrCopy(a, b, dim);
+	REAL ARRAY a; REAL ARRAY b; INTEGER dim;
+	BEGIN
+		INTEGER i, j;
+		FOR i := 1 STEP 1 UNTIL dim DO
+		BEGIN
+			FOR j := 1 STEP 1 UNTIL dim DO  b[i,j] := a[i,j]
+		END		
+	END ;
+	
+	COMMENT matrix generation;
+	n := 10;
+	FOR i := 1 STEP 1 UNTIL n DO
+	BEGIN
+		FOR j := 1 STEP 1 UNTIL n DO
+		BEGIN
+			aa[i,j] := entier ( 100000 /i/j)
+		END
+	END ;
+	
+	outmatrix(1, aa, n);
+	outmatrix(1, bb, n);
+	matrCopy(aa, bb, n);
+	outmatrix(1, bb, n)
+		
+END
+
+-Switch
+
+BEGIN
+   COMMENT CONVERT A DIGIT (1-7) TO WEEKDAY;
+   INTEGER I;
+   SWITCH D := D1, D2, D3, D4, D5, D6, D7;
+   READ(I);
+   IF D GREATER 7 THEN GOTO FIN;
+   GOTO D[I];
+   D1: BEGIN
+          WRITE("MON"); GOTO FIN
+       END;
+   D2: BEGIN
+          WRITE("TUE"); GOTO FIN
+       END;
+   D3: BEGIN
+          WRITE("WEN"); GOTO FIN
+       END;
+   D4: BEGIN
+          WRITE("THU"); GOTO FIN
+       END;
+   D5: BEGIN
+          WRITE("FRI"); GOTO FIN
+       END;
+   D6: BEGIN
+          WRITE("SAT"); GOTO FIN
+       END;
+   D7: BEGIN
+          WRITE("SUN"); GOTO FIN
+       END;
+FIN:
+END
+
 
 
 
