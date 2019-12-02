@@ -1,0 +1,10 @@
+BEGIN
+	COMMENT array with square numbers ;
+	INTEGER ARRAY narr[1:100];
+	INTEGER i;
+	FOR i := 1 STEP 1 UNTIL 100 DO
+	BEGIN
+		nArr[i] := i*i
+	END;
+	n:=4
+END

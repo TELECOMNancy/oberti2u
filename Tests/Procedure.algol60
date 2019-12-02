@@ -1,0 +1,11 @@
+BEGIN
+   INTEGER I, L, P;
+   INTEGER PROCEDURE SELECT(N,M,K);
+      VALUE N, M, K;
+      INTEGER N, M, K;
+      BEGIN
+         INTEGER L;
+         L := 10
+      END;
+M:=4
+END

@@ -1,0 +1,12 @@
+BEGIN
+COMMENT : if inside if using begin...end;
+
+	INTEGER n, m;
+	ININTEGER(0,n);
+	IF n LESS 0 THEN
+	BEGIN
+		IF n EQUAL 1 THEN m := -n ELSE m := -100
+	END
+	ELSE m := 0;
+	m:=0
+END
