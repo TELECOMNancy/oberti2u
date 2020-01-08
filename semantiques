@@ -1,0 +1,67 @@
+
+
+
+-déclaration liste de paramètre( il fallait gérer les différents cas de déclaration de fonctions)
+
+-point virgule avant les ends
+
+-les ifs on a mis un greedy(nous avions réussi è creer une grammaire sans greedy mais le noeud des ifs n'était pas bon)
+
+-gestion des labels(factorisation dérécursivation)
+
+-combiner et classer les règles d'ipération par ordre de priorité
+
+
+
+penses-bêtes: faire des screes des noeuds et corriger la grammaire
+
+
+Liste des contrôles sémanqtiques:
+
+OPérations:
+-types des opérateurs
+-si variable vérifier qu'elle est définie
+-pour les assignements vérfier la concordances des types;
+-division par zeros
+
+
+Déclarations:
+-Corcordance des types;
+
+Déclration de fonctions:
+-verifier le type de retour;
+-double déclaration de fonction ou de varaiable
+
+
+Appel de fonciion:
+type de retour;
+le nombre d'argument;
+les types des arguments
+
+For:
+-si step: vérifier l'ordre des bornes en fonctions du step
+-for while: concordances de types et bornes
+
+IF et WHILE:
+-verifier les concordances des types pour les concditions
+-verifier que ce sont des booleens
+
+
+GOTO:
+verifier que le lable existe
+
+LABEL:
+pas de double déclaration des labels
+
+
+ARRAY:
+-accès à un tableau qui est pas un tableau
+-verifier que les bornes sont entières:
+-accès verifier que ce sont des entiers(a[j] j entier)
+-assigement verification des types
+
+
+
+
+
+
