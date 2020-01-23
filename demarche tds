@@ -1,0 +1,11 @@
+
+
+Division en 3 étapes:
+
+-une personne pour s'occuper des déclaration et des controles sémantques liée à ces derniers
+
+-une personne pour s'occuper des diférents bloc: parcours de bloc d'instruction et check desappels  de fonction et des arrayacces
+
+-une personnes pour les opérations
+
+- une pour les ifs et les for(gros boulot sur les for)
