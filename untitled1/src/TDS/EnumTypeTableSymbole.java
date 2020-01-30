@@ -2,14 +2,15 @@ package TDS;
 
 
 public enum EnumTypeTableSymbole {
-    FUNCTION,
+    PROCEDURE,
     IF,
     ELSE,
     WHILE,
     ANONYMOUS,
     FOR, 
-    LET,
+    BEGIN,
     IN,
     THEN,
+    LABEL,
     DO,
 }

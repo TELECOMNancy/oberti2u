@@ -6,12 +6,14 @@ import java.util.LinkedList;
 
 public class SymbolFonction extends CompositionTableDesSymboles {
 	private Type returnType;
+	private String types;
 	private int NbrParametre;
 	private LinkedList<SymboleVariable> listparam;
 	
-	public SymbolFonction(Tree node, String name, Scope scope, Type returnType, tableDesSymboles symbolTable,int nbrParametre) {
-		super(node, EnumTypeSymbole.PROCEDURE, name, scope, symbolTable);
+	public SymbolFonction(Tree node, String name, Scope scope, String types, tableDesSymboles symbolTable,int nbrParametre) {
+		super(node, EnumTypeSymbole.PROCEDURE, name, types,scope, symbolTable);
 		this.returnType = returnType;
+		this.types=types;
 		this.NbrParametre=nbrParametre;
 		this.listparam = new LinkedList<SymboleVariable>();
 	}

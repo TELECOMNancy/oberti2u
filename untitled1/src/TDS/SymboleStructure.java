@@ -4,8 +4,8 @@ import org.antlr.runtime.tree.Tree;
 
 public class SymboleStructure extends CompositionTableDesSymboles {
 
-	public SymboleStructure(Tree node, String name, Scope scope, tableDesSymboles symboleTable) {
-		super(node, EnumTypeSymbole.STRUCTURE, name, scope, symboleTable);
+	public SymboleStructure(Tree node, String name,String type, Scope scope, tableDesSymboles symboleTable) {
+		super(node, EnumTypeSymbole.STRUCTURE, name,type,scope, symboleTable);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package TDS;
 
 public enum EnumType {
     VOID("void"),
-    INT("INT"),
+    INT("INTEGER"),
     STRING("STRING"),
     RECORD("record"),
     ARRAY("ARRAY"),

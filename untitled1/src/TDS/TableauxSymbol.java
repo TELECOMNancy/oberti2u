@@ -5,9 +5,10 @@ import org.antlr.runtime.tree.Tree;
 
 public class TableauxSymbol extends CompositionTableDesSymboles{
 	
-	
-	public TableauxSymbol(Tree node, String name, Scope scope, tableDesSymboles symboleTable) {
-		super(node, EnumTypeSymbole.ARRAY, name, scope, symboleTable);
+	private String type;
+	public TableauxSymbol(Tree node, String name,String type, Scope scope, tableDesSymboles symboleTable) {
+		super(node, EnumTypeSymbole.ARRAY, name,type,scope, symboleTable);
+		this.type=type;
 	}
 
 	public String toTable() {

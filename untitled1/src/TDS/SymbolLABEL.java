@@ -7,8 +7,8 @@ public class SymbolLABEL extends CompositionTableDesSymboles {
 
     public String nom;
     private boolean isDefined;
-    public SymbolLABEL(Tree node, String name, Scope scope, tableDesSymboles symbolTable) {
-        super(node, EnumTypeSymbole.LABEL, name, scope, symbolTable);
+    public SymbolLABEL(Tree node, String name,String type,Scope scope, tableDesSymboles symbolTable) {
+        super(node, EnumTypeSymbole.LABEL,name,type, scope, symbolTable);
         this.nom=name;
         this.isDefined = false;
     }

@@ -2,7 +2,6 @@ package TDS;
 
 import org.antlr.runtime.tree.Tree;
 
-
 import grammar.*;
 
 public class TreeTraversal {
@@ -17,7 +16,7 @@ public class TreeTraversal {
     public tableDesSymboles buildSymbolTable()  {
         tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
         Type returntype =new Type(EnumType.VOID);
-        SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,returntype ,symbolTable,1);
+        SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable,1);
         this.gestionnaireTDS.getTableDesSymboles().addSymbol(print);
 
         this.traverseFile(root, true);
@@ -35,18 +34,23 @@ public class TreeTraversal {
     	else {
     		for(int i = 0; i < root.getChildCount() ; i ++) {
     			Tree child = root.getChild(i);
-
-    			
     			switch (child.getType()) {
                     case AlgolParser.DEC:
+                        System.out.println("DEC");
                         Tree Child= child.getChild(1);
                         switch (Child.getType()){
                             case AlgolParser.PROCEDURE:
-
-                                this.traverseFunction(Child, onlyDeclarations,child.getChild(0).getText());
+                                System.out.println("PROC");
+                                this.traverseFunction(child, onlyDeclarations);
                                 break;
                              case  AlgolParser.SWITCH:
-                                 this.traverseswitch();
+                                 System.out.println("SWITCH");
+                                 this.traverseswitch(child,onlyDeclarations);
+                                 break;
+                            case AlgolParser.ARRAY:
+                                this.traverseStructure(child,onlyDeclarations);
+                            default:
+                            this.traverseVariable(child, onlyDeclarations);
                         }
                         break;
 
@@ -68,7 +72,7 @@ public class TreeTraversal {
 
                 	 */
                 	case AlgolParser.LABEL:
-                	    this.traverselabel();
+                	    this.traverselabel(child,onlyDeclarations);
                 	    break;
                 	case AlgolParser.IF:
 
@@ -102,23 +106,20 @@ public class TreeTraversal {
     }
     }
   
+    private void traverseFunction(Tree functionNode, boolean onlyDeclarations) {
+        String idf = functionNode.getChild(1).getChild(0).getText();
+        int nbrParametre = functionNode.getChild(1).getChild(1).getChildCount();
 
-    private void traverseFunction(Tree functionNode, boolean onlyDeclarations,String type ) {
-        String idf = functionNode.getChild(0).getText();
-        int nbrParametre = functionNode.getChild(1).getChildCount();
-
-            Type returnType = new Type(EnumType.VOID);
+           Type returnType = new Type(EnumType.VOID);
            tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
+             if ( functionNode.getChildCount()!=1/*functionNode.getChild(2).getChild(0).getType() != tigerParser.VOID*/ ){
+                    returnType = traverseType(functionNode.getChild(0));}
 
-             if (functionNode.getChild(2).getChild(0).getType() != tigerParser.VOID){
-                    returnType = traverseType(functionNode.getChild(2).getChild(0));  }
-
-            
             SymbolFonction functionSymbol = new SymbolFonction(
                     functionNode,
                     idf,
                     Scope.LOCAL,
-                    returnType,
+                    "VOID",
                    symbolTable,
 
                     nbrParametre
@@ -130,40 +131,35 @@ public class TreeTraversal {
             	
                 System.out.println("Redefining function " + idf + ". Line : " + functionNode.getLine());
             }
+        for (int i = 0; i < functionNode.getChild(1).getChild(1).getChildCount(); i++){
+            SymboleVariable symbVar=traverseParameter(functionNode.getChild(1).getChild(i).getChild(i),functionSymbol.getSymbolTable(), idf);
+            functionSymbol.addParam(symbVar);
 
-           this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
-           
-           
-           
-           
-           
-            for (int i = 0; i < functionNode.getChild(1).getChildCount(); i++){
-                 SymboleVariable symbVar=traverseParameter(functionNode.getChild(1).getChild(i),functionSymbol.getSymbolTable(), idf);
-                 functionSymbol.addParam(symbVar);
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
 
-           this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
-            
 
         }
 
-            this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
-            BlocType blocType = this.traverseBloc(functionNode.getChild(3), EnumTypeTableSymbole.FUNCTION, false);
+        this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
+        BlocType blocType = this.traverseBloc(functionNode.getChild(3), EnumTypeTableSymbole.PROCEDURE, false);
 
-            this.gestionnaireTDS.fermerTableDesSymboles();
-            
+        this.gestionnaireTDS.fermerTableDesSymboles();
 
+           this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
 
-
+            ///il faut faire pareil pour les labesl car ils ont aussi un bloc d'instruction
     }
 
     private void traverseStructure(Tree structureNode, boolean onlyDeclarations)  {
-        String idf = this.getID(structureNode.getChild(0));
-
+        //String idf = this.getID(structureNode.getChild(0));
+String idf=structureNode.getChild(1).getChild(0).getText();
+String type=structureNode.getChild(0).getText();
         if(onlyDeclarations) {
             tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
             SymboleStructure structureSymbol = new SymboleStructure(
                     structureNode,
                     idf,
+                    type,
                     Scope.LOCAL,
                     symbolTable
             );
@@ -179,6 +175,8 @@ public class TreeTraversal {
             SymboleStructure structureSymbol = this.gestionnaireTDS.getTableDesSymboles().getStructureSymbol(idf, true);
             this.gestionnaireTDS.ouvrirTableDesSymboles(structureSymbol.getSymbolTable());
 
+
+
             for(int i = 1; i < structureNode.getChildCount(); i++) {
                 Tree child = structureNode.getChild(i);
 
@@ -190,6 +188,7 @@ public class TreeTraversal {
                         System.out.println("");
                 }
             }
+
 
             this.gestionnaireTDS.fermerTableDesSymboles();}
         
@@ -237,25 +236,25 @@ public class TreeTraversal {
         }
     
  
-    private void traverseVariable(Tree variableNode, boolean onlyDeclarations)  {
-
-    	String idf = variableNode.getChild(0).getChild(0).getText();
+    private void traverseVariable(Tree variableNode, boolean onlyDeclarations) {
+    for(int i=1;i<variableNode.getChildCount();i++) {
+        String idf = variableNode.getChild(i).getText();
         SymboleVariable variableSymbol;
-        
-        String stringType=variableNode.getText();
-        String structureType =null;
+
+        String stringType = variableNode.getText();
+        String structureType = null;
         Type type;
         EnumType enumType;
-        if(onlyDeclarations) {
+        if (onlyDeclarations) {
 
-            EnumType typeVariable =null;
-            if(variableNode.getChildCount()==2){
-                switch (variableNode.getChild(1).getText()){
-                    case "INTEGER" :
+            EnumType typeVariable = null;
+            if (variableNode.getChildCount() == 2) {
+                switch (variableNode.getChild(0).getText()) {
+                    case "INTEGER":
                         typeVariable = EnumType.INT;
                         structureType = "int";
                         break;
-                    case "STRING" :
+                    case "STRING":
                         typeVariable = EnumType.STRING;
                         structureType = "string";
                         break;
@@ -265,53 +264,52 @@ public class TreeTraversal {
                         SymboleStructure structureSymbol = this.gestionnaireTDS
                                 .getTableDesSymboles()
                                 .getStructureSymbol(variableNode.getChild(1).getText(), true);
-                        if (structureSymbol != null){
-                        	structureType = variableNode.getChild(1).getText();
-                        }else{
-                        	
-                        	System.out.println(variableNode.getChild(1).getText() + "n'est pas défini");
+                        if (structureSymbol != null) {
+                            structureType = variableNode.getChild(1).getText();
+                        } else {
+
+                            System.out.println(variableNode.getChild(1).getText() + "n'est pas défini");
                         }
                 }
-            }else{          
-                    try {
-                        Integer.parseInt(variableNode.getChild(0).getChild(1).getText());
-                        typeVariable = EnumType.INT;
-                        structureType = "int";
-                    } catch (Exception e) {
-                    	if (variableNode.getChild(0).getChild(1).getType()==tigerParser.ARREC){
-                    		typeVariable = EnumType.RECORD;
-                    		SymboleStructure structureSymbol = this.gestionnaireTDS
-                    				.getTableDesSymboles()
-                    				.getStructureSymbol(variableNode.getChild(0).getChild(1).getChild(0).getText(), true);
+            } else {
+                try {
+                    Integer.parseInt(variableNode.getChild(0).getChild(1).getText());
+                    typeVariable = EnumType.INT;
+                    structureType = "int";
+                } catch (Exception e) {
+                    if (variableNode.getChild(0).getChild(1).getType() == tigerParser.ARREC) {
+                        typeVariable = EnumType.RECORD;
+                        SymboleStructure structureSymbol = this.gestionnaireTDS
+                                .getTableDesSymboles()
+                                .getStructureSymbol(variableNode.getChild(0).getChild(1).getChild(0).getText(), true);
 
-                    		if(structureSymbol == null) {
-                                System.out.println("Unknown type : " + stringType + ". Line : " + variableNode.getLine());
-                    		}else{
-                    			structureType = variableNode.getChild(0).getChild(1).getChild(0).getText();
-                    		}
-                    		
-                    	} else{
-                    	typeVariable = EnumType.STRING;
-                    	structureType = "string";
-                    	}
+                        if (structureSymbol == null) {
+                            System.out.println("Unknown type : " + stringType + ". Line : " + variableNode.getLine());
+                        } else {
+                            structureType = variableNode.getChild(0).getChild(1).getChild(0).getText();
+                        }
+
+                    } else {
+                        typeVariable = EnumType.STRING;
+                        structureType = "string";
                     }
                 }
+            }
 
-        enumType = Type.getDefaultType(stringType);
-        type = new Type(
-                typeVariable,
-                structureType);
-        variableSymbol = new SymboleVariable(variableNode, idf, Scope.GLOBAL, type,this.gestionnaireTDS.getTableDesSymboles());    ///symbolTable);
-        
-        
+            enumType = Type.getDefaultType(stringType);
+            type = new Type(
+                    typeVariable,
+                    structureType);
+            variableSymbol = new SymboleVariable(variableNode, idf, Scope.GLOBAL, type, this.gestionnaireTDS.getTableDesSymboles());    ///symbolTable);
 
-        if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
-        	System.out.println("Redefining  " + idf + ". Line : " + variableNode.getLine());
-        }
+            if (this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
+                System.out.println("Redefining  " + idf + ". Line : " + variableNode.getLine());
+            }
 
             this.gestionnaireTDS.getTableDesSymboles().addSymbol(variableSymbol);
 
-        }}
+        }
+    }}
     
     private Type traverseFunctionCall(Tree functionCallNode)  {
 
@@ -444,10 +442,10 @@ public class TreeTraversal {
         String stringType=currentNode.getText();
         EnumType enumType = EnumType.UNDEFINED;
 
-        try { if(currentNode.getText().equals("int")) {stringType = "int";}
+        try { if(currentNode.getText().equals("INTEGER")) {stringType = "INTEGER";}
         	else{Integer.parseInt(currentNode.getText());} 
         	
-        	stringType = "int";
+        	stringType = "INTEGER";
         	} 
         	catch (Exception e) { 
         		if(!Type.isDefaultType(stringType)) {
@@ -461,7 +459,7 @@ public class TreeTraversal {
 
                     
                 }
-        		else {stringType = "string";	}
+        		else {stringType = "STRING";	}
         	
         	}
         
@@ -661,19 +659,18 @@ public class TreeTraversal {
                 if(!(leftExpr.isInt() && rightExpr.isInt())) {
                 	System.out.println("Mathematical inequalities or comparisons should be done between two integers. Line : "+ exprNode.getLine());
 
-
                 }
 
                 type = new Type(EnumType.INT);
                 break;
-            case tigerParser.COND :
+            /*case AlgolParser.COND :
             	 
             	type=this.traverseExpr(exprNode.getChild(0));
-            	break;
-            case tigerParser.PLUS :
-            case tigerParser.MOINS :
-            case tigerParser.MULT :
-            case tigerParser.DIV :
+            	break;*/
+            case AlgolParser.PLUS:
+            //case AlgolParser.MINUS:
+            case AlgolParser.MULT :
+            case AlgolParser.DIV :
 
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
@@ -741,8 +738,6 @@ public class TreeTraversal {
             	for (int i=0; i < this.gestionnaireTDS.getStack().size();i++){
             		tds = (tableDesSymboles) this.gestionnaireTDS.getStack().get(i);
 
-                	
-
             	}
 
             	SymboleVariable variableSymbol1 = tds.getVariableSymbol(exprNode.getText(), true);
@@ -767,11 +762,72 @@ public class TreeTraversal {
     }
 
 
-    private void traverselabel(){
+    private void traverselabel(Tree labelnode, boolean onlyDeclarations){
+        String idf = labelnode.getChild(0).getText();
+        tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
+        SymbolLABEL lab= new SymbolLABEL(
+                labelnode,
+                idf,
+                null,
+                Scope.LOCAL,
+                symbolTable
+                );
+
+        this.gestionnaireTDS.fermerTableDesSymboles();
+
+        if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(lab, true)) {
+
+            System.out.println("Redefining function " + idf + ". Line : " + labelnode.getLine());
+        }
+        this.gestionnaireTDS.ouvrirTableDesSymboles(lab.getSymbolTable());
+        BlocType blocType = this.traverseBloc(labelnode.getChild(1), EnumTypeTableSymbole.LABEL, false);
+
+        this.gestionnaireTDS.fermerTableDesSymboles();
+        this.gestionnaireTDS.getTableDesSymboles().addSymbol(lab);
+
+
 
     }
 
-    private void traverseswitch(){
+    private void traverseswitch(Tree switchNode,boolean onlyDeclarations){
+        String idf = switchNode.getChild(0).getChild(0).getChild(0).getText();
+        int nbrElement = switchNode.getChild(0).getChild(0).getChild(1).getChildCount();
+
+        //Type returnType = new Type(EnumType.VOID);
+        tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
+       // if (onlyDeclarations){
+           // returnType = traverseType(switchNode.getChild(0));}
+
+        SymbolSWITCH functionSymbol = new SymbolSWITCH(
+                switchNode,
+                idf,
+                null,
+                Scope.LOCAL,
+                symbolTable,
+                nbrElement
+        );
+        this.gestionnaireTDS.fermerTableDesSymboles();
+
+        if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(functionSymbol, true)) {
+
+            System.out.println("Redefining function " + idf + ". Line : " + switchNode.getLine());
+        }
+        for (int i = 0; i < switchNode.getChild(1).getChild(1).getChildCount(); i++){
+            SymboleVariable symbVar=traverseParameter(switchNode.getChild(1).getChild(i).getChild(i),functionSymbol.getSymbolTable(), idf);
+            functionSymbol.addPelement(symbVar);
+
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+
+
+        }
+
+        this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
+        BlocType blocType = this.traverseBloc(switchNode.getChild(3), EnumTypeTableSymbole.PROCEDURE, false);
+
+        this.gestionnaireTDS.fermerTableDesSymboles();
+
+        this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
+
 
     }
 
@@ -789,7 +845,7 @@ public class TreeTraversal {
         return new BlocType(type, true, returnNode);
     }
 
-    private BlocType traverseLet(Tree letNode)  {
+    private BlocType traverseBegin(Tree letNode)  {
 
         BlocType exprRightType=this.traverseBloc(letNode.getChild(1), EnumTypeTableSymbole.ANONYMOUS,false );
        Type type;
@@ -817,10 +873,6 @@ public class TreeTraversal {
         	type = this.traverseBloc(vecNode,EnumTypeTableSymbole.ANONYMOUS,false);
 
         	}
-        
-        
-            
-      
         return type;
     }
 

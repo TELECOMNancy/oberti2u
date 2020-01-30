@@ -18,9 +18,9 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException,  RecognitionException {
-        String source = "/Users/Grillon/Desktop/Compilation/grillon1/testcompil/Test3.txt";
-        String outSt = "/Users/Grillon/Desktop/Compilation/grillon1/testcompil/tds.txt";
-        String out = "/Users/Grillon/Desktop/Compilation/grillon1/testcompil/gen1.txt";
+        String source = "/Users/lataw/Downloads/untitled1/src/test.txt";
+        String outSt = "/Users/lataw/Downloads/untitled1/src/tds.txt";
+        String out = "/Users/lataw/Downloads/untitled1/src/gen1.txt";
 
 
 
@@ -45,10 +45,10 @@ public class Main {
             File sourceFile = new File(source);
             File genFile = new File(out);
             Generator generator = new Generator(sourceFile, genFile, symbolTable);
-            generator.generate(root);
+            //generator.generate(root);
 
-            Compiler compiler = new Compiler(genFile);
-            compiler.compile();
+           // Compiler compiler = new Compiler(genFile);
+           // compiler.compile();
         } catch (RecognitionException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
