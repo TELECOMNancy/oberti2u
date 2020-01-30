@@ -323,14 +323,14 @@ String type=structureNode.getChild(0).getText();
 
         int size = functionSymbol.getReturnNombre();
         
-        int realSize = functionCallNode.getChildCount()-1;
+        int realSize = functionCallNode.getChild(1).getChildCount();
 
         if (size != realSize){
            System.out.println("The function "+ idf + " has been called with wrong number of arguments (" + realSize + " instead of " + size + "). Line :" + functionCallNode.getLine());
         }
 
         for (int i = 1; i < realSize + 1; i++){
-            Tree param = functionCallNode.getChild(i);
+            Tree param = functionCallNode.getChild(1).getChild(i);
 
             
             
@@ -342,6 +342,8 @@ String type=structureNode.getChild(0).getText();
                 System.out.println("The argument "+ param.getText() + " is called with the wrong type (" + type.getType().getToken() + " instead of " + realType.getType().getToken() + "). Line :" + functionCallNode.getLine());
             }
         }
+
+        // Type de retour ??
 
         return functionSymbol.getReturnType();
     }

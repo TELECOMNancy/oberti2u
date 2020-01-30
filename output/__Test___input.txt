@@ -1,0 +1,5 @@
+BEGIN
+	REAL x;
+	x := 5;
+	outreal(1,x)
+END
