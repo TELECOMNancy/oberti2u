@@ -1,0 +1,8 @@
+
+BEGIN
+	INTEGER n;
+    INTEGER j;
+    INTEGER k;
+	ininteger(0,n);
+	outinteger( 1,n)
+END

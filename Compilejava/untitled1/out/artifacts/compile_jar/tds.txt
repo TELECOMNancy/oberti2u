@@ -1,0 +1,6 @@
+
+|0|0|
+|NAME                |OFFSET|SYMB           |TYPE           |
+|print               |0     |FUNC(0)        |VOID           |
+|n                   |2     |VAR            |INT            |
+|j                   |6     |VAR            |INT            |
