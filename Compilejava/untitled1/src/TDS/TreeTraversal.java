@@ -284,6 +284,9 @@ String type=structureNode.getChild(0).getText();
                         typeVariable = EnumType.STRING;
                         structureType = "string";
                         break;
+                    case  "REAL":
+                        typeVariable=EnumType.REAL;
+                        structureType="real";
                     default:
                         typeVariable = EnumType.RECORD;
                         SymboleStructure structureSymbol = this.gestionnaireTDS
