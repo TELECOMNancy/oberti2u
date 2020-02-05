@@ -1,0 +1,12 @@
+3 ValueRev
+
+
+=F11*(1+IF(G$7=GrowthRevMth,INDEX(GrowthRevPCT,MATCH(G$8,GrowthRevYR,0)),0))
+
+=F12*(1+IF(G$7=GrowthExpMth,INDEX(GrowthExpPCT,MATCH(G$8,GrowthExpYR,0)),0))
+
+=G11*ValueRev
+
+5022769
+
+31586
