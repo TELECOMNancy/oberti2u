@@ -4,6 +4,8 @@ import org.antlr.runtime.tree.Tree;
 
 import grammar.*;
 
+import java.util.ArrayList;
+
 public class TreeTraversal {
     private final gestionnaireDeTableDesSymboles gestionnaireTDS;
     private final Tree root;
@@ -57,22 +59,24 @@ public class TreeTraversal {
                             Tree Child1= child.getChild(j);
                             switch (Child1.getType()){
                                 case AlgolParser.LABEL:
-                                    this.traverselabel(child,onlyDeclarations);
+                                    this.traverselabel(Child1,onlyDeclarations);
                                     break;
                                 case AlgolParser.IF:
-                                    this.traverseIf(child);
+                                    this.traverseIf(Child1;
                                     break;
                                 //	 this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
 
                                 //	break;
+                                case AlgolParser.ASSIGEMENT:
+                                    this.traverseASSIG(Child1);
                                 case AlgolParser.FOR:
-                                    this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
+                                    this.traverseBloc(Child1, EnumTypeTableSymbole.WHILE,false);
                                     break;
                                 case AlgolParser.CALL:
                                     break;
                                 case AlgolParser.BEGIN:
                                     if (onlyDeclarations) {
-                                        this.traverseFile(child, onlyDeclarations);
+                                        this.traverseFile(Child1, onlyDeclarations);
                                     }
                                     break;
                                 default:
@@ -239,11 +243,52 @@ String type=structureNode.getChild(0).getText();
         }
     }
 
+    private String traverseArrayAccess(Tree accessNode){
+        //System.out.println(accessNode.getText());
+        String arrayName=accessNode.getChild(0).getText();
+        int nbDimensions=accessNode.getChild(1).getChildCount();
+        ArrayList<Tree> indexes=new ArrayList(nbDimensions);
+        SymboleStructure arraySymbol = this.gestionnaireTDS.getTableDesSymboles().getStructureSymbol(arrayName,true);
+
+
+
+        for (int index=0;index <nbDimensions;index++){
+            indexes.add(accessNode.getChild(1).getChild(index));
+        }
+        if(arraySymbol==null){
+            System.out.println("Impossible array access : "+arrayName+" is not declared. Line : " + accessNode.getLine());
+
+        }
+        /*else{
+            if (...!=nbDimensions){
+                System.out.println("Impossible array access : "+arrayName+" has "+...+" dimensions, not "+nbDimensions+". Line : " + accessNode.getLine())
+            }
+        }
+        int i=0;
+        for (int i=0;i<indexes.size();i++{
+            if(!traverseExpr(indexes.get(i)).equals("INT")){
+                System.out.println("Impossible array access to "+arrayName+" . Index "+(i-1)+" is not an integer. Line : " + accessNode.getLine());
+                return arraySymbol.getSymbolType().toString();
+            }
+        }
+
+
+        */
+
+        return arraySymbol.getSymbolType().toString();
+
+
+
+
+
+    }
+
     private void traverseASSIG(Tree variableNode)  {
 
+        String res= traverseArrayAccess(variableNode.getChild(1));
     	String idf = variableNode.getChild(0).getText();
 
-    	SymboleVariable variableSymbol;
+    	/*SymboleVariable variableSymbol;
 
 
          Type type = this.traverseExpr(variableNode.getChild(1));
@@ -259,8 +304,9 @@ String type=structureNode.getChild(0).getText();
 
         if(! stringType2.equals(String.valueOf(variableSymbol.type.getType().getToken()) )) {
             System.out.println("Affectation impossible car types incompatibles " + stringType2 + ". Line : " + variableNode.getChild(1).getLine());
+        }*/
         }
-        }
+
 
 
     private void traverseVariable(Tree variableNode, boolean onlyDeclarations) {
