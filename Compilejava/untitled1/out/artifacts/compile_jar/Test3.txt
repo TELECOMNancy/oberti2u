@@ -1,0 +1,23 @@
+let
+    var a:=0
+    var b:=1
+    function fibo(generations :int) :int =
+       let
+      
+            function comp(gen : int, previous :int, pprevious : int):int =
+                if gen = 0 then
+                    previous
+                else
+                    comp(gen-1,previous+pprevious,previous)
+        in
+            if generations = 0 | generations = 1 then
+                generations
+            else
+                comp(generations -2, 1,4)
+                
+        end
+in
+    (a:= fibo(3);
+    print(a))
+
+end

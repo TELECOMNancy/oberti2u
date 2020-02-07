@@ -42,7 +42,7 @@ public class SymbolSWITCH extends CompositionTableDesSymboles{
     public String toTable() {
         String str = super.toTable();
 
-        str += "|" + Utils.padRight("SWITCH" + this.getSymbolTable().getRegionNum() + ")", tableDesSymboles.SYMBOL_TYPE_COL_WIDTH);
+        str += "|" + Utils.padRight("SWITCH", tableDesSymboles.SYMBOL_TYPE_COL_WIDTH);
        // str += "|" + Utils.padRight(String.valueOf(this.getReturnType().getNom()), tableDesSymboles.TYPE_COL_WIDTH);
 
         str += "|"+"\n";

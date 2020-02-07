@@ -2,6 +2,7 @@ package com.company;
 
 
 
+import antlr.collections.Stack;
 import generation.Compiler;
 import generation.Generator;
 import generation.*;
@@ -30,8 +31,9 @@ public class Main {
             AlgolParser.prog_return ret = g.prog();
             Tree root = (Tree)ret.getTree();
             TDS.TreeTraversal treeTraversal = new TDS.TreeTraversal(root);
+           //Stack t= (Stack) treeTraversal.gestionnaireTDS.getStack();
 
-            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable();
+            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable(null);
 
             if(!outSt.equals("")) {
                BufferedWriter writer = new BufferedWriter(new FileWriter(outSt));

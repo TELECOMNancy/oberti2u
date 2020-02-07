@@ -448,7 +448,7 @@ public class Generator {
     			break;
     		case tigerLexer.ID :
     			SymboleVariable symbolVar = currentSymbolTable.getVariableSymbol(Node.getText(),true);
-    			String type = symbolVar.getType().getType().getToken();
+    			String type = symbolVar.getType();
     			if (type.equals("string")){
     				generatePrint(Node,currentSymbolTable);
     			}else{

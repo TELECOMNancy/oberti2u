@@ -1,5 +1,6 @@
 package TDS;
 
+import jdk.nashorn.internal.ir.Symbol;
 import org.antlr.runtime.tree.Tree;
 
 import java.util.*;
@@ -12,15 +13,16 @@ public class tableDesSymboles {
 	public static int SYMBOL_TYPE_COL_WIDTH = 15;
 	public static int TYPE_COL_WIDTH = 15;
 
-    private final tableDesSymboles parent;
+    private tableDesSymboles parent;
     private EnumTypeTableSymbole symbolTableType;
     private final Map<String,Symbole> symbols;
-	private final int nestingLevel;
-	private final int regionNum;
+	private  int nestingLevel;
+	private  int regionNum;
 	private int offsetCount;
 	private Map<Integer, tableDesSymboles> blocs;
 
 	public tableDesSymboles(tableDesSymboles parent, int nestingLevel) {
+	  //  System.out.println("SUUUUU");
 		this.parent = parent;
 		this.regionNum = tableDesSymboles.regionCounter++;
 		this.nestingLevel = nestingLevel;
@@ -31,7 +33,6 @@ public class tableDesSymboles {
 
 	public boolean symbolExists(Symbole symbol,boolean checkParent){
 		boolean exists = symbols.containsKey(symbol.getHashName());
-		
 		if(!exists && checkParent){
 			if(this.getParent() != null){
 				return this.getParent().symbolExists(symbol, true);
@@ -40,21 +41,32 @@ public class tableDesSymboles {
 		return exists;
 	}
 
+	public void setParent(tableDesSymboles t){
+	    this.parent=t;
+    }
+
+	public void removesymbole(Symbole symbol){
+	    this.symbols.remove(symbol.getHashName());
+    }
+
+    public void addStrut(SymboleStructure a){
+	    this.symbols.put(a.getHashName(),a);
+	    this.offsetCount+=getTableauxSymbolSize2(a);
+	    a.setOffset(this.offsetCount);
+    }
+
+
 	public void addSymbol(Symbole symbol){
 
 		this.symbols.put(symbol.getHashName(), symbol);
-		
 		if (symbol instanceof SymboleVariable) {
 		    if(symbol.getScope()== Scope.FUNCTION) {
                 if(this.offsetCount >= 0) {
                     this.offsetCount = -2;
                 }
-                
-                
+
                 this.offsetCount -= this.getVariableSize((SymboleVariable) symbol);
                 symbol.setOffset(this.offsetCount);
-
-
             }
             else{
                 if (this.offsetCount <= 0){
@@ -77,7 +89,7 @@ public class tableDesSymboles {
                 size += this.getVariableSize((SymboleVariable) symbol);
             }
             else if(symbol instanceof SymboleStructure) {
-                size += this.getStructureSize((SymboleStructure) symbol);
+                size += this.getTableauxSymbolSize2((SymboleStructure) symbol);
             } else if(symbol instanceof TableauxSymbol) {
                 size += this.getTableauxSymbolSize((TableauxSymbol) symbol);
             }
@@ -87,25 +99,34 @@ public class tableDesSymboles {
         return size;
     }
 
+    public int getTableauxSymbolSize2(SymboleStructure TableauxSymbol) {
+        int size = 0;
+       String type= TableauxSymbol.type;
+      for(int i=0;i<TableauxSymbol.list.size();i++){
+          size= size+Integer.parseInt(TableauxSymbol.list.get(i).get(1))-Integer.parseInt(TableauxSymbol.list.get(i).get(0))+1;
+          size=size*2;
+      }
+        return size;
+    }
+
     public int getVariableSize(SymboleVariable variableSymbol) {
         int size = 0;
-        Type type = variableSymbol.getType();     
+        String type = variableSymbol.getType();
         
         //if(type.isRecord()) {
         //	size = this.getStructureSize(this.getStructureSymbol(type.getNom(), true));;
         //}
-         if(type.isArray()) {
-            size = this.getTableauxSymbolSize(this.getTableauxSymbol(type.getNom(), true));
+         if(type.equals("ARRAY")) {
+            size = this.getTableauxSymbolSize(this.getTableauxSymbol("ARRAY", true));
         }
-        else if(type.isInt()) {
+        else if(type.equals("INTEGER")) {
             size = 2;
         }
-        else if(type.isVoid()) {
+        else if(type.equals("REAL")) {
             size = 2;
         }
-        else if(type.isString()) {
+        else if(type.equals("STRING")) {
             size = variableSymbol.getNode().getChild(0).getChild(1).getText().length()-2;
-
         }
 
         return size;
@@ -145,9 +166,7 @@ public class tableDesSymboles {
             else if(symbol instanceof TableauxSymbol) {
                 size += this.getTableauxSymbolSize((TableauxSymbol) symbol);
             }
-            
-            
-            
+
         }
 
         return size;
@@ -202,6 +221,14 @@ public class tableDesSymboles {
 		return nestingLevel;
 	}
 
+
+	public void setNestingLevel(int nest){
+	    //this.nestingLevel=nest;
+    }
+
+   public void  setRegionnum(int num){
+	    this.regionNum=num;
+   }
 	public int getRegionNum() {
 		return regionNum;
 	}
@@ -234,17 +261,14 @@ str.append("|").append(Utils.padRight("NAME", tableDesSymboles.NAME_COL_WIDTH))
 		for(Map.Entry<String, Symbole> entry: list) {
 			
 			Symbole symbol = entry.getValue();
-		    
+           // System.out.println(entry.toString());
 			str.append(symbol.toTable());
-
 			if(symbol instanceof CompositionTableDesSymboles) {
 				toVisit.offer(((CompositionTableDesSymboles) symbol).getSymbolTable());
 			}
 		}
 
-
 		for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
-			
 			str.append(entry.getValue().toTable());
 			
 		}
