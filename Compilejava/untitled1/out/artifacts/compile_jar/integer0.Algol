@@ -2,7 +2,10 @@ BEGIN
 	COMMENT by experiment find min and max integer;
 	INTEGER n;
     INTEGER j;
-    INTEGER j;
+	INTEGER i;
+
+	i:=C[2,2];
+
 	ininteger(0,n);
 	outinteger(1,n)
 END

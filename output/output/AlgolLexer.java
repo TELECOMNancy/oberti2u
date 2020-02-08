@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g 2020-02-02 16:59:03
+// $ANTLR 3.5.1 /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g 2020-02-02 17:07:01
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -93,15 +93,15 @@ public class AlgolLexer extends Lexer {
 	public AlgolLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "/media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g"; }
+	@Override public String getGrammarFileName() { return "/media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g"; }
 
 	// $ANTLR start "AND"
 	public final void mAND() throws RecognitionException {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:7:5: ( 'AND' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:7:7: 'AND'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:7:5: ( 'AND' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:7:7: 'AND'
 			{
 			match("AND"); 
 
@@ -121,8 +121,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = ASSIGENMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:8:13: ( ':=' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:8:15: ':='
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:8:13: ( ':=' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:8:15: ':='
 			{
 			match(":="); 
 
@@ -142,8 +142,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = BEGIN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:9:7: ( 'BEGIN' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:9:9: 'BEGIN'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:9:7: ( 'BEGIN' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:9:9: 'BEGIN'
 			{
 			match("BEGIN"); 
 
@@ -163,8 +163,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = BORNE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:10:7: ( ':' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:10:9: ':'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:10:7: ( ':' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:10:9: ':'
 			{
 			match(':'); 
 			}
@@ -183,8 +183,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = BORNESUPP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:11:11: ( 'UNTIL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:11:13: 'UNTIL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:11:11: ( 'UNTIL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:11:13: 'UNTIL'
 			{
 			match("UNTIL"); 
 
@@ -204,8 +204,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:12:5: ( '/' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:12:7: '/'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:12:5: ( '/' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:12:7: '/'
 			{
 			match('/'); 
 			}
@@ -224,8 +224,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = ELSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:13:6: ( 'ELSE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:13:8: 'ELSE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:13:6: ( 'ELSE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:13:8: 'ELSE'
 			{
 			match("ELSE"); 
 
@@ -245,8 +245,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = EQUAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:14:7: ( 'EQUAL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:14:9: 'EQUAL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:14:7: ( 'EQUAL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:14:9: 'EQUAL'
 			{
 			match("EQUAL"); 
 
@@ -266,8 +266,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = EQV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:15:5: ( 'EQUIV' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:15:7: 'EQUIV'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:15:5: ( 'EQUIV' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:15:7: 'EQUIV'
 			{
 			match("EQUIV"); 
 
@@ -287,8 +287,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:16:7: ( 'FALSE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:16:9: 'FALSE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:16:7: ( 'FALSE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:16:9: 'FALSE'
 			{
 			match("FALSE"); 
 
@@ -308,8 +308,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = FOR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:17:5: ( 'FOR' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:17:7: 'FOR'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:17:5: ( 'FOR' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:17:7: 'FOR'
 			{
 			match("FOR"); 
 
@@ -329,8 +329,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = GOTO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:18:6: ( 'GOTO' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:18:8: 'GOTO'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:18:6: ( 'GOTO' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:18:8: 'GOTO'
 			{
 			match("GOTO"); 
 
@@ -350,8 +350,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = GREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:19:9: ( 'GREATER' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:19:11: 'GREATER'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:19:9: ( 'GREATER' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:19:11: 'GREATER'
 			{
 			match("GREATER"); 
 
@@ -371,8 +371,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = IF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:20:4: ( 'IF' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:20:6: 'IF'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:20:4: ( 'IF' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:20:6: 'IF'
 			{
 			match("IF"); 
 
@@ -392,8 +392,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = IMPL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:21:6: ( 'IMPL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:21:8: 'IMPL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:21:6: ( 'IMPL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:21:8: 'IMPL'
 			{
 			match("IMPL"); 
 
@@ -413,8 +413,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = LABEL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:22:7: ( 'LABEL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:22:9: 'LABEL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:22:7: ( 'LABEL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:22:9: 'LABEL'
 			{
 			match("LABEL"); 
 
@@ -434,8 +434,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = LESS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:23:6: ( 'LESS' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:23:8: 'LESS'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:23:6: ( 'LESS' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:23:8: 'LESS'
 			{
 			match("LESS"); 
 
@@ -455,8 +455,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = LOCAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:24:7: ( 'OWN' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:24:9: 'OWN'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:24:7: ( 'OWN' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:24:9: 'OWN'
 			{
 			match("OWN"); 
 
@@ -476,8 +476,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:25:6: ( '*' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:25:8: '*'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:25:6: ( '*' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:25:8: '*'
 			{
 			match('*'); 
 			}
@@ -496,8 +496,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = NOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:26:5: ( 'NOT' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:26:7: 'NOT'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:26:5: ( 'NOT' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:26:7: 'NOT'
 			{
 			match("NOT"); 
 
@@ -517,8 +517,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = NOTEQUAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:27:10: ( 'NOTEQUAL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:27:12: 'NOTEQUAL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:27:10: ( 'NOTEQUAL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:27:12: 'NOTEQUAL'
 			{
 			match("NOTEQUAL"); 
 
@@ -538,8 +538,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = NOTGREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:28:12: ( 'NOTGREATER' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:28:14: 'NOTGREATER'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:28:12: ( 'NOTGREATER' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:28:14: 'NOTGREATER'
 			{
 			match("NOTGREATER"); 
 
@@ -559,8 +559,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = NOTLESS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:29:9: ( 'NOTLESS' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:29:11: 'NOTLESS'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:29:9: ( 'NOTLESS' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:29:11: 'NOTLESS'
 			{
 			match("NOTLESS"); 
 
@@ -580,8 +580,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:30:4: ( 'OR' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:30:6: 'OR'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:30:4: ( 'OR' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:30:6: 'OR'
 			{
 			match("OR"); 
 
@@ -601,8 +601,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PARENTHESEF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:31:13: ( ')' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:31:15: ')'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:31:13: ( ')' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:31:15: ')'
 			{
 			match(')'); 
 			}
@@ -621,8 +621,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PARENTHESEO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:32:13: ( '(' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:32:15: '('
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:32:13: ( '(' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:32:15: '('
 			{
 			match('('); 
 			}
@@ -641,8 +641,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PAS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:33:5: ( 'STEP' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:33:7: 'STEP'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:33:5: ( 'STEP' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:33:7: 'STEP'
 			{
 			match("STEP"); 
 
@@ -662,8 +662,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:34:6: ( '+' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:34:8: '+'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:34:6: ( '+' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:34:8: '+'
 			{
 			match('+'); 
 			}
@@ -682,8 +682,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = POWER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:35:7: ( 'POWER' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:35:9: 'POWER'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:35:7: ( 'POWER' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:35:9: 'POWER'
 			{
 			match("POWER"); 
 
@@ -703,8 +703,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PROCEDURE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:36:11: ( 'PROCEDURE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:36:13: 'PROCEDURE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:36:11: ( 'PROCEDURE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:36:13: 'PROCEDURE'
 			{
 			match("PROCEDURE"); 
 
@@ -724,8 +724,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = PROG;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:37:6: ( 'PROG' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:37:8: 'PROG'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:37:6: ( 'PROG' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:37:8: 'PROG'
 			{
 			match("PROG"); 
 
@@ -745,8 +745,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = SWITCH;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:38:8: ( 'SWITCH' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:38:10: 'SWITCH'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:38:8: ( 'SWITCH' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:38:10: 'SWITCH'
 			{
 			match("SWITCH"); 
 
@@ -766,8 +766,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = THEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:39:6: ( 'THEN' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:39:8: 'THEN'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:39:6: ( 'THEN' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:39:8: 'THEN'
 			{
 			match("THEN"); 
 
@@ -787,8 +787,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:40:6: ( 'TRUE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:40:8: 'TRUE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:40:6: ( 'TRUE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:40:8: 'TRUE'
 			{
 			match("TRUE"); 
 
@@ -808,8 +808,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = TYPEBOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:41:10: ( 'BOOLEAN' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:41:12: 'BOOLEAN'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:41:10: ( 'BOOLEAN' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:41:12: 'BOOLEAN'
 			{
 			match("BOOLEAN"); 
 
@@ -829,8 +829,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = TYPEINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:42:9: ( 'INTEGER' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:42:11: 'INTEGER'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:42:9: ( 'INTEGER' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:42:11: 'INTEGER'
 			{
 			match("INTEGER"); 
 
@@ -850,8 +850,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = TYPEREAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:43:10: ( 'REAL' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:43:12: 'REAL'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:43:10: ( 'REAL' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:43:12: 'REAL'
 			{
 			match("REAL"); 
 
@@ -871,8 +871,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = WHILE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:44:7: ( 'WHILE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:44:9: 'WHILE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:44:7: ( 'WHILE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:44:9: 'WHILE'
 			{
 			match("WHILE"); 
 
@@ -892,8 +892,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__63;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:45:7: ( ',' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:45:9: ','
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:45:7: ( ',' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:45:9: ','
 			{
 			match(','); 
 			}
@@ -912,8 +912,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:46:7: ( '-' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:46:9: '-'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:46:7: ( '-' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:46:9: '-'
 			{
 			match('-'); 
 			}
@@ -932,8 +932,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__65;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:47:7: ( ';' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:47:9: ';'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:47:7: ( ';' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:47:9: ';'
 			{
 			match(';'); 
 			}
@@ -952,8 +952,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__66;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:48:7: ( 'ARRAY' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:48:9: 'ARRAY'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:48:7: ( 'ARRAY' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:48:9: 'ARRAY'
 			{
 			match("ARRAY"); 
 
@@ -973,8 +973,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__67;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:49:7: ( 'DO' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:49:9: 'DO'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:49:7: ( 'DO' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:49:9: 'DO'
 			{
 			match("DO"); 
 
@@ -994,8 +994,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__68;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:50:7: ( 'END' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:50:9: 'END'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:50:7: ( 'END' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:50:9: 'END'
 			{
 			match("END"); 
 
@@ -1015,8 +1015,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__69;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:51:7: ( 'POW' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:51:9: 'POW'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:51:7: ( 'POW' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:51:9: 'POW'
 			{
 			match("POW"); 
 
@@ -1036,8 +1036,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__70;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:52:7: ( 'STRING' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:52:9: 'STRING'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:52:7: ( 'STRING' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:52:9: 'STRING'
 			{
 			match("STRING"); 
 
@@ -1057,8 +1057,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__71;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:53:7: ( 'VALUE' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:53:9: 'VALUE'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:53:7: ( 'VALUE' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:53:9: 'VALUE'
 			{
 			match("VALUE"); 
 
@@ -1078,8 +1078,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__72;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:54:7: ( '[' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:54:9: '['
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:54:7: ( '[' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:54:9: '['
 			{
 			match('['); 
 			}
@@ -1098,8 +1098,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__73;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:55:7: ( ']' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:55:9: ']'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:55:7: ( ']' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:55:9: ']'
 			{
 			match(']'); 
 			}
@@ -1118,8 +1118,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = T__74;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:56:7: ( 'a' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:56:9: 'a'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:56:7: ( 'a' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:56:9: 'a'
 			{
 			match('a'); 
 			}
@@ -1138,8 +1138,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:521:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:521:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:521:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:521:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1149,7 +1149,7 @@ public class AlgolLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:521:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:521:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -1160,7 +1160,7 @@ public class AlgolLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -1194,10 +1194,10 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:524:5: ( ( '0' .. '9' )+ )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:524:7: ( '0' .. '9' )+
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:524:5: ( ( '0' .. '9' )+ )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:524:7: ( '0' .. '9' )+
 			{
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:524:7: ( '0' .. '9' )+
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:524:7: ( '0' .. '9' )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -1209,7 +1209,7 @@ public class AlgolLexer extends Lexer {
 
 				switch (alt2) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1246,14 +1246,14 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
 			int alt9=3;
 			alt9 = dfa9.predict(input);
 			switch (alt9) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
 					{
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:9: ( '0' .. '9' )+
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:9: ( '0' .. '9' )+
 					int cnt3=0;
 					loop3:
 					while (true) {
@@ -1265,7 +1265,7 @@ public class AlgolLexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -1287,7 +1287,7 @@ public class AlgolLexer extends Lexer {
 					}
 
 					match('.'); 
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:25: ( '0' .. '9' )*
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:25: ( '0' .. '9' )*
 					loop4:
 					while (true) {
 						int alt4=2;
@@ -1298,7 +1298,7 @@ public class AlgolLexer extends Lexer {
 
 						switch (alt4) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -1316,7 +1316,7 @@ public class AlgolLexer extends Lexer {
 						}
 					}
 
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:37: ( EXPONENT )?
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:37: ( EXPONENT )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0=='E'||LA5_0=='e') ) {
@@ -1324,7 +1324,7 @@ public class AlgolLexer extends Lexer {
 					}
 					switch (alt5) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:528:37: EXPONENT
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:528:37: EXPONENT
 							{
 							mEXPONENT(); 
 
@@ -1336,10 +1336,10 @@ public class AlgolLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:529:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:529:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
 					{
 					match('.'); 
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:529:13: ( '0' .. '9' )+
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:529:13: ( '0' .. '9' )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -1351,7 +1351,7 @@ public class AlgolLexer extends Lexer {
 
 						switch (alt6) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -1372,7 +1372,7 @@ public class AlgolLexer extends Lexer {
 						cnt6++;
 					}
 
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:529:25: ( EXPONENT )?
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:529:25: ( EXPONENT )?
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0=='E'||LA7_0=='e') ) {
@@ -1380,7 +1380,7 @@ public class AlgolLexer extends Lexer {
 					}
 					switch (alt7) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:529:25: EXPONENT
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:529:25: EXPONENT
 							{
 							mEXPONENT(); 
 
@@ -1392,9 +1392,9 @@ public class AlgolLexer extends Lexer {
 					}
 					break;
 				case 3 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:530:9: ( '0' .. '9' )+ EXPONENT
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:530:9: ( '0' .. '9' )+ EXPONENT
 					{
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:530:9: ( '0' .. '9' )+
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:530:9: ( '0' .. '9' )+
 					int cnt8=0;
 					loop8:
 					while (true) {
@@ -1406,7 +1406,7 @@ public class AlgolLexer extends Lexer {
 
 						switch (alt8) {
 						case 1 :
-							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+							// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -1447,13 +1447,13 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = COMMENT2;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:539:5: ( . 'COMMENT' ( options {greedy=false; } : . )* ';' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:539:8: . 'COMMENT' ( options {greedy=false; } : . )* ';'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:539:5: ( . 'COMMENT' ( options {greedy=false; } : . )* ';' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:539:8: . 'COMMENT' ( options {greedy=false; } : . )* ';'
 			{
 			matchAny(); 
 			match("COMMENT"); 
 
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:540:23: ( options {greedy=false; } : . )*
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:540:23: ( options {greedy=false; } : . )*
 			loop10:
 			while (true) {
 				int alt10=2;
@@ -1467,7 +1467,7 @@ public class AlgolLexer extends Lexer {
 
 				switch (alt10) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:540:51: .
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:540:51: .
 					{
 					matchAny(); 
 					}
@@ -1496,8 +1496,8 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:543:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:543:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:543:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:543:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -1524,11 +1524,11 @@ public class AlgolLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:551:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:551:8: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:551:5: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:551:8: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
 			{
 			match('\"'); 
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:551:12: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:551:12: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
 			loop11:
 			while (true) {
 				int alt11=3;
@@ -1542,14 +1542,14 @@ public class AlgolLexer extends Lexer {
 
 				switch (alt11) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:551:14: ESC_SEQ
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:551:14: ESC_SEQ
 					{
 					mESC_SEQ(); 
 
 					}
 					break;
 				case 2 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:551:24: ~ ( '\\\\' | '\"' )
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:551:24: ~ ( '\\\\' | '\"' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -1582,8 +1582,8 @@ public class AlgolLexer extends Lexer {
 	// $ANTLR start "EXPONENT"
 	public final void mEXPONENT() throws RecognitionException {
 		try {
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:556:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:556:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:556:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:556:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
 			{
 			if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
 				input.consume();
@@ -1593,7 +1593,7 @@ public class AlgolLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:556:22: ( '+' | '-' )?
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:556:22: ( '+' | '-' )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0=='+'||LA12_0=='-') ) {
@@ -1601,7 +1601,7 @@ public class AlgolLexer extends Lexer {
 			}
 			switch (alt12) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 					{
 					if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
 						input.consume();
@@ -1616,7 +1616,7 @@ public class AlgolLexer extends Lexer {
 
 			}
 
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:556:33: ( '0' .. '9' )+
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:556:33: ( '0' .. '9' )+
 			int cnt13=0;
 			loop13:
 			while (true) {
@@ -1628,7 +1628,7 @@ public class AlgolLexer extends Lexer {
 
 				switch (alt13) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1661,8 +1661,8 @@ public class AlgolLexer extends Lexer {
 	// $ANTLR start "HEX_DIGIT"
 	public final void mHEX_DIGIT() throws RecognitionException {
 		try {
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:559:11: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:559:11: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
 				input.consume();
@@ -1684,7 +1684,7 @@ public class AlgolLexer extends Lexer {
 	// $ANTLR start "ESC_SEQ"
 	public final void mESC_SEQ() throws RecognitionException {
 		try {
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:563:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | UNICODE_ESC | OCTAL_ESC )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:563:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | UNICODE_ESC | OCTAL_ESC )
 			int alt14=3;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0=='\\') ) {
@@ -1739,7 +1739,7 @@ public class AlgolLexer extends Lexer {
 
 			switch (alt14) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:563:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:563:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
 					{
 					match('\\'); 
 					if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1753,14 +1753,14 @@ public class AlgolLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:564:9: UNICODE_ESC
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:564:9: UNICODE_ESC
 					{
 					mUNICODE_ESC(); 
 
 					}
 					break;
 				case 3 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:565:9: OCTAL_ESC
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:565:9: OCTAL_ESC
 					{
 					mOCTAL_ESC(); 
 
@@ -1778,7 +1778,7 @@ public class AlgolLexer extends Lexer {
 	// $ANTLR start "OCTAL_ESC"
 	public final void mOCTAL_ESC() throws RecognitionException {
 		try {
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:570:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:570:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
 			int alt15=3;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0=='\\') ) {
@@ -1836,7 +1836,7 @@ public class AlgolLexer extends Lexer {
 
 			switch (alt15) {
 				case 1 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:570:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:570:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '3') ) {
@@ -1866,7 +1866,7 @@ public class AlgolLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:571:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:571:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -1888,7 +1888,7 @@ public class AlgolLexer extends Lexer {
 					}
 					break;
 				case 3 :
-					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:572:9: '\\\\' ( '0' .. '7' )
+					// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:572:9: '\\\\' ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -1913,8 +1913,8 @@ public class AlgolLexer extends Lexer {
 	// $ANTLR start "UNICODE_ESC"
 	public final void mUNICODE_ESC() throws RecognitionException {
 		try {
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:577:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
-			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:577:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:577:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
+			// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:577:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
 			{
 			match('\\'); 
 			match('u'); 
@@ -1937,397 +1937,397 @@ public class AlgolLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:8: ( AND | ASSIGENMENT | BEGIN | BORNE | BORNESUPP | DIV | ELSE | EQUAL | EQV | FALSE | FOR | GOTO | GREATER | IF | IMPL | LABEL | LESS | LOCAL | MULT | NOT | NOTEQUAL | NOTGREATER | NOTLESS | OR | PARENTHESEF | PARENTHESEO | PAS | PLUS | POWER | PROCEDURE | PROG | SWITCH | THEN | TRUE | TYPEBOOL | TYPEINT | TYPEREAL | WHILE | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | ID | INT | FLOAT | COMMENT2 | WS | STRING )
+		// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:8: ( AND | ASSIGENMENT | BEGIN | BORNE | BORNESUPP | DIV | ELSE | EQUAL | EQV | FALSE | FOR | GOTO | GREATER | IF | IMPL | LABEL | LESS | LOCAL | MULT | NOT | NOTEQUAL | NOTGREATER | NOTLESS | OR | PARENTHESEF | PARENTHESEO | PAS | PLUS | POWER | PROCEDURE | PROG | SWITCH | THEN | TRUE | TYPEBOOL | TYPEINT | TYPEREAL | WHILE | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | ID | INT | FLOAT | COMMENT2 | WS | STRING )
 		int alt16=56;
 		alt16 = dfa16.predict(input);
 		switch (alt16) {
 			case 1 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:10: AND
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:10: AND
 				{
 				mAND(); 
 
 				}
 				break;
 			case 2 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:14: ASSIGENMENT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:14: ASSIGENMENT
 				{
 				mASSIGENMENT(); 
 
 				}
 				break;
 			case 3 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:26: BEGIN
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:26: BEGIN
 				{
 				mBEGIN(); 
 
 				}
 				break;
 			case 4 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:32: BORNE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:32: BORNE
 				{
 				mBORNE(); 
 
 				}
 				break;
 			case 5 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:38: BORNESUPP
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:38: BORNESUPP
 				{
 				mBORNESUPP(); 
 
 				}
 				break;
 			case 6 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:48: DIV
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:48: DIV
 				{
 				mDIV(); 
 
 				}
 				break;
 			case 7 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:52: ELSE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:52: ELSE
 				{
 				mELSE(); 
 
 				}
 				break;
 			case 8 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:57: EQUAL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:57: EQUAL
 				{
 				mEQUAL(); 
 
 				}
 				break;
 			case 9 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:63: EQV
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:63: EQV
 				{
 				mEQV(); 
 
 				}
 				break;
 			case 10 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:67: FALSE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:67: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
 			case 11 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:73: FOR
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:73: FOR
 				{
 				mFOR(); 
 
 				}
 				break;
 			case 12 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:77: GOTO
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:77: GOTO
 				{
 				mGOTO(); 
 
 				}
 				break;
 			case 13 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:82: GREATER
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:82: GREATER
 				{
 				mGREATER(); 
 
 				}
 				break;
 			case 14 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:90: IF
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:90: IF
 				{
 				mIF(); 
 
 				}
 				break;
 			case 15 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:93: IMPL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:93: IMPL
 				{
 				mIMPL(); 
 
 				}
 				break;
 			case 16 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:98: LABEL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:98: LABEL
 				{
 				mLABEL(); 
 
 				}
 				break;
 			case 17 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:104: LESS
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:104: LESS
 				{
 				mLESS(); 
 
 				}
 				break;
 			case 18 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:109: LOCAL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:109: LOCAL
 				{
 				mLOCAL(); 
 
 				}
 				break;
 			case 19 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:115: MULT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:115: MULT
 				{
 				mMULT(); 
 
 				}
 				break;
 			case 20 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:120: NOT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:120: NOT
 				{
 				mNOT(); 
 
 				}
 				break;
 			case 21 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:124: NOTEQUAL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:124: NOTEQUAL
 				{
 				mNOTEQUAL(); 
 
 				}
 				break;
 			case 22 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:133: NOTGREATER
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:133: NOTGREATER
 				{
 				mNOTGREATER(); 
 
 				}
 				break;
 			case 23 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:144: NOTLESS
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:144: NOTLESS
 				{
 				mNOTLESS(); 
 
 				}
 				break;
 			case 24 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:152: OR
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:152: OR
 				{
 				mOR(); 
 
 				}
 				break;
 			case 25 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:155: PARENTHESEF
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:155: PARENTHESEF
 				{
 				mPARENTHESEF(); 
 
 				}
 				break;
 			case 26 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:167: PARENTHESEO
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:167: PARENTHESEO
 				{
 				mPARENTHESEO(); 
 
 				}
 				break;
 			case 27 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:179: PAS
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:179: PAS
 				{
 				mPAS(); 
 
 				}
 				break;
 			case 28 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:183: PLUS
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:183: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 29 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:188: POWER
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:188: POWER
 				{
 				mPOWER(); 
 
 				}
 				break;
 			case 30 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:194: PROCEDURE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:194: PROCEDURE
 				{
 				mPROCEDURE(); 
 
 				}
 				break;
 			case 31 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:204: PROG
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:204: PROG
 				{
 				mPROG(); 
 
 				}
 				break;
 			case 32 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:209: SWITCH
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:209: SWITCH
 				{
 				mSWITCH(); 
 
 				}
 				break;
 			case 33 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:216: THEN
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:216: THEN
 				{
 				mTHEN(); 
 
 				}
 				break;
 			case 34 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:221: TRUE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:221: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
 			case 35 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:226: TYPEBOOL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:226: TYPEBOOL
 				{
 				mTYPEBOOL(); 
 
 				}
 				break;
 			case 36 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:235: TYPEINT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:235: TYPEINT
 				{
 				mTYPEINT(); 
 
 				}
 				break;
 			case 37 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:243: TYPEREAL
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:243: TYPEREAL
 				{
 				mTYPEREAL(); 
 
 				}
 				break;
 			case 38 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:252: WHILE
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:252: WHILE
 				{
 				mWHILE(); 
 
 				}
 				break;
 			case 39 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:258: T__63
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:258: T__63
 				{
 				mT__63(); 
 
 				}
 				break;
 			case 40 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:264: T__64
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:264: T__64
 				{
 				mT__64(); 
 
 				}
 				break;
 			case 41 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:270: T__65
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:270: T__65
 				{
 				mT__65(); 
 
 				}
 				break;
 			case 42 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:276: T__66
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:276: T__66
 				{
 				mT__66(); 
 
 				}
 				break;
 			case 43 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:282: T__67
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:282: T__67
 				{
 				mT__67(); 
 
 				}
 				break;
 			case 44 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:288: T__68
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:288: T__68
 				{
 				mT__68(); 
 
 				}
 				break;
 			case 45 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:294: T__69
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:294: T__69
 				{
 				mT__69(); 
 
 				}
 				break;
 			case 46 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:300: T__70
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:300: T__70
 				{
 				mT__70(); 
 
 				}
 				break;
 			case 47 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:306: T__71
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:306: T__71
 				{
 				mT__71(); 
 
 				}
 				break;
 			case 48 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:312: T__72
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:312: T__72
 				{
 				mT__72(); 
 
 				}
 				break;
 			case 49 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:318: T__73
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:318: T__73
 				{
 				mT__73(); 
 
 				}
 				break;
 			case 50 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:324: T__74
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:324: T__74
 				{
 				mT__74(); 
 
 				}
 				break;
 			case 51 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:330: ID
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:330: ID
 				{
 				mID(); 
 
 				}
 				break;
 			case 52 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:333: INT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:333: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 53 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:337: FLOAT
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:337: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
 			case 54 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:343: COMMENT2
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:343: COMMENT2
 				{
 				mCOMMENT2(); 
 
 				}
 				break;
 			case 55 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:352: WS
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:352: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 56 :
-				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Algol.g:1:355: STRING
+				// /media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/output/Algol.g:1:355: STRING
 				{
 				mSTRING(); 
 

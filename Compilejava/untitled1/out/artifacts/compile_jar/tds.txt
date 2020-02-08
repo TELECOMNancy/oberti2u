@@ -3,4 +3,5 @@
 |NAME                |OFFSET|SYMB           |TYPE           |
 |print               |0     |FUNC(0)        |VOID           |
 |n                   |2     |VAR            |INT            |
-|j                   |6     |VAR            |INT            |
+|j                   |4     |VAR            |INT            |
+|i                   |6     |VAR            |INT            |

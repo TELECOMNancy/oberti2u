@@ -71,40 +71,34 @@ public class TreeTraversal {
                 		break;
 
                 	 */
-                	case AlgolParser.LABEL:
-                	    this.traverselabel(child,onlyDeclarations);
-                	    break;
-                	case AlgolParser.IF:
+                	case AlgolParser.BLOCK:
+                        for(int j=0;j<child.getChildCount();j++){
+                            Tree Child1= child.getChild(i);
+                            switch (Child1.getType()){
+                                case AlgolParser.LABEL:
+                                    this.traverselabel(child,onlyDeclarations);
+                                    break;
+                                case AlgolParser.IF:
+                                    this.traverseIf(child);
+                                    break;
+                                //case ALgolParser.WHILE:
 
-                		 this.traverseBloc(child, EnumTypeTableSymbole.IF,false);
+                                //     this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
 
-                		break;
-                	//case ALgolParser.WHILE:
-
-                	//	 this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
-
-                	//	break;
-                	case AlgolParser.FOR:
-
-                		  this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
-
-                		break;
-                	//case AlgolParser.BODY:
-                	case AlgolParser.BEGIN:
-                		if (onlyDeclarations) {
-
-                			this.traverseFile(child, onlyDeclarations);
-                		}
-
-                		break;
-                	case tigerParser.IN:
-                		
-                			this.traverseBloc(child, EnumTypeTableSymbole.IN,false);
-                	
-            }
-        }
-    }
-    }
+                                //    break;
+                                case AlgolParser.FOR:
+                                    this.traverseBloc(child, EnumTypeTableSymbole.WHILE,false);
+                                    break;
+                                case AlgolParser.BEGIN:
+                                    if (onlyDeclarations) {
+                                        this.traverseFile(child, onlyDeclarations);
+                                    }
+                                    break;
+                            }
+                        }
+	        		}
+	    }
+	    }
   
     private void traverseFunction(Tree functionNode, boolean onlyDeclarations) {
         String idf = functionNode.getChild(1).getChild(0).getText();

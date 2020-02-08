@@ -1,4 +1,4 @@
-grammar FINAL;
+grammar FinaleWithLabelVide;
 options{ k=1;
 language= Java;
 output=AST;

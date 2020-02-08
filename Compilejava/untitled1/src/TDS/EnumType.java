@@ -3,6 +3,7 @@ package TDS;
 public enum EnumType {
     VOID("void"),
     INT("INTEGER"),
+    REAL("REAL"),
     STRING("STRING"),
     RECORD("record"),
     ARRAY("ARRAY"),

@@ -6,7 +6,99 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="346ee3c9-ab1c-4346-acd4-6a8ae746ef00" name="Default Changelist" comment="" />
+    <list default="true" id="346ee3c9-ab1c-4346-acd4-6a8ae746ef00" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Algol.g" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compile_jar/integer0.Algol" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compile_jar/integer0.Algol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compile_jar/tds.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compile_jar/tds.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compile/TDS/EnumType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compile/TDS/EnumType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compile/TDS/TreeTraversal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compile/TDS/TreeTraversal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compile/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compile/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TDS/EnumType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TDS/EnumType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TDS/TreeTraversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TDS/TreeTraversal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FinaleWithLabelVide.g" beforeDir="false" afterPath="$PROJECT_DIR$/../../FinaleWithLabelVide.g" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/AlgolLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../output/AlgolLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/AlgolParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../output/AlgolParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/__Test__.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../output/__Test__.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALLexer$DFA16.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALLexer$DFA9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALLexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$actualpara_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$actualparalist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$actualparametrepart2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$actualparametrepart_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$arrayConstructor_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$arraylist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$arrayseg_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$atom2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$atom_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$begin_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$beginwithID2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$beginwithID_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$block_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$boundp_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$boundplist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$comment_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$compoundTFacto_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$compoundT_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$declaration_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$designExp_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$expression2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$expressionWithId_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$expression_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$forlist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$forlistelement_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$formalpara_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$formalparameterlist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$formalparameterpart_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$gotostatement_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$identifier2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$identifier_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$identifierlist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$instructionsIfLabelLoop_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$instructionsIfWithID_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$instructionsIfWithLabel_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$instructionsIf_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$label2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$label_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$localorown_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$memoire_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$multExp2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$multExpPower2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$multExpPower_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$multExp_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$procedure_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$procedurehead_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$prog1_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$prog_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleARi2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleAr_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleDesign_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleLogAndOr_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleLogEquiv_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleLogImplication_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleLog_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$simpleOp_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$specificationpart_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$specifierType_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$specifier_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$statementLabelLoop_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$statementWithID_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$statementWithLabel_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$statement_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$switchdec_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$switchlist_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$typeFor_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$type_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$typedeclaration2_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$typedeclaration_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$typeliste_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser$valuepart_return.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/FINALParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../output/classes/__Test__.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../untitled1/src/TDS/TreeTraversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../untitled1/src/TDS/TreeTraversal.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +112,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1WlxZdLYucv9iXRsUbWgetUBFYj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -55,53 +153,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="compile" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="compile" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -118,7 +169,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579738038144</updated>
+      <workItem from="1580661879377" duration="505000" />
+      <workItem from="1580731439322" duration="2110000" />
+      <workItem from="1581000458243" duration="9667000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
