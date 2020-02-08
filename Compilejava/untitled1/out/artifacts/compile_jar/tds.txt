@@ -1,7 +1,39 @@
 
 |0|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
+
 |print               |0     |FUNC(0)        |VOID           |
 |n                   |2     |VAR            |INT            |
 |j                   |4     |VAR            |INT            |
 |i                   |6     |VAR            |INT            |
+=======
+|K                   |-8    |VAR            |INTEGER        |
+|M                   |-6    |VAR            |INTEGER        |
+|N                   |-4    |VAR            |INTEGER        |
+|SELECT              |0     |FUNC           |INTEGER        |
+|D                   |0     |SWITCH         |
+|print               |0     |FUNC           |VOID           |
+|n                   |2     |VAR            |INTEGER        |
+|i                   |4     |VAR            |INTEGER        |
+|wawa                |6     |VAR            |INTEGER        |
+|wawa2               |8     |VAR            |REAL           |
+|wawa3               |10    |VAR            |INTEGER        |
+|narr                |16    |ARRAY          |INTEGER        |
+|D4                  |34    |VAR            |Switchelement  |
+|D5                  |34    |VAR            |Switchelement  |
+|D7                  |34    |VAR            |Switchelement  |
+|D6                  |34    |VAR            |Switchelement  |
+|D3                  |34    |VAR            |Switchelement  |
+|D1                  |34    |VAR            |Switchelement  |
+|D2                  |34    |VAR            |Switchelement  |
+|aa                  |34    |MATRICE        |REAL           |
+
+|3|0|
+|NAME                |OFFSET|SYMB           |TYPE           |
+|L                   |2     |VAR            |REAL           |
+
+|1|0|
+|NAME                |OFFSET|SYMB           |TYPE           |
+|L                   |2     |VAR            |REAL           |
+|i                   |4     |VAR            |INTEGER        |
+

@@ -8,16 +8,17 @@ import org.antlr.runtime.tree.Tree;
 public class SymboleVariable extends Symbole {
 
     public Type type;
+    public String types;
     private boolean isDefined;
 
-    public SymboleVariable(Tree node, String name, Scope scope, Type type, tableDesSymboles symbolTable) {
+    public SymboleVariable(Tree node, String name, Scope scope, String type, tableDesSymboles symbolTable) {
         super(node, EnumTypeSymbole.VARIABLE, name, scope/*,symbolTable*/);
-        this.type = type;
+        this.types = type;
         this.isDefined = false;
     }
 
-    public Type getType(){
-        return this.type;
+    public String getType(){
+        return this.types;
     }
 
     public void setType(Type type){
@@ -37,7 +38,7 @@ public class SymboleVariable extends Symbole {
         String str = super.toTable();
 
 	str += "|" + Utils.padRight("VAR", tableDesSymboles.SYMBOL_TYPE_COL_WIDTH);
-str += "|" + Utils.padRight(String.valueOf(this.type.getType()), tableDesSymboles.TYPE_COL_WIDTH);
+str += "|" + Utils.padRight(String.valueOf(this.types), tableDesSymboles.TYPE_COL_WIDTH);
 
 str += "|"+ "\n";
         return str;
