@@ -31,7 +31,7 @@ public class TreeTraversal {
     
     private void traverseFile(Tree root, boolean onlyDeclarations)  {
     	if (root.getChildCount() <= 0 ){
-            System.out.println("The file11 you want to load is empty");
+            System.out.println("The file you want to load is empty");
     	}
 
     	else {
@@ -284,7 +284,7 @@ public class TreeTraversal {
 
     private void traverseStructureField(Tree structFieldNode)  {
 
-    	
+
     	String idf = this.getID(structFieldNode.getChild(0));
 
         Type type = this.traverseType(structFieldNode.getChild(1));
@@ -300,41 +300,67 @@ public class TreeTraversal {
         }
     }
     
-    private void traverseASSIG(Tree variableNode)  {
+    private void traverseASSIG(Tree variableNode) {
+        boolean notAreturn=false;
+        tableDesSymboles Parent=this.gestionnaireTDS.getTableDesSymboles().getParent();
+        String idf = variableNode.getChild(0).getText();
+        String types = "";
+        SymboleVariable variableSymbol = null;
 
-    	String idf = variableNode.getChild(0).getText();
-        String types="";
-    	SymboleVariable variableSymbol= null;
-
-    	String type = this.traverseExpr(variableNode.getChild(1));
-       /*if(variableNode.getChild(1).getText().equals(":=")){
-           type=traverseExpr(variableNode.getChild(1).getChild(0));
+        String type = this.traverseExpr(variableNode.getChild(1));
+       /*if(variableNode.getChild(1).getText().equals(":=")) {
+           type = traverseExpr(variableNode.getChild(1).getChild(0));
            this.traverseASSIG(variableNode.getChild(1));
        }*/
 
+        String stringType2 = type;
 
-        variableSymbol = this.gestionnaireTDS.getTableDesSymboles().getVariableSymbol(idf, true);
-
-
-        String stringType2=type;
-
-        if(idf.equals("ARRAYACCESS")){
-            types=traverseArrayacces(variableNode.getChild(0));
-            System.out.println(types);
-            variableSymbol=null;
-        }
-            if(variableSymbol==null) {
-                if (!types.equals(type)) {
-                    System.out.println("Affectation impossibles car types incompatibles " + type+ ". Line : " + variableNode.getChild(1).getLine());
+        try{
+            if(idf.equals(Parent.getFunctionSymbol(idf,false).getName())){
+                types=this.gestionnaireTDS.getTableDesSymboles().getFunctionSymbol(idf, true).getReturn();
+                if(!types.equals(type)){
+                    System.out.println("Affectation impossibles car types incompatibles " + types + ". Ligne " + variableNode.getChild(1).getLine());
                 }
             }
+
+        } catch (Exception e) {
+            notAreturn=true;
+
+
+        }
+
+        if (idf.equals("ARRAYACCESS")) {
+            types = traverseArrayacces(variableNode.getChild(0));
+            //System.out.println(types);
+            if (!types.equals(type)) {
+                System.out.println("Affectation impossibles car types incompatibles " + types + ". Ligne " + variableNode.getChild(1).getLine());
+            }
+        }
+
+        else {
+            if(notAreturn) {
+                variableSymbol = this.gestionnaireTDS.getTableDesSymboles().getVariableSymbol(idf, true);
+
+
+                if (variableSymbol == null) {
+                    System.out.println("Affectation impossibles : " + idf + " n'existe pas. Ligne " + variableNode.getChild(1).getLine());
+                }
+                else {
+                    types = variableSymbol.getType();
+                    if (!types.equals(type)) {
+                        System.out.println("Affectation impossibles car types incompatibles " + type + ". Ligne " + variableNode.getChild(1).getLine());
+                    }
+                }
+            /*}
             else{
                 if (!type.equals(variableSymbol.types)) {
-                    System.out.println("Affectation impossible car types incompatibles " + stringType2 + ". Line : " + variableNode.getChild(1).getLine());
+                    System.out.println("Affectation impossible car types incompatibles " + stringType2 + ". Ligne " + variableNode.getChild(1).getLine());
                 }
+            }*/
             }
-
         }
+    }
+
     
  
     private void traverseVariable(Tree variableNode, boolean onlyDeclarations) {
@@ -1126,22 +1152,22 @@ else{
     }
 
 
-    public String traverseArrayacces(Tree accessnode){
+    private String traverseArrayacces(Tree accessnode){
         String type="";
         String idf= accessnode.getChild(0).getText();
         SymboleStructure symbol =this.gestionnaireTDS.getTableDesSymboles().getStructureSymbol(idf,true);
         if(symbol==null){
-            System.out.println("le tableau"+ idf+ " n'est pas déclaré"+ "Ligne"+ accessnode.getChild(0).getLine());
+            System.out.println("le tableau "+ idf+ " n'est pas déclaré. "+ "Ligne "+ accessnode.getChild(0).getLine());
         }
         else{
              if(accessnode.getChild(1).getChildCount()!=symbol.list.size()){
-         System.out.println(" Le tableau"+ idf+ "est un tableau a"+ symbol.list.size()+"dimension");
+         System.out.println(" Le tableau "+ idf+ " est un tableau a "+ symbol.list.size()+" dimension");
             }
              else{
                  for(int k=0;k<accessnode.getChild(1).getChildCount();k++){
                      String type1= traverseExpr(accessnode.getChild(1).getChild(k));
                      if (!type1.equals("INTEGER")){
-                         System.out.println(accessnode.getChild(1).getChild(k).getText()+" n'est pas un entier"+ "Ligne"+accessnode.getChild(1).getChild(k).getLine());
+                         System.out.println(accessnode.getChild(1).getChild(k).getText()+" n'est pas un entier. "+ "Ligne "+accessnode.getChild(1).getChild(k).getLine());
                      }
                  }
              }
