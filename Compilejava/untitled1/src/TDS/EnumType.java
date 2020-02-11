@@ -7,7 +7,7 @@ public enum EnumType {
     STRING("STRING"),
     RECORD("record"),
     ARRAY("ARRAY"),
-    REAL("REAL"),
+    //REAL("REAL"),
    // RECORD("record"),
    UNDEFINED ("undefined");
 

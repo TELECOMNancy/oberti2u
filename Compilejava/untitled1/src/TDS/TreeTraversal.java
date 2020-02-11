@@ -307,10 +307,10 @@ public class TreeTraversal {
     	SymboleVariable variableSymbol= null;
 
     	String type = this.traverseExpr(variableNode.getChild(1));
-       if(variableNode.getChild(1).getText().equals(":=")){
+       /*if(variableNode.getChild(1).getText().equals(":=")){
            type=traverseExpr(variableNode.getChild(1).getChild(0));
            this.traverseASSIG(variableNode.getChild(1));
-       }
+       }*/
 
 
         variableSymbol = this.gestionnaireTDS.getTableDesSymboles().getVariableSymbol(idf, true);
@@ -321,7 +321,7 @@ public class TreeTraversal {
         if(idf.equals("ARRAYACCESS")){
             types=traverseArrayacces(variableNode.getChild(0));
             System.out.println(types);
-   variableSymbol=null;
+            variableSymbol=null;
         }
             if(variableSymbol==null) {
                 if (!types.equals(type)) {
