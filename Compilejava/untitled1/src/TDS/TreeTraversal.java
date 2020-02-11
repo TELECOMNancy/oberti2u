@@ -75,7 +75,7 @@ public class TreeTraversal {
                                     this.traverselabel(Child1,onlyDeclarations);
                                     break;
                                 case AlgolParser.IF:
-                                    this.traverseIf(child);
+                                    this.traverseIf(Child1);
                                     break;
                                 case AlgolParser.FOR:
                                     this.traverseFor(Child1);
@@ -762,6 +762,7 @@ else{
                         else{
                             SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
+
                                 System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
                             }
                             else if(!stepVariable.getType().equals("INTEGER")){
@@ -769,34 +770,16 @@ else{
                             }
                         }
                     }
-                    if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(VarWhile, true)){
-                        System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
+                    if (!(this.traverseExpr(actualNode.getChild(1)).equals("BOOL"))) {
+                        System.out.println("While expression must be boolean. Line : "+ actualNode.getChild(1).getLine()+ ".");
                     }
-                        /*else if(!VarWhile.getType().isInt()){
-                            System.out.println("FOR : Value used is not integer: " +actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " +actualNode.getChild(1).getChild(1).getChild(0).getLine());
-                        }*/
-                    if(!supLimit.matches("^[0-9]+$")){
-                        if(supLimit.matches("-")){
-                            if(!actualNode.getChild(1).getChild(0).getChild(1).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("FOR : Value used is not integer: -" + actualNode.getChild(1).getChild(0).getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(1).getChild(0).getLine());
-                            }
-                        }
-                        else{
-                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(0).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
-                            if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
-                                System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(0).getChild(1).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(1).getLine());
-                            }
-                            else if(!stepVariable.getType().equals("INTEGER")){
-                                System.out.println("FOR : Value used is not integer: " +actualNode.getChild(1).getChild(0).getChild(1).getText() + ". Line : " +actualNode.getChild(1).getChild(1).getChild(1).getLine());
-                            }
-                        }
-                    }
+
 
                 }
             }
         }
 
-        //type = this.traverseBloc(forNode.getChild(2), EnumTypeTableSymbole.FOR, false);
+        type = this.traverseBloc(forNode.getChild(1), EnumTypeTableSymbole.FOR, false);
         return type;
     }
 
@@ -840,26 +823,15 @@ else{
     }*/
 
     private BlocType traverseIf(Tree ifNode) {
-        BlocType ifType;
-
-        traverseExpr(ifNode.getChild(0));
-
-        if (!(this.traverseExpr(ifNode.getChild(0)).equals("BOOL"))) {
-        	System.out.println("Une expression booléenne est attendue pour la condition du if. Line : "+ ifNode.getLine()+ ".");
+        BlocType type = null;
+        if(!traverseExpr(ifNode.getChild(0)).equals("BOOL")){
+            System.out.println("IF : Expression must be boolean. Line : " + ifNode.getChild(0).getLine());
         }
-
-        ifType = traverseBloc(ifNode.getChild(1), EnumTypeTableSymbole.IF,false);
-
-        if(ifNode.getChildCount() > 2){
-            BlocType elseType = traverseElse(ifNode.getChild(2));
-            if(!elseType.equals(ifType)) {
-            	System.out.println("Line " + ifNode.getLine() + " Different block types : " + ifType.getType().getToken() + " : " + elseType.getType().getToken());
-            }
-
-            ifType = elseType;
+        type = this.traverseBloc(ifNode.getChild(1), EnumTypeTableSymbole.IF, true);
+        if(ifNode.getChildCount() == 3){
+            type = this.traverseBloc(ifNode.getChild(2),EnumTypeTableSymbole.IF,true);
         }
-
-        return ifType;
+        return type;
     }
 
     private BlocType traverseElse(Tree elseNode)  {
@@ -958,7 +930,7 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
                     System.out.println("La connection logique < doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
