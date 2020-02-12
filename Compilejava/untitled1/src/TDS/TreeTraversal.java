@@ -316,17 +316,16 @@ public class TreeTraversal {
         String stringType2 = type;
 
         try{
-            if(idf.equals(Parent.getFunctionSymbol(idf,false).getName())){
-                types=this.gestionnaireTDS.getTableDesSymboles().getFunctionSymbol(idf, true).getReturn();
+            SymbolFonction fsymb=Parent.getFunctionSymbol(idf,false);
+            if(fsymb!=null){
+                types=fsymb.getReturn();
                 if(!types.equals(type)){
                     System.out.println("Affectation impossibles car types incompatibles " + types + ". Ligne " + variableNode.getChild(1).getLine());
                 }
             }
 
         } catch (Exception e) {
-            notAreturn=true;
-
-
+            notAreturn = true;
         }
 
         if (idf.equals("ARRAYACCESS")) {
@@ -469,7 +468,7 @@ public class TreeTraversal {
                 String realType = functionSymbol.returnParam().get(i).getType();
                 String type = traverseExpr(param);
                 if (!type.equals(realType)) {
-                    System.out.println("The argument " + param.getText() + " is called with the wrong type (" + type + " instead of " + realType + "). Line :" + functionCallNode.getLine());
+                    System.out.println("The argument " + param.getText() + " is of type (" + type + " instead of " + realType + "). Line :" + functionCallNode.getLine());
                 }
             }
             type1=functionSymbol.getReturn();
