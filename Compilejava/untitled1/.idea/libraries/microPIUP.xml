@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="microPIUP">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/out/production/compile/generation/microPIUP.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/generation/microPIUP.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

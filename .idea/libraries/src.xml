@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="src">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Compilejava/untitled1/src/antlr-3.5.2-complete.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Compilejava/untitled1/src/compile.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

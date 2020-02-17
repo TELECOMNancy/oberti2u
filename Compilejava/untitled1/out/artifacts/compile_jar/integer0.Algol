@@ -20,6 +20,7 @@ BEGIN
           END;
     FOR i := 1 STEP 1 UNTIL 100 DO
         	BEGIN
+        	INTEGER wawa4;
         		nArr[i] := i*i
         	END;
 

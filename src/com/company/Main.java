@@ -1,4 +1,4 @@
-package com.company;
+package src.com.company;
 
 
 
@@ -33,7 +33,7 @@ public class Main {
             TDS.TreeTraversal treeTraversal = new TDS.TreeTraversal(root);
            //Stack t= (Stack) treeTraversal.gestionnaireTDS.getStack();
 
-            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable();
+            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable(null);
 
             if(!outSt.equals("")) {
                BufferedWriter writer = new BufferedWriter(new FileWriter(outSt));
