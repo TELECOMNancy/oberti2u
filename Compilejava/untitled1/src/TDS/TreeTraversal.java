@@ -38,6 +38,7 @@ public class TreeTraversal {
     }
     
     private void traverseFile(Tree root, boolean onlyDeclarations)  {
+        this.gestionnaireTDS.getTableDesSymboles().setName("Begin");
     	if (root.getChildCount() <= 0 ){
             System.out.println("The file you want to load is empty");
     	}
