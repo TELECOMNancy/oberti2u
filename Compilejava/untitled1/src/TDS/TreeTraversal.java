@@ -83,6 +83,9 @@ public class TreeTraversal {
                                 case AlgolParser.CALL:
                                     this.traverseFunctionCall(Child1);
                                     break;
+                                case AlgolParser.GOTO:
+                                    this.traverseGoto(Child1);
+                                    break;
                                 case AlgolParser.BEGIN:
                                     if (onlyDeclarations) {
                                         TreeTraversal func= new TreeTraversal(Child1);
@@ -117,8 +120,12 @@ public class TreeTraversal {
                 		break;
 
                 	 */
+                    case AlgolParser.GOTO:
+                        this.traverseGoto(child);
+                        break;
                     case AlgolParser.LABEL:
                 	    break;
+
                 	case AlgolParser.IF:
                 		 this.traverseBloc(child, EnumTypeTableSymbole.IF,false);
 
@@ -134,11 +141,11 @@ public class TreeTraversal {
                 		    this.traverseFile(child, onlyDeclarations);
                 		}
 
+
                 		break;
-                	case tigerParser.IN:
-                			this.traverseBloc(child, EnumTypeTableSymbole.IN,false);
-                	
+
             }
+
         }
     }
     }
@@ -846,6 +853,42 @@ else{
 
         return type;
     }*/
+    private void traverseGoto(Tree GOTO) {
+        Tree fils = GOTO.getChild(0);
+
+        if (fils.getType() == AlgolParser.ARRAYACCESS) {
+            String idf = fils.getChild(0).getText();
+            SymbolSWITCH symbol = this.gestionnaireTDS.getTableDesSymboles().getSWITCHSymbol(idf, true);
+            if (symbol == null) {
+                System.out.println("Le switch " + idf + " n'existe pas. Ligne " + GOTO.getChild(0).getLine());
+            } else {
+                if(fils.getChild(1).getChildCount()>1){System.out.println("Il ne doit y avoir qu'un seul indice. Ligne "+GOTO.getChild(0).getLine());}
+                else{
+                    String type1 = traverseExpr(fils.getChild(1).getChild(0));
+                    if (!type1.equals("INTEGER")) {
+                        System.out.println("L'indice d'accès à un element de switch doit être entier. Ligne " + GOTO.getChild(0).getLine());
+                    }
+
+                }
+            }
+        }
+        else {
+            String labelName = fils.getText();
+            SymbolLABEL label = this.gestionnaireTDS.getTableDesSymboles().getLabelSymbol(labelName, true);
+            if (label == null) {
+                System.out.println("Le label "+labelName+" n'existe pas. Ligne " + GOTO.getChild(0).getLine());
+
+
+        /*if(fils.getType()==AlgolParser.IF){
+            BlocType typeBloc=traverseIf(fils);
+            /*if(BlocType)
+
+            }*/
+
+            }
+        }
+    }
+
 
     private BlocType traverseIf(Tree ifNode) {
         BlocType type = null;
