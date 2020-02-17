@@ -20,6 +20,7 @@ public class TableauxSymbol extends CompositionTableDesSymboles{
 
 		return str;
 	}
+
 	
 	
 	

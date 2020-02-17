@@ -207,6 +207,14 @@ public class tableDesSymboles {
 	public TableauxSymbol getTableauxSymbol(String name, boolean checkParent){
 	return (TableauxSymbol) getSymbol(name + EnumTypeSymbole.ARRAY.getSuffix(), checkParent);
 	}
+
+    public SymbolLABEL getLabelSymbol(String name, boolean checkParent){
+        return (SymbolLABEL) getSymbol(name + EnumTypeSymbole.LABEL.getSuffix(), checkParent);
+    }
+
+    public SymbolSWITCH getSWITCHSymbol(String name, boolean checkParent){
+        return (SymbolSWITCH) getSymbol(name + EnumTypeSymbole.SWITCH.getSuffix(), checkParent);
+    }
 	
 
 	public Map<String,Symbole> getSymbols(){
