@@ -4,28 +4,30 @@ BEGIN
 
     INTEGER i;
     INTEGER wawa;
-    REAL wawa2;
+    INTEGER wawa2;
     INTEGER wawa3;
     INTEGER ARRAY narr[1:3];
     REAL ARRAY aa[1:3,1:3];
-    SWITCH D := D1, D2, D3, D4, D5, D6, D7;
+    SWITCH D := E1, E2, E3, E4, E5, E6;
 
-   INTEGER PROCEDURE SELECT(N,M,K);
+
+    INTEGER PROCEDURE SELECT(N,M,K);
           VALUE N, M, K;
           INTEGER N, M, K;
           BEGIN
              REAL L;
-             INTEGER i;
-             L := SELECT(wawa,wawa2,wawa3)
+             wawa := SELECT(wawa,wawa2,wawa3)
           END;
     FOR i := 1 STEP 1 UNTIL 100 DO
         	BEGIN
-        		nArr[i] := i*i
+        		narr[i] := i*i
         	END;
 
-	SELECT(wawa,wawa2,wawa3);
-	BEGIN
+    BEGIN
 	  REAL L;
-	  L :=narr[i]:=13.5
-	END
+	  TEST1 : i:=3;
+	  GOTO D[1];
+	  IF wawa EQUAL 0 THEN wawa2:=1 ELSE wawa:=0;
+	  L :=narr[i]:=13
+    END
 END
