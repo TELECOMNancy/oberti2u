@@ -25,10 +25,11 @@ public class TreeTraversal {
         this.region = region;
     }
 
-    public tableDesSymboles buildSymbolTable(tableDesSymboles parent)  {
+    public tableDesSymboles buildSymbolTable(tableDesSymboles parent,String idf)  {
         tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
         Type returntype =new Type(EnumType.VOID);
         this.gestionnaireTDS.getTableDesSymboles().setParent(parent);
+        this.gestionnaireTDS.getTableDesSymboles().setName(idf);
         SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable,1);
         this.gestionnaireTDS.getTableDesSymboles().addSymbol(print);
 
@@ -38,7 +39,7 @@ public class TreeTraversal {
     }
     
     private void traverseFile(Tree root, boolean onlyDeclarations)  {
-        this.gestionnaireTDS.getTableDesSymboles().setName("Begin");
+        //this.gestionnaireTDS.getTableDesSymboles().setName("Begin");
     	if (root.getChildCount() <= 0 ){
             System.out.println("The file you want to load is empty");
     	}
@@ -99,10 +100,11 @@ public class TreeTraversal {
                                 case AlgolParser.BEGIN:
                                     if (onlyDeclarations) {
                                         this.region++;
+                                        System.out.println("ICIII"+this.gestionnaireTDS.getTableDesSymboles().getName());
                                         TreeTraversal func= new TreeTraversal(Child1);
                                         func.setRegion(region);
                                         func.setNestion(nestion);
-                                        TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
+                                        TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(),"Begin");
                                         SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable1,1);
                                         symbolTable1.removesymbole(print);
                                         symbolTable1.setParent(this.gestionnaireTDS.getTableDesSymboles());
@@ -225,7 +227,11 @@ public class TreeTraversal {
 
         this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
         TreeTraversal func= new TreeTraversal(functionNode.getChild(1).getChild(4));
-        TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
+        //func.gestionnaireTDS.getTableDesSymboles().setName(idf);
+        //this.gestionnaireTDS.getTableDesSymboles().setName(idf);
+        //TDS.tableDesSymboles symb=this.gestionnaireTDS.getTableDesSymboles();
+        //symb.setName(idf);
+        TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(),idf);
         SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable,1);
         symbolTable1.removesymbole(print);
         symbolTable1.setName(idf);
@@ -519,7 +525,7 @@ public class TreeTraversal {
                     TreeTraversal func= new TreeTraversal(child);
                     func.setRegion(this.region);
                     func.setNestion(this.nestion);
-                    TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
+                    TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(),"Begin");
                     SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable1,1);
                     symbolTable1.removesymbole(print);
                     symbolTable1.setName("Begin");

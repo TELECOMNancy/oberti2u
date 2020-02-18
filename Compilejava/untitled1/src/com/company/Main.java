@@ -33,7 +33,7 @@ public class Main {
             TDS.TreeTraversal treeTraversal = new TDS.TreeTraversal(root);
            //Stack t= (Stack) treeTraversal.gestionnaireTDS.getStack();
 
-            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable(null);
+            TDS.tableDesSymboles symbolTable = treeTraversal.buildSymbolTable(null,"Root");
 
             if(!outSt.equals("")) {
                BufferedWriter writer = new BufferedWriter(new FileWriter(outSt));

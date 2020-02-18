@@ -1,5 +1,5 @@
 
-Begin
+Root
 |0|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |K                   |-8    |VAR            |INTEGER        |
@@ -24,19 +24,16 @@ Begin
 |aa                  |34    |MATRICE        |REAL           |
 
 Begin
-Begin
 |4|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
 
-SELECT
 SELECT
 |1|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
 |i                   |4     |VAR            |INTEGER        |
 
-Begin
 Begin
 |3|0|
 |NAME                |OFFSET|SYMB           |TYPE           |

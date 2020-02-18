@@ -287,7 +287,7 @@ str.append("|").append(Utils.padRight("NAME", tableDesSymboles.NAME_COL_WIDTH))
 		}
 
 		for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
-		    str.append("\n").append(entry.getValue().getName());
+		    //str.append("\n").append(entry.getValue().getName());
 			str.append(entry.getValue().toTable());
 			
 		}
