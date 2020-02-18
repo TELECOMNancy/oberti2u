@@ -14,6 +14,7 @@ public class tableDesSymboles {
 	public static int TYPE_COL_WIDTH = 15;
 
     private tableDesSymboles parent;
+    public String name;
     private EnumTypeTableSymbole symbolTableType;
     private final Map<String,Symbole> symbols;
 	private  int nestingLevel;
@@ -30,6 +31,14 @@ public class tableDesSymboles {
 		this.offsetCount = 0;
 		this.blocs = new HashMap<>();
 	}
+
+	public String getName(){
+	    return name;
+    }
+
+    public void setName(String name){
+	    this.name=name;
+    }
 
 	public boolean symbolExists(Symbole symbol,boolean checkParent){
 		boolean exists = symbols.containsKey(symbol.getHashName());
@@ -255,6 +264,7 @@ public class tableDesSymboles {
         });
 
 			if (list.size() != 0){
+                str.append("\n").append(this.getName());
 		str.append("\n").append("|").append(this.getRegionNum())
 		.append("|").append(this.getNestingLevel())
 		.append("|").append("\n");
@@ -277,6 +287,7 @@ str.append("|").append(Utils.padRight("NAME", tableDesSymboles.NAME_COL_WIDTH))
 		}
 
 		for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
+		    str.append("\n").append(entry.getValue().getName());
 			str.append(entry.getValue().toTable());
 			
 		}

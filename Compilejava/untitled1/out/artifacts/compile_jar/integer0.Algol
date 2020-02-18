@@ -21,6 +21,7 @@ BEGIN
     FOR i := 1 STEP 1 UNTIL 100 DO
         	BEGIN
         		narr[i] := i*i
+
         	END;
 
     BEGIN

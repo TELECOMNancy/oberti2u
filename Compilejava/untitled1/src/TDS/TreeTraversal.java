@@ -17,6 +17,14 @@ public class TreeTraversal {
         this.root = tree;
     }
 
+    public void setNestion(int nestion) {
+        this.nestion = nestion;
+    }
+
+    public void setRegion(int region) {
+        this.region = region;
+    }
+
     public tableDesSymboles buildSymbolTable(tableDesSymboles parent)  {
         tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
         Type returntype =new Type(EnumType.VOID);
@@ -30,6 +38,7 @@ public class TreeTraversal {
     }
     
     private void traverseFile(Tree root, boolean onlyDeclarations)  {
+        this.gestionnaireTDS.getTableDesSymboles().setName("Begin");
     	if (root.getChildCount() <= 0 ){
             System.out.println("The file you want to load is empty");
     	}
@@ -48,6 +57,7 @@ public class TreeTraversal {
                         }
                         switch (Child.getType()){
                             case AlgolParser.PROCEDURE:
+                                this.nestion++;
                                 this.traverseFunction(child, onlyDeclarations);
                                 break;
                              case  AlgolParser.SWITCH:
@@ -88,11 +98,15 @@ public class TreeTraversal {
                                     break;
                                 case AlgolParser.BEGIN:
                                     if (onlyDeclarations) {
+                                        this.region++;
                                         TreeTraversal func= new TreeTraversal(Child1);
+                                        func.setRegion(region);
+                                        func.setNestion(nestion);
                                         TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
                                         SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable1,1);
                                         symbolTable1.removesymbole(print);
                                         symbolTable1.setParent(this.gestionnaireTDS.getTableDesSymboles());
+                                        symbolTable1.setName("Begin");
                                         this.gestionnaireTDS.getTableDesSymboles().addBloc(0,symbolTable1);
                                     }
                                     break;
@@ -214,7 +228,9 @@ public class TreeTraversal {
         TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
         SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable,1);
         symbolTable1.removesymbole(print);
+        symbolTable1.setName(idf);
         symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
+        symbolTable1.setNestingLevel(this.nestion);
         functionSymbol.settds(symbolTable1);
         this.gestionnaireTDS.getTableDesSymboles().removesymbole(functionSymbol);
         this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
@@ -498,8 +514,17 @@ public class TreeTraversal {
             BlocType tempType;
             switch (child.getType()) {
                 case AlgolParser.BEGIN:
-                    System.out.println("Begin");
-                	this.traverseFile(child,true);
+                    System.out.println("Begin22");
+                	//this.traverseFile(child,true);
+                    TreeTraversal func= new TreeTraversal(child);
+                    func.setRegion(this.region);
+                    func.setNestion(this.nestion);
+                    TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles());
+                    SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable1,1);
+                    symbolTable1.removesymbole(print);
+                    symbolTable1.setName("Begin");
+                    symbolTable1.setParent(this.gestionnaireTDS.getTableDesSymboles());
+                    this.gestionnaireTDS.getTableDesSymboles().addBloc(2,symbolTable1);
                     if(!type.isDeterminedByReturn()) {
                         type = new BlocType(EnumType.VOID, false, child);
                     }

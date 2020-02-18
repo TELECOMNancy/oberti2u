@@ -1,4 +1,5 @@
 
+Begin
 |0|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |K                   |-8    |VAR            |INTEGER        |
@@ -21,11 +22,15 @@
 |E4                  |34    |VAR            |Switchelement  |
 |E2                  |34    |VAR            |Switchelement  |
 
-|3|0|
+Begin
+Begin
+|4|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |TEST1               |0     |LABEL          |
 |L                   |2     |VAR            |REAL           |
 
+SELECT
+SELECT
 |1|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
