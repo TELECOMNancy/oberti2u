@@ -32,12 +32,3 @@ SELECT
 |1|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
-<<<<<<< HEAD
-|i                   |4     |VAR            |INTEGER        |
-
-Begin
-|3|0|
-|NAME                |OFFSET|SYMB           |TYPE           |
-|wawa4               |2     |VAR            |INTEGER        |
-=======
->>>>>>> 368cb0b9be2f106df80e57ea69eedd73ca5ee9bb

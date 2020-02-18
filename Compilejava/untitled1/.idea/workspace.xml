@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65e6061b-9806-4846-a1a4-db64fd2ef336" name="Default Changelist" comment="" />
+    <list default="true" id="e8b8bd7b-b0af-4611-8774-6df6487e6d60" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/compile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/compile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/compile1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/compile1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/compile2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/compile2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/microPIUP.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/microPIUP.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/microPIUP1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/microPIUP1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/src.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/src.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compile_jar/integer0.Algol" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compile_jar/integer0.Algol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compile_jar/tds.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compile_jar/tds.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled1/TDS/TreeTraversal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled1/TDS/TreeTraversal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled1/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled1/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TDS/TreeTraversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TDS/TreeTraversal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/untitled1.iml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="untitled1" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="1Xwb91TxFA3cFyA9As3fykDdZJC" />
+  <component name="ProjectId" id="1XzIB7HQc6VL0mVRphkdImeStdu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -29,6 +57,16 @@
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="untitled1" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -39,22 +77,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="65e6061b-9806-4846-a1a4-db64fd2ef336" name="Default Changelist" comment="" />
-      <created>1581959948024</created>
+      <changelist id="e8b8bd7b-b0af-4611-8774-6df6487e6d60" name="Default Changelist" comment="" />
+      <created>1582042358281</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1581959948024</updated>
+      <updated>1582042358281</updated>
+      <workItem from="1582042362644" duration="2121000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>

@@ -330,46 +330,34 @@ public class TreeTraversal {
     }
     
     private void traverseASSIG(Tree variableNode) {
-        boolean notAreturn=false;
         tableDesSymboles Parent=this.gestionnaireTDS.getTableDesSymboles().getParent();
+        tableDesSymboles courant= this.gestionnaireTDS.getTableDesSymboles();
         String idf = variableNode.getChild(0).getText();
         String types = "";
         SymboleVariable variableSymbol = null;
-
         String type = this.traverseExpr(variableNode.getChild(1));
-       /*if(variableNode.getChild(1).getText().equals(":=")) {
-           type = traverseExpr(variableNode.getChild(1).getChild(0));
-           this.traverseASSIG(variableNode.getChild(1));
-       }*/
-
         String stringType2 = type;
 
-        try{
-            SymbolFonction fsymb=Parent.getFunctionSymbol(idf,false);
-            if(fsymb!=null){
-                types=fsymb.getReturn();
-                if(!types.equals(type)){
+        if(courant.getName().equals(idf)){
+            SymbolFonction fcourant=courant.getFunctionSymbol(idf,true);
+            String typeRetour= fcourant.getReturn();
+            if(!typeRetour.equals(type)){
+                System.out.println("La fonction " + idf + " doit retourner un  " +typeRetour+ " et pas un " + type + ". Ligne "+variableNode.getChild(1).getLine());
+            }
+        }
+
+        else{
+
+            if (idf.equals("ARRAYACCESS")) {
+                types = traverseArrayacces(variableNode.getChild(0));
+            //System.out.println(types);
+                if (!types.equals(type)) {
                     System.out.println("Affectation impossibles car types incompatibles " + types + ". Ligne " + variableNode.getChild(1).getLine());
                 }
             }
 
-        } catch (Exception e) {
-            notAreturn = true;
-        }
-
-        if (idf.equals("ARRAYACCESS")) {
-            types = traverseArrayacces(variableNode.getChild(0));
-            //System.out.println(types);
-            if (!types.equals(type)) {
-                System.out.println("Affectation impossibles car types incompatibles " + types + ". Ligne " + variableNode.getChild(1).getLine());
-            }
-        }
-
-        else {
-            if(notAreturn) {
+            else {
                 variableSymbol = this.gestionnaireTDS.getTableDesSymboles().getVariableSymbol(idf, true);
-
-
                 if (variableSymbol == null) {
                     System.out.println("Affectation impossibles : " + idf + " n'existe pas. Ligne " + variableNode.getChild(1).getLine());
                 }
