@@ -11,30 +11,33 @@ Root
 |n                   |2     |VAR            |INTEGER        |
 |i                   |4     |VAR            |INTEGER        |
 |wawa                |6     |VAR            |INTEGER        |
-|wawa2               |8     |VAR            |REAL           |
+|wawa2               |8     |VAR            |INTEGER        |
 |wawa3               |10    |VAR            |INTEGER        |
 |narr                |16    |ARRAY          |INTEGER        |
-|D4                  |34    |VAR            |Switchelement  |
-|D5                  |34    |VAR            |Switchelement  |
-|D7                  |34    |VAR            |Switchelement  |
-|D6                  |34    |VAR            |Switchelement  |
-|D3                  |34    |VAR            |Switchelement  |
-|D1                  |34    |VAR            |Switchelement  |
-|D2                  |34    |VAR            |Switchelement  |
+|E6                  |34    |VAR            |Switchelement  |
+|E5                  |34    |VAR            |Switchelement  |
 |aa                  |34    |MATRICE        |REAL           |
+|E1                  |34    |VAR            |Switchelement  |
+|E3                  |34    |VAR            |Switchelement  |
+|E4                  |34    |VAR            |Switchelement  |
+|E2                  |34    |VAR            |Switchelement  |
 
 Begin
 |4|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
+|TEST1               |0     |LABEL          |
 |L                   |2     |VAR            |REAL           |
 
 SELECT
 |1|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
+<<<<<<< HEAD
 |i                   |4     |VAR            |INTEGER        |
 
 Begin
 |3|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |wawa4               |2     |VAR            |INTEGER        |
+=======
+>>>>>>> 368cb0b9be2f106df80e57ea69eedd73ca5ee9bb
