@@ -991,8 +991,8 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique > doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("La connection logique > ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1004,8 +1004,8 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique !> doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("La connection logique !> ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1018,7 +1018,7 @@ else{
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
                 if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique < doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                    System.out.println("La connection logique < ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1030,8 +1030,8 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique !< doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("La connection logique !< ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1043,8 +1043,8 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique = doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("La connection logique == ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1056,8 +1056,8 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique != doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("La connection logique != ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1067,10 +1067,9 @@ else{
 
             case AlgolParser.NOT:
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
-                rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if (!leftExpr.equals("BOOL") || !rightExpr.equals("BOOL")) {
-                    System.out.println("La connection logique négation doit être utilisée avec 2 entitées booléennes. Line : " + exprNode.getLine());
+                if (!leftExpr.equals("BOOL")) {
+                    System.out.println("La connection logique négation doit être utilisée avec 1 entitée booléenne. Line : " + exprNode.getLine());
                     a = 1;
                 }
                 else {
@@ -1088,14 +1087,14 @@ else{
                 //type = new Type( EnumType.VOID,exprNode.getChild(0).getText());
                 //	break;
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
-                rightExpr = this.traverseExpr(exprNode.getChild(1));
+//                rightExpr = this.traverseExpr(exprNode.getChild(1));
+//
+//                if (!(leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER"))) {
+//                    System.out.println("Mathematical inequalities or comparisons should be done between two integers. Line : " + exprNode.getLine());
+//                    a = 1;
+//                }
 
-                if (!(leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER"))) {
-                    System.out.println("Mathematical inequalities or comparisons should be done between two integers. Line : " + exprNode.getLine());
-                    a = 1;
-                }
-
-                type = "BOOL";
+                type = leftExpr;
                 break;
             /*case AlgolParser.COND :
             	 
@@ -1105,8 +1104,9 @@ else{
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if ((leftExpr.equals("INTEGER") && rightExpr.equals("REAL")) || (leftExpr.equals("REAL") && rightExpr.equals("INTEGER"))) { // check type int
-                    System.out.println("L'opération d'addition se fait entre 2 entitées de même type. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("L'opperation + ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
+                    a=1;
                 }
                 else if (leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER")){
                     type = "INTEGER";
@@ -1114,13 +1114,15 @@ else{
                 else {
                     type = "REAL";
                 }
+                break;
 
             case AlgolParser.MINUS:
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if ((leftExpr.equals("INTEGER") && rightExpr.equals("REAL")) || (leftExpr.equals("REAL") && rightExpr.equals("INTEGER"))) { // check type int
-                    System.out.println("L'opération de soustraction se fait entre 2 entitées de même type. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("L'opperation - ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
+                    a=1;
                 }
                 else if (leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER")){
                     type = "INTEGER";
@@ -1128,13 +1130,15 @@ else{
                 else {
                     type = "REAL";
                 }
+                break;
 
             case AlgolParser.MULT:
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if ((leftExpr.equals("INTEGER") && rightExpr.equals("REAL")) || (leftExpr.equals("REAL") && rightExpr.equals("INTEGER"))) { // check type int
-                    System.out.println("L'opération de multiplication se fait entre 2 entitées de même type. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("L'opperation * ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
+                    a=1;
                 }
                 else if (leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER")){
                     type = "INTEGER";
@@ -1142,14 +1146,16 @@ else{
                 else {
                     type = "REAL";
                 }
+                break;
 
             case AlgolParser.DIV:
 
                 leftExpr = this.traverseExpr(exprNode.getChild(0));
                 rightExpr = this.traverseExpr(exprNode.getChild(1));
 
-                if ((leftExpr.equals("INTEGER") && rightExpr.equals("REAL")) || (leftExpr.equals("REAL") && rightExpr.equals("INTEGER"))) { // check type int
-                    System.out.println("L'opération de division se fait entre 2 entitées de même type. Line : " + exprNode.getLine());
+                if (leftExpr.equals("BOOL") || rightExpr.equals("BOOL")) {
+                    System.out.println("L'opperation / ne peut pas être utilisée avec des entitées booléennes. Line : " + exprNode.getLine());
+                    a=1;
                 }
                 else if (leftExpr.equals("INTEGER") && rightExpr.equals("INTEGER")){
                     type = "INTEGER";
@@ -1157,9 +1163,6 @@ else{
                 else {
                     type = "REAL";
                 }
-
-                //div par 0
-
                 break;
 
             case AlgolParser.CALL:
@@ -1186,7 +1189,6 @@ else{
                 break;
 
             case AlgolParser.ARRAYACCESS:
-                //System.out.println("wawa");
                 type = this.traverseArrayacces(exprNode);
                 break;
             default:
@@ -1198,9 +1200,6 @@ else{
                 } else {
                     type = variableSymbol.getType();
                 }
-
-                // System.out.println("Unknown node : " + exprNode.hashCode());
-                // type="INCONNU";
 
         }
 
