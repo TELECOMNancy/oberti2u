@@ -473,7 +473,6 @@ public class TreeTraversal {
 
         }
 
-        
         int realSize = functionCallNode.getChild(1).getChildCount();
 
         if (size != realSize){
