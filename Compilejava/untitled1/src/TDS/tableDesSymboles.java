@@ -264,7 +264,8 @@ public class tableDesSymboles {
         });
 
 			if (list.size() != 0){
-                str.append("\n").append(this.getName());
+			   // System.out.println("wawa");
+			    str.append("\n").append(this.getName());
 		str.append("\n").append("|").append(this.getRegionNum())
 		.append("|").append(this.getNestingLevel())
 		.append("|").append("\n");
