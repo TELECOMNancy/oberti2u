@@ -29,7 +29,11 @@ BEGIN
 	  REAL L;
 	  TEST1 : i:=3;
 	  GOTO D[1];
-	  IF wawa EQUAL 0 THEN wawa2:=1 ELSE wawa:=0;
-	  L :=narr[i]:=13
+	  IF NOT (wawa GREATER 0) THEN wawa2:=1 ELSE wawa:=0;
+	  i :=narr[i]:=13;
+	  L := 4.7;
+	  L := i + L;
+	  i := 4.7 * 5;
+	  L := 4.7 * 5
     END
 END
