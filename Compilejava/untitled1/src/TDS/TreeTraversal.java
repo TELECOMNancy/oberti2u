@@ -1239,7 +1239,11 @@ else{
         }
         else{
              if(accessnode.getChild(1).getChildCount()!=symbol.list.size()){
-         System.out.println("Le tableau "+ idf+ " est un tableau a "+ symbol.list.size()+" dimension");
+                 String plur="";
+                 if(symbol.list.size()>1){
+                     plur="s";
+                 }
+            System.out.println("Le tableau "+ idf+ " est un tableau à "+ symbol.list.size()+" dimension"+plur);
             }
              else{
                  for(int k=0;k<accessnode.getChild(1).getChildCount();k++){

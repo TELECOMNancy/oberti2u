@@ -20,7 +20,7 @@ BEGIN
              wawa := SELECT(wawa,wawa2);
              wawa:=SELECT(wawa,a,wawa2);
              wawa:=SELECT(truc,wawa,wawa2);
-             wawa:=SELECT(truc,aa[1,1]);
+             wawa:=SELECT(truc,aa[1,1],wawa2);
 
              a:=SELECT(wawa,wawa2,wawa3);
 
