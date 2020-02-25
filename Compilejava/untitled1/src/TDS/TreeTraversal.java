@@ -486,7 +486,7 @@ public class TreeTraversal {
                 String realType = functionSymbol.returnParam().get(i).getType();
                 String type = traverseExpr(param);
                 if (!type.equals(realType)) {
-                    System.out.println("L'argument " + param.getText() + " est de type " + type + " et pas " + realType + ". Ligne" + functionCallNode.getLine());
+                    System.out.println("L'argument " + param.getText() + " est de type " + type + " et pas " + realType + ". Ligne " + functionCallNode.getLine());
                 }
             }
             type1=functionSymbol.getReturn();
