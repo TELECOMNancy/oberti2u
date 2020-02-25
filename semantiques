@@ -19,46 +19,46 @@ penses-bêtes: faire des screes des noeuds et corriger la grammaire
 Liste des contrôles sémanqtiques:
 
 OPérations:
--types des opérateurs
--si variable vérifier qu'elle est définie
--pour les assignements vérfier la concordances des types;
--division par zeros
+-types des opérateurs:OK
+-si variable vérifier qu'elle est définie:OK
+-pour les assignements vérfier la concordances des types:OK;
+-division par zeros:
 
 
 Déclarations:
--Corcordance des types;
+-Corcordance des types:OK;
 
-Déclration de fonctions:
--verifier le type de retour;
--double déclaration de fonction ou de varaiable
+Déclaration de fonctions:
+-verifier le type de retour:OK;
+-double déclaration de fonction ou de varaiable:OK
 
 
 Appel de fonciion:
-type de retour;
-le nombre d'argument;
-les types des arguments
+type de retour:OK;
+le nombre d'argument:OK;
+les types des arguments:OK;
 
 For:
 -si step: vérifier l'ordre des bornes en fonctions du step
--for while: concordances de types et bornes
+-for while: concordances de types et bornes:OK
 
-IF et WHILE:
--verifier les concordances des types pour les concditions
--verifier que ce sont des booleens
+IF:
+-verifier les concordances des types pour les concditions:OK
+-verifier que ce sont des booleens:OK
 
 
 GOTO:
 verifier que le lable existe
 
 LABEL:
-pas de double déclaration des labels
+pas de double déclaration des labels:OK
 
 
 ARRAY:
--accès à un tableau qui est pas un tableau
--verifier que les bornes sont entières:
--accès verifier que ce sont des entiers(a[j] j entier)
--assigement verification des types
+-accès à un tableau qui est pas un tableau:OK
+-verifier que les bornes sont entières:OK
+-accès verifier que ce sont des entiers(a[j] j entier):OK
+-assigement verification des types:OK
 
 
 

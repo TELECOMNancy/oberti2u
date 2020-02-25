@@ -12,6 +12,7 @@ public class TreeTraversal {
     private final Tree root;
     public int region=0;
     public int nestion=0;
+    public int bloc=0;
     public TreeTraversal(Tree tree) {
         this.gestionnaireTDS = new gestionnaireDeTableDesSymboles();
         this.root = tree;
@@ -58,7 +59,7 @@ public class TreeTraversal {
                         }
                         switch (Child.getType()){
                             case AlgolParser.PROCEDURE:
-                                this.nestion++;
+                               // this.nestion++;
                                 this.traverseFunction(child, onlyDeclarations);
                                 break;
                              case  AlgolParser.SWITCH:
@@ -99,8 +100,8 @@ public class TreeTraversal {
                                     break;
                                 case AlgolParser.BEGIN:
                                     if (onlyDeclarations) {
-                                        this.region++;
-                                        System.out.println("ICIII"+this.gestionnaireTDS.getTableDesSymboles().getName());
+                                     //   this.region++;
+                                        bloc++;
                                         TreeTraversal func= new TreeTraversal(Child1);
                                         func.setRegion(region);
                                         func.setNestion(nestion);
@@ -109,7 +110,7 @@ public class TreeTraversal {
                                         symbolTable1.removesymbole(print);
                                         symbolTable1.setParent(this.gestionnaireTDS.getTableDesSymboles());
                                         symbolTable1.setName("Begin");
-                                        this.gestionnaireTDS.getTableDesSymboles().addBloc(0,symbolTable1);
+                                        this.gestionnaireTDS.getTableDesSymboles().addBloc(bloc-1,symbolTable1);
                                     }
                                     break;
                                 default:
@@ -240,7 +241,8 @@ public class TreeTraversal {
         functionSymbol.settds(symbolTable1);
         this.gestionnaireTDS.getTableDesSymboles().removesymbole(functionSymbol);
         this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
-        this.gestionnaireTDS.getTableDesSymboles().addBloc(1,symbolTable1);
+        bloc++;
+        this.gestionnaireTDS.getTableDesSymboles().addBloc(bloc-1,symbolTable1);
 
     }
 
@@ -498,19 +500,16 @@ public class TreeTraversal {
 
     	BlocType type = new BlocType(EnumType.VOID, false, blocNode);
         if(createBloc) {
-            System.out.println("wawa");
             this.gestionnaireTDS.ouvrirTableDesSymboles();
         }
         for(int i = 0; i < blocNode.getChildCount(); i++) {
-            System.out.println("Begin");
             Tree child = blocNode.getChild(i);
             BlocType tempType;
             switch (child.getType()) {
                 case AlgolParser.BEGIN:
-                    System.out.println("Begin22");
                 	//this.traverseFile(child,true);
                     TreeTraversal func= new TreeTraversal(child);
-                    func.setRegion(this.region);
+                    //func.setRegion(this.region);
                     func.setNestion(this.nestion);
                     TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(),"Begin");
                     SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable1,1);

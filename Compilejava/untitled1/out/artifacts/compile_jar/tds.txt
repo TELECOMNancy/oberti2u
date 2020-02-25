@@ -22,13 +22,13 @@ Root
 |E4                  |34    |VAR            |Switchelement  |
 |E2                  |34    |VAR            |Switchelement  |
 
+SELECT
+|1|0|
+|NAME                |OFFSET|SYMB           |TYPE           |
+|L                   |2     |VAR            |REAL           |
+
 Begin
 |4|0|
 |NAME                |OFFSET|SYMB           |TYPE           |
 |TEST1               |0     |LABEL          |
-|L                   |2     |VAR            |REAL           |
-
-SELECT
-|1|0|
-|NAME                |OFFSET|SYMB           |TYPE           |
 |L                   |2     |VAR            |REAL           |
