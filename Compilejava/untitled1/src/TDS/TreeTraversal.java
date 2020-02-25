@@ -168,16 +168,19 @@ public class TreeTraversal {
     }
   
     private void traverseFunction(Tree functionNode, boolean onlyDeclarations) {
-        String idf = functionNode.getChild(1).getChild(0).getText();
-        ArrayList<String> typearg=new ArrayList<String>();
-        int nbrParametre = functionNode.getChild(1).getChild(1).getChildCount();
+        if(functionNode.getChildCount()==2) {
+           // System.out.println(functionNode.getText());
+            String idf = functionNode.getChild(1).getChild(0).getText();
+            ArrayList<String> typearg = new ArrayList<String>();
+            int nbrParametre = functionNode.getChild(1).getChild(1).getChildCount();
 
-           Type returnType = new Type(EnumType.VOID);
-           String types="";
-           tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
-             if ( functionNode.getChildCount()!=1/*functionNode.getChild(2).getChild(0).getType() != tigerParser.VOID*/ ){
-                    returnType = traverseType(functionNode.getChild(0));
-             types=functionNode.getChild(0).getText();}
+            Type returnType = new Type(EnumType.VOID);
+            String types = "";
+            tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
+            if (functionNode.getChildCount() != 1/*functionNode.getChild(2).getChild(0).getType() != tigerParser.VOID*/) {
+                returnType = traverseType(functionNode.getChild(0));
+                types = functionNode.getChild(0).getText();
+            }
 
             SymbolFonction functionSymbol = new SymbolFonction(
                     functionNode,
@@ -189,60 +192,132 @@ public class TreeTraversal {
             );
             this.gestionnaireTDS.fermerTableDesSymboles();
 
-            if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(functionSymbol, true)) {
+            if (this.gestionnaireTDS.getTableDesSymboles().symbolExists(functionSymbol, true)) {
 
                 System.out.println("Redefining function " + idf + ". Line : " + functionNode.getLine());
             }
-                if(functionNode.getChild(1).getChild(3).getChildCount()==functionNode.getChild(1).getChild(1).getChildCount()+1){
-                    typearg.add(functionNode.getChild(1).getChild(3).getChild(0).getText());
-                }
-                if(functionNode.getChild(1).getChild(3).getChildCount()==functionNode.getChild(1).getChild(1).getChildCount()*2){
-                    int j=0;
-                    while(j<functionNode.getChild(1).getChild(3).getChildCount()){
-                        typearg.add(functionNode.getChild(1).getChild(3).getChild(j).getText());
-                        j=j+2;
-                    }
-                }
-
-
-        for (int i = 0; i < functionNode.getChild(1).getChild(1).getChildCount(); i++){
-            if(typearg.size()==1) {
-                SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
-                functionSymbol.addParam(symbVar);
-
-                this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+            if (functionNode.getChild(1).getChild(3).getChildCount() == functionNode.getChild(1).getChild(1).getChildCount() + 1) {
+                typearg.add(functionNode.getChild(1).getChild(3).getChild(0).getText());
             }
-            else{
-                SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
-                functionSymbol.addParam(symbVar);
-
-                this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+            if (functionNode.getChild(1).getChild(3).getChildCount() == functionNode.getChild(1).getChild(1).getChildCount() * 2) {
+                int j = 0;
+                while (j < functionNode.getChild(1).getChild(3).getChildCount()) {
+                    typearg.add(functionNode.getChild(1).getChild(3).getChild(j).getText());
+                    j = j + 2;
+                }
             }
+
+            for (int i = 0; i < functionNode.getChild(1).getChild(1).getChildCount(); i++) {
+                if (typearg.size() == 1) {
+                    SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
+                    functionSymbol.addParam(symbVar);
+
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                } else {
+                    SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
+                    functionSymbol.addParam(symbVar);
+
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                }
+
+            }
+
+            this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
+            // this.traverseFile(functionNode.getChild(1).getChild(4),onlyDeclarations);
+            this.gestionnaireTDS.fermerTableDesSymboles();
+
+
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
+            TreeTraversal func = new TreeTraversal(functionNode.getChild(1).getChild(4));
+            //func.gestionnaireTDS.getTableDesSymboles().setName(idf);
+            //this.gestionnaireTDS.getTableDesSymboles().setName(idf);
+            //TDS.tableDesSymboles symb=this.gestionnaireTDS.getTableDesSymboles();
+            //symb.setName(idf);
+            TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(), idf);
+            SymbolFonction print = new SymbolFonction(root, "print", Scope.FUNCTION, "VOID", symbolTable, 1);
+            symbolTable1.removesymbole(print);
+            symbolTable1.setName(idf);
+            symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
+            symbolTable1.setNestingLevel(this.nestion);
+            functionSymbol.settds(symbolTable1);
+            this.gestionnaireTDS.getTableDesSymboles().removesymbole(functionSymbol);
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
+            bloc++;
+            this.gestionnaireTDS.getTableDesSymboles().addBloc(bloc - 1, symbolTable1);
+        }
+        else{
+            String idf =functionNode.getChild(0).getChild(0).getText();
+            ArrayList<String> typearg = new ArrayList<String>();
+          //System.out.println(idf);
+            int nbrParametre = functionNode.getChild(0).getChild(1).getChildCount();
+            String types = "VOID";
+            tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
+            SymbolFonction functionSymbol = new SymbolFonction(
+                    functionNode,
+                    idf,
+                    Scope.LOCAL,
+                    types,
+                    symbolTable,
+                    nbrParametre
+            );
+            this.gestionnaireTDS.fermerTableDesSymboles();
+
+            if (this.gestionnaireTDS.getTableDesSymboles().symbolExists(functionSymbol, true)) {
+                System.out.println("Redefining function " + idf + ". Line : " + functionNode.getLine());
+            }
+
+            if (functionNode.getChild(0).getChild(1).getChildCount() == functionNode.getChild(0).getChild(2).getChildCount()+1) {
+                typearg.add(functionNode.getChild(2).getChild(0).getText());
+            }
+          //  System.out.println(functionNode.getChild(0).getChild(1).getChildCount());
+            if (functionNode.getChild(0).getChild(2).getChildCount() == functionNode.getChild(0).getChild(1).getChildCount()*2) {
+                int j = 0;
+              //  System.out.println("wawawa");
+                while (j < functionNode.getChild(0).getChild(2).getChildCount()) {
+                    typearg.add(functionNode.getChild(0).getChild(2).getChild(j).getText());
+                    j = j + 2;
+                }
+            }
+
+            for (int i = 0; i < functionNode.getChild(0).getChild(1).getChildCount(); i++) {
+                if (typearg.size() == 1) {
+                    SymboleVariable symbVar = traverseParameter(functionNode.getChild(0).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
+                    functionSymbol.addParam(symbVar);
+
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                } else {
+                    SymboleVariable symbVar = traverseParameter(functionNode.getChild(0).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
+                    functionSymbol.addParam(symbVar);
+
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                }
+
+            }
+
+            this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
+            // this.traverseFile(functionNode.getChild(1).getChild(4),onlyDeclarations);
+            this.gestionnaireTDS.fermerTableDesSymboles();
+
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
+            TreeTraversal func = new TreeTraversal(functionNode.getChild(0).getChild(3));
+            //func.gestionnaireTDS.getTableDesSymboles().setName(idf);
+            //this.gestionnaireTDS.getTableDesSymboles().setName(idf);
+            //TDS.tableDesSymboles symb=this.gestionnaireTDS.getTableDesSymboles();
+            //symb.setName(idf);
+            TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(), idf);
+            SymbolFonction print = new SymbolFonction(root, "print", Scope.FUNCTION, "VOID", symbolTable, 1);
+            symbolTable1.removesymbole(print);
+            symbolTable1.setName(idf);
+            symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
+            symbolTable1.setNestingLevel(this.nestion);
+            functionSymbol.settds(symbolTable1);
+            this.gestionnaireTDS.getTableDesSymboles().removesymbole(functionSymbol);
+            this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
+            bloc++;
+            this.gestionnaireTDS.getTableDesSymboles().addBloc(bloc - 1, symbolTable1);
+
 
         }
-
-        this.gestionnaireTDS.ouvrirTableDesSymboles(functionSymbol.getSymbolTable());
-        // this.traverseFile(functionNode.getChild(1).getChild(4),onlyDeclarations);
-        this.gestionnaireTDS.fermerTableDesSymboles();
-
-
-        this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
-        TreeTraversal func= new TreeTraversal(functionNode.getChild(1).getChild(4));
-        //func.gestionnaireTDS.getTableDesSymboles().setName(idf);
-        //this.gestionnaireTDS.getTableDesSymboles().setName(idf);
-        //TDS.tableDesSymboles symb=this.gestionnaireTDS.getTableDesSymboles();
-        //symb.setName(idf);
-        TDS.tableDesSymboles symbolTable1 = func.buildSymbolTable(this.gestionnaireTDS.getTableDesSymboles(),idf);
-        SymbolFonction print= new SymbolFonction(root, "print", Scope.FUNCTION,"VOID",symbolTable,1);
-        symbolTable1.removesymbole(print);
-        symbolTable1.setName(idf);
-        symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
-        symbolTable1.setNestingLevel(this.nestion);
-        functionSymbol.settds(symbolTable1);
-        this.gestionnaireTDS.getTableDesSymboles().removesymbole(functionSymbol);
-        this.gestionnaireTDS.getTableDesSymboles().addSymbol(functionSymbol);
-        bloc++;
-        this.gestionnaireTDS.getTableDesSymboles().addBloc(bloc-1,symbolTable1);
 
     }
 
@@ -420,9 +495,9 @@ public class TreeTraversal {
             }
             else {
                 try {
-                    Integer.parseInt(variableNode.getChild(0).getChild(1).getText());
+                    //Integer.parseInt(variableNode.getChild(0).getChild(1).getText());
                     typeVariable = EnumType.INT;
-                    structureType = "INTEGER";
+                    structureType = variableNode.getChild(0).getText();
                 } catch (Exception e) {
                     if (variableNode.getChild(0).getChild(1).getType() == tigerParser.ARREC) {
                         typeVariable = EnumType.RECORD;

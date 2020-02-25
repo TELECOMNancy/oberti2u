@@ -16,24 +16,32 @@ BEGIN
           INTEGER N, M, K;
           BEGIN
              REAL L;
-
              wawa := SELECT(wawa,wawa2);
              wawa:=SELECT(wawa,a,wawa2);
              wawa:=SELECT(truc,wawa,wawa2);
              wawa:=SELECT(truc,aa[1,1],wawa2);
 
              a:=SELECT(wawa,wawa2,wawa3);
-
              SELECT:=a;
-
              i:=narr[1.5];
              i:=narr[truc];
              i:=narr[a];
              a:=aa[1];
              i:=truc[1]
-
-
           END;
+
+          PROCEDURE outmatrix(channel,c, dim);
+          	INTEGER channel;INTEGER b;INTEGER dim;
+          	BEGIN
+          		INTEGER i,j;
+          		outinteger (channel, dim);
+          		FOR i := 1 STEP 1 UNTIL dim DO
+          		BEGIN
+          			FOR j := 1 STEP 1 UNTIL dim DO
+          			outstring(channel,"\n")
+          		END
+          	END;
+
     FOR i := 1 STEP 1 UNTIL 100 DO
         	BEGIN
         		narr[i] := i*i

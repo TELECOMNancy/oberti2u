@@ -19,8 +19,8 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException,  RecognitionException {
-        String source = "/media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Compilejava/untitled1/out/artifacts/compile_jar/integer0.Algol";
-        String outSt = "/media/mathias/OS/Users/lemat/Documents/Scolarité/PCL/Oberti2u/Compilejava/untitled1/out/artifacts/compile_jar/tds.txt";
+        String source = "C:\\Users\\lataw\\FUCKINGFNALPCL\\Oberti2u\\Compilejava\\untitled1\\out\\artifacts\\compile_jar\\integer0.Algol";
+        String outSt = "C:\\Users\\lataw\\FUCKINGFNALPCL\\Oberti2u\\Compilejava\\untitled1\\out\\artifacts\\compile_jar\\tds.txt";
         String out = "gen1.txt";
 
         AlgolLexer lex = new AlgolLexer(new ANTLRFileStream(source, "UTF8"));
