@@ -466,7 +466,7 @@ public class TreeTraversal {
         SymbolFonction functionSymbol = this.gestionnaireTDS.getTableDesSymboles().getFunctionSymbol(idf,true);
        int size=0;
         if (functionSymbol == null){
-            System.out.println("The function "+ idf + " is not defined. Line :" + functionCallNode.getLine());
+            System.out.println("La fonction "+ idf + " n'existe pas. Ligne" + functionCallNode.getLine());
 
         }
 
@@ -478,7 +478,7 @@ public class TreeTraversal {
         int realSize = functionCallNode.getChild(1).getChildCount();
 
         if (size != realSize){
-           System.out.println("The function "+ idf + " has been called with wrong number of arguments (" + realSize + " instead of " + size + "). Line :" + functionCallNode.getLine());
+           System.out.println("La fonction "+ idf + " a été appelée avec le mauvais nombre d'arguments (" + realSize + " au lieu de  " + size + "). Ligne " + functionCallNode.getLine());
         }
         if(!(functionSymbol==null)) {
             for (int i = 0; i < realSize; i++) {
@@ -486,7 +486,7 @@ public class TreeTraversal {
                 String realType = functionSymbol.returnParam().get(i).getType();
                 String type = traverseExpr(param);
                 if (!type.equals(realType)) {
-                    System.out.println("The argument " + param.getText() + " is of type (" + type + " instead of " + realType + "). Line :" + functionCallNode.getLine());
+                    System.out.println("L'argument " + param.getText() + " est de type (" + type + " et pas " + realType + "). Ligne" + functionCallNode.getLine());
                 }
             }
             type1=functionSymbol.getReturn();
