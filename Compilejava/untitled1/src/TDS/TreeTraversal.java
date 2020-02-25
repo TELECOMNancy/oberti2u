@@ -676,7 +676,7 @@ else{
         
         
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)){
-          System.out.println("The parameter " + idf + " is already defined in the function. Line : " + paramNode.getLine());
+          System.out.println("Le parametre " + idf + " est déjà défini dans la fonction. Ligne  " + paramNode.getLine());
         }
       
         return variableSymbol;
@@ -692,7 +692,7 @@ else{
 
 
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)){
-            System.out.println("The parameter " + idf + " is already defined in the function. Line : " + paramNode.getLine());
+            System.out.println("Le paramètre  " + idf + " est déjà défini dans la fonction. Ligne " + paramNode.getLine());
         }
 
         return variableSymbol;
@@ -708,10 +708,10 @@ else{
         SymboleVariable variableSymbol = new SymboleVariable(forNode, forNode.getChild(0).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
 
         if (!this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
-            System.out.println("FOR : Variable used but not declared: " + forNode.getChild(0).getChild(0).getText() + ". Line : " + forNode.getLine());
+            System.out.println("FOR : Variable non déclarée :  " + forNode.getChild(0).getChild(0).getText() + ". Ligne  " + forNode.getLine());
         }
         else if(!variableSymbol.getType().equals("INTEGER")){
-            System.out.println("FOR : Variable used is not integer: " + forNode.getChild(0).getChild(0).getText() + ". Line : " + forNode.getLine());
+            System.out.println("FOR : La variable " + forNode.getChild(0).getChild(0).getText() + " n'est pas entière. Ligne  " + forNode.getLine());
         }
         for(int i = 0; i <forNode.getChild(0).getChild(1).getChildCount();i++) {
             Tree actualNode = forNode.getChild(0).getChild(1).getChild(i);
@@ -1239,7 +1239,7 @@ else{
         }
         else{
              if(accessnode.getChild(1).getChildCount()!=symbol.list.size()){
-         System.out.println(" Le tableau "+ idf+ " est un tableau a "+ symbol.list.size()+" dimension");
+         System.out.println("Le tableau "+ idf+ " est un tableau a "+ symbol.list.size()+" dimension");
             }
              else{
                  for(int k=0;k<accessnode.getChild(1).getChildCount();k++){
@@ -1257,7 +1257,7 @@ else{
 
     private void traverselabel(Tree labelnode, boolean onlyDeclarations){
         String idf = labelnode.getChild(0).getText();
-        System.out.println("label");
+        //System.out.println("label");
         tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
         SymbolLABEL lab= new SymbolLABEL(
                 labelnode,
@@ -1271,7 +1271,7 @@ else{
 
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(lab, true)) {
 
-            System.out.println("Redefining function " + idf + ". Line : " + labelnode.getLine());
+            System.out.println("Redefinition de fonction " + idf + ". Ligne " + labelnode.getLine());
         }
         this.gestionnaireTDS.ouvrirTableDesSymboles(lab.getSymbolTable());
         BlocType blocType = this.traverseBloc(labelnode.getChild(1), EnumTypeTableSymbole.LABEL, false);
@@ -1304,7 +1304,7 @@ else{
 
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(functionSymbol, true)) {
 
-            System.out.println("Redefining function " + idf + ". Line : " + switchNode.getLine());
+            System.out.println("Redefinition de fonction " + idf + ". Ligne  " + switchNode.getLine());
         }
         for (int i = 0; i < switchNode.getChild(0).getChild(0).getChild(1).getChildCount(); i++){
             SymboleVariable symbVar=traverseSwitchelement(switchNode.getChild(0).getChild(0).getChild(1).getChild(i),functionSymbol.getSymbolTable(), idf,"Switchelement");

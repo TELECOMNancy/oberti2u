@@ -21,6 +21,7 @@ Root
 |E3                  |34    |VAR            |Switchelement  |
 |E4                  |34    |VAR            |Switchelement  |
 |E2                  |34    |VAR            |Switchelement  |
+|a                   |36    |VAR            |REAL           |
 
 SELECT
 |1|0|
