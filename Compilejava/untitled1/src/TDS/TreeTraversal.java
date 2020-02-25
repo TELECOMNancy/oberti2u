@@ -891,19 +891,39 @@ else{
             }
         }
         else {
-            String labelName = fils.getText();
-            SymbolLABEL label = this.gestionnaireTDS.getTableDesSymboles().getLabelSymbol(labelName, true);
-            if (label == null) {
-                System.out.println("Le label "+labelName+" n'existe pas. Ligne " + GOTO.getChild(0).getLine());
+            if(fils.getType()==AlgolParser.IF) {
+                traverseIf(fils);
+                Tree filsThen = fils.getChild(1).getChild(0);
+                Tree filsElse = fils.getChild(2).getChild(0);
+                while (filsElse.getType() == AlgolParser.IF) {
+                    traverseGoto(filsThen.getParent());
+
+                    if (filsElse.getType() == AlgolParser.IF) {
+                        //traverseIf(filsElse);
+                        filsThen = filsElse.getChild(1).getChild(0);
+                        filsElse = filsElse.getChild(2).getChild(0);
+                    } else {
+                        traverseGoto(filsElse.getParent());
+                    }
+
+                }
+                traverseGoto(filsThen.getParent());
+                traverseGoto(filsElse.getParent());
+            }
+
+            else{
+                String labelName = fils.getText();
+                SymbolLABEL label = this.gestionnaireTDS.getTableDesSymboles().getLabelSymbol(labelName, true);
+                if (label == null) {
+                    System.out.println("Le label "+labelName+" n'existe pas. Ligne " + GOTO.getChild(0).getLine());
 
 
-        /*if(fils.getType()==AlgolParser.IF){
-            BlocType typeBloc=traverseIf(fils);
-            /*if(BlocType)
 
-            }*/
+
+                }
 
             }
+
         }
     }
 

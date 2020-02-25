@@ -28,7 +28,10 @@ BEGIN
     BEGIN
 	  REAL L;
 	  TEST1 : i:=3;
-	  GOTO D[1];
+	  GOTO IF L LESS 0 THEN wawa ELSE IF L LESS 0 THEN TEST1 ELSE IF i EQUAL 0 THEN TEST1 ELSE truc;
+	  GOTO F[1];
+	  GOTO i;
+
 	  IF NOT (wawa GREATER 0) THEN wawa2:=1 ELSE wawa:=0;
 	  i :=narr[i]:=13;
 	  L := 4.7;
