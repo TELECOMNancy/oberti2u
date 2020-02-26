@@ -804,7 +804,7 @@ else{
                     traverseIf(actualNode.getChild(0));
                 }
                 else if(!actualNode.getChild(0).getText().matches("^[0-9]+$")){
-                    System.out.println("FOR : Value used is not integer: " + actualNode.getChild(0).getText() + ". Line : " + forNode.getLine());
+                    System.out.println("\"FOR : La variable n'est pas entière ou réel: " + actualNode.getChild(0).getText() + ". Line : " + forNode.getLine());
                 }
             }
             else{
@@ -815,50 +815,49 @@ else{
                     String supLimit = actualNode.getChild(1).getChild(1).getChild(0).getText();
                     if(!strStepValue.matches("^[0-9]+$")){
                         if(strStepValue.matches("-")){
-                            stepNegative = true;
                             if(!actualNode.getChild(1).getChild(0).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("FOR : Value used is not integer: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
+                                System.out.println("\"FOR : La variable n'est pas entière ou réel: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
                             }
                         }
                         else{
                             SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
-                                System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getLine());
+                                System.out.println("FOR : Variable non déclarée: " + actualNode.getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getLine());
                             }
-                            else if(!stepVariable.getType().equals("INTEGER")){
-                                System.out.println("FOR : Value used is not integer: " + actualNode.getChild(1).getChild(0).getText() + ". Line : " +actualNode.getChild(1).getChild(0).getLine());
+                            else if(!actualNode.getChild(1).getChild(0).getText().equals("INTEGER")){
+                                System.out.println("FOR : La variable n'est pas entière ou réel: " + actualNode.getChild(1).getChild(0).getText() + ". Line : " +actualNode.getChild(1).getChild(0).getLine());
                             }
                         }
                     }
                     if(!infLimit.matches("^[0-9]+$")){
                         if(infLimit.matches("-")){
                             if(!actualNode.getChild(0).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("FOR : Value used is not integer: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
                             }
                         }
                         else{
                             SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
-                                System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
+                                System.out.println("FOR : Variable non déclarée: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
                             }
-                            else if(!stepVariable.getType().equals("INTEGER")){
-                                System.out.println("FOR : Value used is not integer: " +actualNode.getChild(0).getText() + ". Line : " +actualNode.getChild(0).getLine());
+                            else if(!actualNode.getChild(0).getText().equals("INTEGER")){
+                                System.out.println("FOR : La variable n'est pas entière ou réel: " +actualNode.getChild(0).getText() + ". Line : " +actualNode.getChild(0).getLine());
                             }
                         }
                     }
                     if(!supLimit.matches("^[0-9]+$")){
                         if(supLimit.matches("-")){
                             if(!actualNode.getChild(1).getChild(1).getChild(0).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("FOR : Value used is not integer: -" + actualNode.getChild(1).getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(0).getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière: -" + actualNode.getChild(1).getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(0).getChild(0).getLine());
                             }
                         }
                         else{
                             SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
-                                System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(0).getLine());
+                                System.out.println("FOR : Variable non déclarée: " + actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(0).getLine());
                             }
                             else if(!stepVariable.getType().equals("INTEGER")){
-                                System.out.println("FOR : Value used is not integer: " +actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " +actualNode.getChild(1).getChild(1).getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière: " +actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " +actualNode.getChild(1).getChild(1).getChild(0).getLine());
                             }
                         }
                     }
@@ -888,22 +887,22 @@ else{
                     if(!infLimit.matches("^[0-9]+$")){
                         if(infLimit.matches("-")){
                             if(!actualNode.getChild(0).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("FOR : Value used is not integer: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
                             }
                         }
                         else{
                             SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
 
-                                System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
+                                System.out.println("FOR : Variable non déclarée: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
                             }
                             else if(!stepVariable.getType().equals("INTEGER")){
-                                System.out.println("FOR : Value used is not integer: " +actualNode.getChild(0).getText() + ". Line : " +actualNode.getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière: " +actualNode.getChild(0).getText() + ". Line : " +actualNode.getChild(0).getLine());
                             }
                         }
                     }
                     if (!(this.traverseExpr(actualNode.getChild(1)).equals("BOOL"))) {
-                        System.out.println("While expression must be boolean. Line : "+ actualNode.getChild(1).getLine()+ ".");
+                        System.out.println("FOR: Expression doit être BOOL. Line : "+ actualNode.getChild(1).getLine()+ ".");
                     }
 
 
@@ -1296,7 +1295,7 @@ else{
                 SymboleVariable variableSymbol = this.gestionnaireTDS.getTableDesSymboles().getVariableSymbol(exprNode.getText(), true);
 
                 if (variableSymbol == null) {
-                    System.out.println("the variable does not exist " + exprNode.getText() + ". Line : " + exprNode.getLine());
+                    System.out.println("La variable " + exprNode.getText() + " n'a pas été declarée. Line : " + exprNode.getLine());
                     type = "INCONNU";
                 } else {
                     type = variableSymbol.getType();
