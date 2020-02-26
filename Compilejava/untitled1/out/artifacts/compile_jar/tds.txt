@@ -1,11 +1,5 @@
 
 Root|NAME                |OFFSET|SYMB           |TYPE           |
-|dim                 |-14   |VAR            |INTEGER        |
-|c                   |-12   |VAR            |INTEGER        |
-|channel             |-10   |VAR            |INTEGER        |
-|K                   |-8    |VAR            |INTEGER        |
-|M                   |-6    |VAR            |INTEGER        |
-|N                   |-4    |VAR            |INTEGER        |
 |SELECT              |0     |FUNC           |INTEGER        |
 |D                   |0     |SWITCH         |
 |outmatrix           |0     |FUNC           |VOID           |
@@ -26,12 +20,19 @@ Root|NAME                |OFFSET|SYMB           |TYPE           |
 |a                   |36    |VAR            |REAL           |
 
 SELECT|NAME                |OFFSET|SYMB           |TYPE           |
+|K                   |-8    |ARG            |INTEGER        |
+|M                   |-6    |ARG            |INTEGER        |
+|N                   |-4    |ARG            |INTEGER        |
 |L                   |2     |VAR            |REAL           |
 
 outmatrix|NAME                |OFFSET|SYMB           |TYPE           |
+|dim                 |-8    |ARG            |INTEGER        |
+|c                   |-6    |ARG            |INTEGER        |
+|channel             |-4    |ARG            |INTEGER        |
 |i                   |2     |VAR            |INTEGER        |
 |j                   |4     |VAR            |INTEGER        |
 
 Begin|NAME                |OFFSET|SYMB           |TYPE           |
 |TEST1               |0     |LABEL          |
 |L                   |2     |VAR            |REAL           |
+|b                   |4     |VAR            |INTEGER        |

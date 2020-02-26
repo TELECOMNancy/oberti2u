@@ -50,11 +50,13 @@ BEGIN
 
     BEGIN
 	  REAL L;
+	  INTEGER b;
 	  TEST1 : i:=3;
 	  GOTO IF L LESS 0 THEN wawa ELSE IF L LESS 0 THEN TEST1 ELSE IF i EQUAL 0 THEN TEST1 ELSE truc;
 	  GOTO F[1];
 	  GOTO i;
       TRUC(i);
+      b:=SELECT(wawa,wawa2,wawa3);
 	  IF NOT (wawa GREATER 0) THEN wawa2:=1 ELSE wawa:=0;
 	  i :=narr[i]:=13;
 	  i:=3.3;

@@ -8,7 +8,7 @@ public class SymbolFonction extends CompositionTableDesSymboles {
 	private Type returnType;
 	private String types;
 	private int NbrParametre=0;
-	private LinkedList<SymboleVariable> listparam;
+	public LinkedList<SymboleVariable> listparam;
 	public tableDesSymboles tds;
 	
 	public SymbolFonction(Tree node, String name, Scope scope, String types, tableDesSymboles symbolTable,int nbrParametre) {
@@ -49,6 +49,10 @@ public class SymbolFonction extends CompositionTableDesSymboles {
  public void addParam(SymboleVariable symb){
 	 this.listparam.add(symb);
 	 
+ }
+
+ public SymboleVariable getParam(int i){
+		return this.listparam.get(i);
  }
 	
 	public LinkedList<SymboleVariable> returnParam(){

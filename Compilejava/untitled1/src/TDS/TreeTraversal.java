@@ -212,12 +212,12 @@ public class TreeTraversal {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
                     functionSymbol.addParam(symbVar);
 
-                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                   // this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 } else {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
                     functionSymbol.addParam(symbVar);
 
-                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                    //this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 }
 
             }
@@ -237,6 +237,10 @@ public class TreeTraversal {
             SymbolFonction print = new SymbolFonction(root, "print", Scope.FUNCTION, "VOID", symbolTable, 1);
             symbolTable1.removesymbole(print);
             symbolTable1.setName(idf);
+            //symbolTable1.addSymbol(functionSymbol.ge);
+            for(int k=0;k<functionSymbol.listparam.size();k++){
+              symbolTable1.addSymbol(functionSymbol.getParam(k));
+            }
             symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
             symbolTable1.setNestingLevel(this.nestion);
             functionSymbol.settds(symbolTable1);
@@ -284,12 +288,12 @@ public class TreeTraversal {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(0).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
                     functionSymbol.addParam(symbVar);
 
-                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                  //  this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 } else {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(0).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
                     functionSymbol.addParam(symbVar);
 
-                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                   // this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 }
 
             }
@@ -308,6 +312,10 @@ public class TreeTraversal {
             SymbolFonction print = new SymbolFonction(root, "print", Scope.FUNCTION, "VOID", symbolTable, 1);
             symbolTable1.removesymbole(print);
             symbolTable1.setName(idf);
+
+            for(int k=0;k<functionSymbol.listparam.size();k++){
+                symbolTable1.addSymbol(functionSymbol.getParam(k));
+            }
             symbolTable1.setRegionnum(functionSymbol.getSymbolTable().getRegionNum());
             symbolTable1.setNestingLevel(this.nestion);
             functionSymbol.settds(symbolTable1);
@@ -395,7 +403,7 @@ public class TreeTraversal {
 
         Type type = this.traverseType(structFieldNode.getChild(1));
         tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
-        SymboleVariable variableSymbol = new SymboleVariable(structFieldNode, idf, Scope.LOCAL, "ARRAY",symbolTable);
+        SymboleVariable variableSymbol = new SymboleVariable(structFieldNode, idf, Scope.LOCAL, "ARRAY",symbolTable,0);
       
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol,false)) {
             System.out.println("The element " + variableSymbol.getName()+" is already defined in the structure. Line : " + structFieldNode.getLine());
@@ -521,7 +529,7 @@ public class TreeTraversal {
             type = new Type(
                     typeVariable,
                     structureType);
-            variableSymbol = new SymboleVariable(variableNode, idf, Scope.GLOBAL, structureType , this.gestionnaireTDS.getTableDesSymboles());    ///symbolTable);
+            variableSymbol = new SymboleVariable(variableNode, idf, Scope.GLOBAL, structureType , this.gestionnaireTDS.getTableDesSymboles(),0);    ///symbolTable);
 
             if (this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
                 System.out.println("Redefining  " + idf + ". Line : " + variableNode.getLine());
@@ -747,7 +755,7 @@ else{
     	String idf = this.getID(paramNode);
         Type type = this.traverseType(paramNode);
   //Type type = null;
-        SymboleVariable variableSymbol = new SymboleVariable(paramNode, idf, Scope.FUNCTION, typearg,symbolTable2);
+        SymboleVariable variableSymbol = new SymboleVariable(paramNode, idf, Scope.FUNCTION, typearg,symbolTable2,1);
         
         
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)){
@@ -763,7 +771,7 @@ else{
         //System.out.println(paramNode.getText());
         String idf = this.getID(paramNode);
         Type type = this.traverseType(paramNode);
-        SymboleVariable variableSymbol = new SymboleVariable(paramNode, idf, Scope.GLOBAL, typearg,symbolTable2);
+        SymboleVariable variableSymbol = new SymboleVariable(paramNode, idf, Scope.GLOBAL, typearg,symbolTable2,0);
 
 
         if(this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)){
@@ -780,7 +788,7 @@ else{
                 EnumType.INT,
                 "int");
         String type1="INTEGER";
-        SymboleVariable variableSymbol = new SymboleVariable(forNode, forNode.getChild(0).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+        SymboleVariable variableSymbol = new SymboleVariable(forNode, forNode.getChild(0).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
 
         if (!this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
             System.out.println("FOR : Variable non déclarée :  " + forNode.getChild(0).getChild(0).getText() + ". Ligne  " + forNode.getLine());
@@ -813,7 +821,7 @@ else{
                             }
                         }
                         else{
-                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
                                 System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getLine());
                             }
@@ -829,7 +837,7 @@ else{
                             }
                         }
                         else{
-                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
                                 System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
                             }
@@ -845,7 +853,7 @@ else{
                             }
                         }
                         else{
-                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(1).getChild(1).getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
                                 System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(1).getChild(1).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(1).getChild(0).getLine());
                             }
@@ -874,7 +882,7 @@ else{
                 }
                 else if(actualNode.getChild(1).getText().equals("WHILE")){
                     String sVarWhile = actualNode.getChild(1).getChild(0).getChild(0).getText();
-                    SymboleVariable VarWhile = new SymboleVariable(forNode, sVarWhile, Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+                    SymboleVariable VarWhile = new SymboleVariable(forNode, sVarWhile, Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                     String infLimit = actualNode.getChild(0).getText();
                     String supLimit = actualNode.getChild(1).getChild(0).getChild(1).getText();
                     if(!infLimit.matches("^[0-9]+$")){
@@ -884,7 +892,7 @@ else{
                             }
                         }
                         else{
-                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles());
+                            SymboleVariable stepVariable = new SymboleVariable(forNode, actualNode.getChild(0).getText(), Scope.LOCAL, type1, this.gestionnaireTDS.getTableDesSymboles(),0);
                             if(!this.gestionnaireTDS.getTableDesSymboles().symbolExists(stepVariable, true)){
 
                                 System.out.println("FOR : Variable used but not declared: " + actualNode.getChild(0).getText() + ". Line : " + actualNode.getChild(0).getLine());
