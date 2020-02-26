@@ -36,6 +36,19 @@ BEGIN
 
           END;
 
+          PROCEDURE outmatrix(channel, a, dim);
+          	INTEGER channel;REAL b;INTEGER dim;
+          	BEGIN
+          		INTEGER i, j;
+          		outinteger (channel, dim);
+          		FOR i := 1 STEP 1 UNTIL dim DO
+          		BEGIN
+          			FOR j := 1 STEP 1 UNTIL dim DO
+          			outstring(channel,"\n")
+          		END
+          	END;
+
+
     FOR i := 1,2,3 STEP boolVar UNTIL 100, 2 WHILE i + 20 DO
         	BEGIN
         		narr[i] := i*i

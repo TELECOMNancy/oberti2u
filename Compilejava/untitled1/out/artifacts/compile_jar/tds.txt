@@ -17,7 +17,8 @@ Root|NAME                |OFFSET|SYMB           |TYPE           |
 |E3                  |34    |VAR            |Switchelement  |
 |E4                  |34    |VAR            |Switchelement  |
 |E2                  |34    |VAR            |Switchelement  |
-|a                   |36    |VAR            |REAL           |
+|realVar             |36    |VAR            |REAL           |
+|boolVar             |38    |VAR            |REAL           |
 
 SELECT|NAME                |OFFSET|SYMB           |TYPE           |
 |K                   |-8    |ARG            |INTEGER        |
@@ -27,7 +28,7 @@ SELECT|NAME                |OFFSET|SYMB           |TYPE           |
 
 outmatrix|NAME                |OFFSET|SYMB           |TYPE           |
 |dim                 |-8    |ARG            |INTEGER        |
-|c                   |-6    |ARG            |INTEGER        |
+|a                   |-6    |ARG            |REAL           |
 |channel             |-4    |ARG            |INTEGER        |
 |i                   |2     |VAR            |INTEGER        |
 |j                   |4     |VAR            |INTEGER        |
