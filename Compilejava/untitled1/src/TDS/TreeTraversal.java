@@ -120,23 +120,6 @@ public class TreeTraversal {
                         }
                         break;
 
-                        /*case AlgolParser.PROCEDURE:
-
-                		this.traverseFunction(child, onlyDeclarations,"");
-
-                		break;
-                	case tigerParser.TYPE:
-
-                		this.traverseStructure(child, onlyDeclarations);
-
-                		break;
-                	case tigerParser.VAR:
-
-                		 this.traverseVariable(child, onlyDeclarations);
-
-                		break;
-
-                	 */
                     case AlgolParser.GOTO:
                         this.traverseGoto(child);
                         break;
@@ -177,7 +160,7 @@ public class TreeTraversal {
             Type returnType = new Type(EnumType.VOID);
             String types = "";
             tableDesSymboles symbolTable = this.gestionnaireTDS.ouvrirTableDesSymboles();
-            if (functionNode.getChildCount() != 1/*functionNode.getChild(2).getChild(0).getType() != tigerParser.VOID*/) {
+            if (functionNode.getChildCount() != 1) {
                 returnType = traverseType(functionNode.getChild(0));
                 types = functionNode.getChild(0).getText();
             }
@@ -385,9 +368,6 @@ public class TreeTraversal {
                 Tree child = structureNode.getChild(i);
 
                 switch (child.getType()) {
-                    case tigerParser.FIELD:
-                        this.traverseStructureField(child);
-                        break;
                     default:
                         System.out.println("");
                 }
@@ -605,47 +585,6 @@ public class TreeTraversal {
                     }
             
                     break;
-                case tigerParser.BLOCKF:
-                	this.traverseBloc(child,symbolTableType,false);
-                    if(!type.isDeterminedByReturn()) {
-                        type = new BlocType(EnumType.VOID, false, child);
-                    }
-                    break;
-                case tigerParser.IN:
-                	for(int j = 0; j < child.getChildCount(); j++) {
-                        Tree childOfChild = child.getChild(j);
-                        this.traverseBloc(childOfChild,symbolTableType,false);
-                    	}
-                	break;
-                case tigerParser.WHILE:
-                  //  tempType = this.traverseWhile(child);
-
-                    if(!type.isDeterminedByReturn()) {
-                       // type = tempType;
-                    }
-                    break;
-                case tigerParser.FOR:
-                    //tempType = this.traverseWhile(child);
-                        //type = tempType;
-
-                    break;
-                case tigerParser.TYPEDERETOUR:
-                    tempType = this.traverseReturn(child);
-
-                    if(!type.isDeterminedByReturn()) {
-                        type = tempType;
-                    }
-                    break;
-                case tigerParser.IF:
-                    tempType = this.traverseIf(child);
-
-                    if(!type.isDeterminedByReturn()) {
-                        type = tempType;
-                    }
-                    break;
-                case tigerParser.VAR:
-                	this.traverseVariable(child, true);
-                	break;
                 default:
                     //Type exprType = this.traverseExpr(child);
 
@@ -793,7 +732,7 @@ else{
         if (!this.gestionnaireTDS.getTableDesSymboles().symbolExists(variableSymbol, true)) {
             System.out.println("FOR : Variable non déclarée :  " + forNode.getChild(0).getChild(0).getText() + ". Ligne  " + forNode.getLine());
         }
-        else if(!variableSymbol.getType().equals("INTEGER")){
+        else if(!traverseExpr(forNode.getChild(0).getChild(0)).equals("INTEGER")){
             System.out.println("FOR : La variable " + forNode.getChild(0).getChild(0).getText() + " n'est pas entière. Ligne  " + forNode.getLine());
         }
         for(int i = 0; i <forNode.getChild(0).getChild(1).getChildCount();i++) {
@@ -803,8 +742,8 @@ else{
                 if(actualNode.getChild(0).getText().equals("IF")){
                     traverseIf(actualNode.getChild(0));
                 }
-                else if(!actualNode.getChild(0).getText().matches("^[0-9]+$")){
-                    System.out.println("\"FOR : La variable n'est pas entière ou réel: " + actualNode.getChild(0).getText() + ". Line : " + forNode.getLine());
+                else if(!traverseExpr(actualNode.getChild(0)).equals("INTEGER") && !traverseExpr(actualNode.getChild(0)).equals("REAL")){
+                    System.out.println("FOR : L'expression n'est pas entière ou réel. Line : " + forNode.getLine());
                 }
             }
             else{
@@ -816,7 +755,7 @@ else{
                     if(!strStepValue.matches("^[0-9]+$")){
                         if(strStepValue.matches("-")){
                             if(!actualNode.getChild(1).getChild(0).getChild(0).getText().matches("^[0-9]+$")){
-                                System.out.println("\"FOR : La variable n'est pas entière ou réel: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
+                                System.out.println("FOR : La variable n'est pas entière ou réel: -" + actualNode.getChild(1).getChild(0).getChild(0).getText() + ". Line : " + actualNode.getChild(1).getChild(0).getChild(0).getLine());
                             }
                         }
                         else{
@@ -1021,23 +960,6 @@ else{
         return type;
     }
 
-    private BlocType traverseElse(Tree elseNode)  {
-        BlocType type;
-
-        switch(elseNode.getType()){
-            case tigerParser.BLOCK :
-                type = traverseBloc(elseNode, EnumTypeTableSymbole.ELSE,false);
-                break;
-            case tigerParser.IF :
-                type = traverseIf(elseNode);
-                break;
-            default:
-                System.out.println("Unknown node : " + elseNode.getText());
-                type=null;
-        }
-
-        return type;
-    }
 
     private String traverseExpr(Tree exprNode)  {
         String leftExpr; //on peut pas faire leftExpr = this.traverseExpr(exprNode.getChild(0)); malheureusement
@@ -1056,6 +978,12 @@ else{
                 type=type1;
             }
         }*/
+        if(exprNode.getText().equals("-")){
+            String aux = traverseExpr(exprNode.getChild(0));
+            if(aux.equals("REAL") || aux.equals("INTEGER"))
+                return aux;
+        }
+
         switch (exprNode.getType()) {
             //case tigerParser.IN:
             //case tigerParser.BLOCK:
