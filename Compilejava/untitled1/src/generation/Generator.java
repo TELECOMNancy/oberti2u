@@ -1,6 +1,8 @@
 package generation;
 
 import grammar.tigerLexer;
+import grammar.AlgolParser;
+import grammar.AlgolLexer;
 import grammar.tigerParser;
 import javafx.util.Pair;
 import org.antlr.runtime.tree.Tree;
@@ -102,16 +104,22 @@ public class Generator {
         
         Environment environment3 = this.environmentManager.createEnvironment(this.symbolTable.getEnvironmentSize());
         environment3.openEnvironment(this.code);
-        for(int i = 0; i < root.getChild(0).getChild(0).getChildCount(); i++) {
-            Tree child = root.getChild(0).getChild(0).getChild(i);
+        for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
+            Tree child = root.getChild(0).getChild(i)/*.getChild(i)*/;
             
-           if ( child.getChild(0).getType()== tigerLexer.AFFECTATION) {
+           if ( child.getType()== AlgolLexer.ASSIGEMENT) {
                this.generateAssig(child.getChild(0), this.symbolTable);
 
            }
+           else{if ( child.getType()== AlgolLexer.BLOCK) {
+               for(int j = 0; j < child.getChild(0).getChild(0).getChildCount()-1; j++) {
+                   this.generateAssig(child.getChild(0).getChild(0).getChild(j), this.symbolTable);
+               }
+
+           }}
 
         }
-        this.generateBloc(newroot, this.symbolTable);
+        //this.generateBloc(newroot, this.symbolTable);
         this.environmentManager.closeEnvironment(this.code);
 
         this.code
@@ -362,7 +370,7 @@ public class Generator {
                         .append("// " + this.sourceManager.getLine(ASSIgNode.getLine()));
 
 
-                if (ASSIgNode.getChild(1).getType()==tigerLexer.STRINGLIT){
+                if (ASSIgNode.getChild(1).getType()==AlgolLexer.STRING){
                 	this.generateExpr(ASSIgNode.getChild(1), currentSymbolTable);
                 	int r0=this.registersManager.unlockRegister();
                     
@@ -400,7 +408,7 @@ public class Generator {
 
     private void generateExpr(Tree exprNode, tableDesSymboles currentSymbolTable) throws IOException {
         switch(exprNode.getType()) {
-            case tigerLexer.OR:
+            /*case tigerLexer.OR:
             case tigerLexer.AND:
             case tigerLexer.EQ:
             case tigerLexer.LE:
@@ -410,7 +418,7 @@ public class Generator {
                 this.generateLogicalExpr(exprNode, currentSymbolTable);
                 break;
             case tigerLexer.PLUS:
-            case tigerLexer.MOINS:
+            //case tigerLexer.MOINS:
             case tigerLexer.MULT:
             case tigerLexer.DIV:
                 this.generateArithmeticExpr(exprNode, currentSymbolTable);
@@ -421,11 +429,11 @@ public class Generator {
  
             case tigerLexer.APPELFONCTION:
                 this.generateFunctionCall(exprNode, currentSymbolTable);
-                break;
+                break;*/
             
-            case tigerLexer.INTLIT:
-            case tigerLexer.STRINGLIT :
-            case tigerLexer.ID:
+            case AlgolLexer.INT:
+            case AlgolLexer.STRING :
+            case AlgolLexer.ID:
                 this.generateAssignation(exprNode, currentSymbolTable);
                 break;
         }
@@ -511,7 +519,7 @@ public class Generator {
         int register = this.registersManager.lockRegister();
 
         switch (exprNode.getType()) {
-            case tigerLexer.ID:
+            case AlgolLexer.ID:
                 SymboleVariable variableSymbol = currentSymbolTable.getVariableSymbol(exprNode.getText(), true);
 
                int offset = variableSymbol.getOffset();
@@ -527,7 +535,7 @@ public class Generator {
                 this.code
                         .append("LDW R" + register + ", (BP)" + bp);
                 break;
-            case tigerLexer.INTLIT:
+            case AlgolLexer.INT:
                 int value = Integer.parseInt(exprNode.getText());
 
                 if(value >= -128 && value <= 127) {
@@ -539,7 +547,7 @@ public class Generator {
                             .append("LDW R" + register + ", #" + value);
                 }
                 break;
-            case tigerLexer.STRINGLIT :
+            case AlgolLexer.STRING:
             	this.code
                 .append("STRING"+exprNode.hashCode() + " string "+ exprNode.getText())
             	.append("LDW R"+register+",#"+"STRING"+exprNode.hashCode());

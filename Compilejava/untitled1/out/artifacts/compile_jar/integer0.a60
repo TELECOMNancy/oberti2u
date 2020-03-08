@@ -1,8 +1,9 @@
 
 BEGIN
-	INTEGER n;
-    INTEGER j;
-    INTEGER k;
-	ininteger(0,n);
-	outinteger( 1,n)
+    INTEGER n;
+    INTEGER m;
+	BEGIN
+	n:=10;
+	m:=n
+	END
 END
