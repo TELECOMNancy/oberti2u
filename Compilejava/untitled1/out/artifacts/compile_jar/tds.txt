@@ -1,39 +1,5 @@
 
 Root|NAME                |OFFSET|SYMB           |TYPE           |
-|SELECT              |0     |FUNC           |INTEGER        |
-|D                   |0     |SWITCH         |
-|outmatrix           |0     |FUNC           |VOID           |
 |print               |0     |FUNC           |VOID           |
-|n                   |2     |VAR            |INTEGER        |
+|L                   |2     |VAR            |INTEGER        |
 |i                   |4     |VAR            |INTEGER        |
-|wawa                |6     |VAR            |INTEGER        |
-|wawa2               |8     |VAR            |INTEGER        |
-|wawa3               |10    |VAR            |INTEGER        |
-|narr                |16    |ARRAY          |INTEGER        |
-|E6                  |34    |VAR            |Switchelement  |
-|E5                  |34    |VAR            |Switchelement  |
-|aa                  |34    |MATRICE        |REAL           |
-|E1                  |34    |VAR            |Switchelement  |
-|E3                  |34    |VAR            |Switchelement  |
-|E4                  |34    |VAR            |Switchelement  |
-|E2                  |34    |VAR            |Switchelement  |
-|realVar             |36    |VAR            |REAL           |
-|boolVar             |38    |VAR            |REAL           |
-
-SELECT|NAME                |OFFSET|SYMB           |TYPE           |
-|K                   |-8    |ARG            |INTEGER        |
-|M                   |-6    |ARG            |INTEGER        |
-|N                   |-4    |ARG            |INTEGER        |
-|L                   |2     |VAR            |REAL           |
-
-outmatrix|NAME                |OFFSET|SYMB           |TYPE           |
-|dim                 |-8    |ARG            |INTEGER        |
-|a                   |-6    |ARG            |REAL           |
-|channel             |-4    |ARG            |INTEGER        |
-|i                   |2     |VAR            |INTEGER        |
-|j                   |4     |VAR            |INTEGER        |
-
-Begin|NAME                |OFFSET|SYMB           |TYPE           |
-|TEST1               |0     |LABEL          |
-|L                   |2     |VAR            |REAL           |
-|b                   |4     |VAR            |INTEGER        |

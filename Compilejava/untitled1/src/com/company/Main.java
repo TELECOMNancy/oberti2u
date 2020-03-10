@@ -40,16 +40,17 @@ public class Main {
                /// System.out.println(symbolTable.toTable());
                BufferedWriter writer = new BufferedWriter(new FileWriter(outSt));
                 writer.write(symbolTable.toTable().toString());
+              // System.out.println(symbolTable.getBloc());
                writer.close();
             }
 
             File sourceFile = new File(source);
             File genFile = new File(out);
             Generator generator = new Generator(sourceFile, genFile, symbolTable);
-            //generator.generate(root);
+            generator.generate(root);
 
-           // Compiler compiler = new Compiler(genFile);
-           // compiler.compile();
+            Compiler compiler = new Compiler(genFile);
+            //compiler.compile();
         } catch (RecognitionException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

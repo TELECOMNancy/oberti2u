@@ -1,5 +1,6 @@
 package generation;
 
+import antlr.actions.cpp.ActionLexer;
 import grammar.tigerLexer;
 import grammar.AlgolParser;
 import grammar.AlgolLexer;
@@ -84,14 +85,15 @@ public class Generator {
         this.generatePrintFunction();
         this.generatePrintiFunction();
         this.generateItoaFunction();
-        for(int i = 0; i < root.getChild(0).getChild(0).getChildCount(); i++) {
-            Tree child = root.getChild(0).getChild(0).getChild(i);
+        //System.out.println(root.getChild(0).getText());
+        for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
+            Tree child = root.getChild(0).getChild(i);
             
            
-           if ( child.getType()== tigerLexer.FUNCTION) {
-        	   String functionIdf = child.getChild(0).getText();
+           if ( child.getType()== AlgolLexer.PROCEDURE) {
+        	   //String functionIdf = child.getChild(0).getText();
 
-               this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
+              // this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
            }
             
         }
@@ -99,26 +101,36 @@ public class Generator {
 
         while(!this.registersManager.getreturnRegister().isEmpty()){
         	this.registersManager.unlockRegister();
+
         }
         this.registersManager.lockRegister();
-        
+        Tree region =null;
         Environment environment3 = this.environmentManager.createEnvironment(this.symbolTable.getEnvironmentSize());
         environment3.openEnvironment(this.code);
-        for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
-            Tree child = root.getChild(0).getChild(i)/*.getChild(i)*/;
+        for(int i=0;i<root.getChild(0).getChildCount();i++){
+            if(root.getChild(0).getChild(i).getText().equals("BLOCK")){
+                region=root.getChild(0).getChild(i);
+            }
+        }
+        for(int i = 0; i < region.getChildCount(); i++) {
+            Tree child = region.getChild(i)/*.getChild(i)*/;
             
-           if ( child.getType()== AlgolLexer.ASSIGEMENT) {
-               this.generateAssig(child.getChild(0), this.symbolTable);
-
+           if (child.getType()== AlgolLexer.ASSIGEMENT) {
+              // this.generateAssig(child, this.symbolTable);
            }
-           else{if ( child.getType()== AlgolLexer.BLOCK) {
+           /*else{if ( child.getType()== AlgolLexer.BLOCK) {
                for(int j = 0; j < child.getChild(0).getChild(0).getChildCount()-1; j++) {
                    this.generateAssig(child.getChild(0).getChild(0).getChild(j), this.symbolTable);
                }
 
-           }}
+           }}*/
+           else {
+               //this.generateBloc(child,this.symbolTable);
+            }
 
         }
+        System.out.println(this.registersManager.getreturnRegister().size());
+        this.generateBloc(region,this.symbolTable);
         //this.generateBloc(newroot, this.symbolTable);
         this.environmentManager.closeEnvironment(this.code);
 
@@ -130,8 +142,6 @@ public class Generator {
 
     private List<String> genratedFunction = new ArrayList<>();
 
-
-    
 
     private void generateFunction(Tree functionNode, SymbolFonction functionSymbol) throws IOException {
         this.currentFunction = functionSymbol.getName();
@@ -163,12 +173,12 @@ public class Generator {
     }
 
     private void generateBloc(Tree blocNode, tableDesSymboles currentSymbolTable) throws IOException {
-        for(int i = 0; i < blocNode.getChildCount(); i++) {
+        for(int i = 0; i <blocNode.getChildCount(); i++) {
+           // System.out.println("yoo"+blocNode.getChild(i).getText());
             Tree child = blocNode.getChild(i);
-
             switch (child.getType()) {
-            case tigerLexer.LET:      
-            	if (child.getChild(0).getType()== tigerLexer.FUNCTION){
+            case AlgolLexer.BEGIN:
+            	if (child.getChild(0).getType()== AlgolLexer.PROCEDURE){
             		
             		 String functionIdf = child.getChild(0).getChild(0).getText();
             		 
@@ -176,34 +186,36 @@ public class Generator {
 
                      this.generateFunction(child.getChild(0), currentSymbolTable.getFunctionSymbol(functionIdf, true));
                      this.code.append(functionIdf+"_end_end");
-            		
             	}
             	else {
-            	this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);}
+            	this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
+            	}
                 break;
-            case tigerLexer.ASSIG:
-               
+
+                case AlgolLexer.ASSIGEMENT:
+                    ///System.out.println("wawawa");
                     this.generateAssig(child, currentSymbolTable);
                     break;
-                case tigerLexer.WHILE:
+                case AlgolLexer.WHILE:
                     this.generateWhile(child, currentSymbolTable);
                     break;
-                case tigerLexer.FOR:
+                case AlgolLexer.FOR:
                     this.generateFor(child, currentSymbolTable);
                     break;
-                case tigerLexer.IF:
+                case AlgolLexer.IF:
+                    ///System.out.println("iffff");
                     this.generateIf(child, currentSymbolTable);
+                    System.out.println(this.registersManager.getreturnRegister().size());
                     break;
 
-                case tigerLexer.APPELFONCTION:
-
-                    this.generateFunctionCall(child, currentSymbolTable);
+                case AlgolLexer.CALL:
+                    this.generateFunctionCall(child,currentSymbolTable);
                     break;
                 case tigerLexer.DO:
                 case tigerLexer.IN:
                 case tigerLexer.BODY:
                 case tigerLexer.BLOCK:
-                case tigerLexer.BLOCKF:
+                //case tigerLexer.BLOCKF:
                 case tigerLexer.SEQEXP:
 
                     this.generateBloc(child, currentSymbolTable);
@@ -307,10 +319,10 @@ public class Generator {
     
 
    private Pair<Integer, SymboleVariable> getOffset(Tree variableNode, tableDesSymboles currentSymbolTable) {
-	   int offset = 0;
+	    int offset = 0;
         Stack<Pair<String, Integer>> nodes = new Stack<>();
         Tree currentNode = variableNode;
-       
+        //System.out.println(currentNode.getText());
         nodes.push(new Pair<>(currentNode.getText(), 0));
         String idf = nodes.pop().getKey();
 
@@ -318,13 +330,11 @@ public class Generator {
 
         offset += variableSymbol.getOffset();
 
-       
         return new Pair<>(offset, variableSymbol);
     }
 
     private void generateIf(Tree ifNode, tableDesSymboles currentSymbolTable) throws IOException {
-        Tree condition = ifNode.getChild(0).getChild(0);
-        
+        Tree condition = ifNode.getChild(0);
         Tree bloc = ifNode.getChild(1);
 
         String label = "if" + ifNode.hashCode();
@@ -336,7 +346,6 @@ public class Generator {
                 .append(beginLabel);
 
         this.generateExpr(condition, currentSymbolTable);
-
         int r0 = this.registersManager.unlockRegister();
         this.code
                 .append("// cond")
@@ -350,11 +359,13 @@ public class Generator {
 
         
         if (ifNode.getChildCount() > 2) {
+        //    System.out.println("yoo"+this.registersManager.getreturnRegister().size());
         	this.registersManager.unlockRegister();
-                    this.generateBloc(ifNode.getChild(2), currentSymbolTable);
-                
-            }
-        
+            //System.out.println("yoo"+this.registersManager.getreturnRegister().size());
+            this.generateBloc(ifNode.getChild(2), currentSymbolTable);
+           // System.out.println("yoo"+this.registersManager.getreturnRegister().size());
+
+        }
 
         this.code
                 .append(endifLabel);
@@ -408,6 +419,10 @@ public class Generator {
 
     private void generateExpr(Tree exprNode, tableDesSymboles currentSymbolTable) throws IOException {
         switch(exprNode.getType()) {
+            case AlgolLexer.AND:
+                System.out.println("iffff");
+                this.generateLogicalExpr(exprNode, currentSymbolTable);
+                break;
             /*case tigerLexer.OR:
             case tigerLexer.AND:
             case tigerLexer.EQ:
@@ -441,11 +456,12 @@ public class Generator {
 
   
     private void generatePrintCas(Tree Node, tableDesSymboles currentSymbolTable)throws IOException{
+      //  System.out.println("okkkk");
     	switch (Node.getType()) {
-    		case tigerLexer.STRINGLIT :
+    		case AlgolLexer.STRING :
     			generatePrint(Node,currentSymbolTable);
     			break;
-    		case tigerLexer.APPELFONCTION :
+    		case AlgolLexer.CALL :
     			SymbolFonction symbolFonction = currentSymbolTable.getFunctionSymbol(Node.getChild(0).getText(), true) ;
     			String typeRetour = symbolFonction.getReturnType().getType().getToken();
     			if (typeRetour.equals("string)")){
@@ -454,10 +470,11 @@ public class Generator {
     				generatePrinti(Node,currentSymbolTable);
     			}
     			break;
-    		case tigerLexer.ID :
+    		case AlgolLexer.ID :
+             //   System.out.println("okkk111");
     			SymboleVariable symbolVar = currentSymbolTable.getVariableSymbol(Node.getText(),true);
     			String type = symbolVar.getType();
-    			if (type.equals("string")){
+    			if (type.equals("STRING")){
     				generatePrint(Node,currentSymbolTable);
     			}else{
     				generatePrinti(Node,currentSymbolTable);
@@ -473,16 +490,17 @@ public class Generator {
 
     private void generateFunctionCall(Tree functionCallNode, tableDesSymboles currentSymbolTable) throws IOException {
         String functionIdf = functionCallNode.getChild(0).getText();
-
-        if (functionIdf.equals("print")){
-        	this.generatePrintCas(functionCallNode.getChild(1),currentSymbolTable);
-        }else{
+       System.out.println(functionIdf);
+        if (functionIdf.equals("outinteger")){
+            System.out.println(functionIdf);
+        	this.generatePrintCas(functionCallNode.getChild(1).getChild(1),currentSymbolTable);
+        }
+        else{
 
         if (!this.genratedFunction.contains(functionIdf)) {
             this.genratedFunction.add(functionIdf);
             this.usedFunctions.push(currentSymbolTable.getFunctionSymbol(functionIdf, true));
         }
-
         int nbParametre = functionCallNode.getChildCount()-1;
         this.code
                 .append("//Appel de la fonction : " + functionCallNode.getChild(0).getText())
@@ -490,6 +508,7 @@ public class Generator {
 
         if (nbParametre > 0){
             for(int i = nbParametre; i>0; i--){
+                //System.out.println(this.registersManager.getreturnRegister().size());
                 this.generateExpr(functionCallNode.getChild(i), currentSymbolTable);
                 
                 
@@ -590,13 +609,13 @@ public class Generator {
     }
 
     private void generateLogicalExpr(Tree logicalExprNode, tableDesSymboles currentSymbolTable) throws IOException {
-        if(logicalExprNode.getType() == tigerLexer.OR) {
+        if(logicalExprNode.getType() == AlgolLexer.OR) {
             this.generateOr(logicalExprNode, currentSymbolTable);
         }
-        else if(logicalExprNode.getType() == tigerLexer.AND) {
+        else if(logicalExprNode.getType() == AlgolLexer.AND) {
             this.generateAnd(logicalExprNode, currentSymbolTable);
         }
-        else if(logicalExprNode.getType() == tigerLexer.ID){
+        else if(logicalExprNode.getType() == AlgolLexer.ID){
         	 this.generateExpr(logicalExprNode.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
              this.generateExpr(logicalExprNode, currentSymbolTable);
              int r2 = this.registersManager.unlockRegister();
@@ -614,8 +633,8 @@ public class Generator {
          
      
         }
-        else if(logicalExprNode.getType() == tigerLexer.INTLIT){
-       	 this.generateExpr(logicalExprNode.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
+        else if(logicalExprNode.getType() == AlgolLexer.INT){
+       	    this.generateExpr(logicalExprNode.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
             this.generateExpr(logicalExprNode, currentSymbolTable);
             int r2 = this.registersManager.unlockRegister();
             int r1 = this.registersManager.unlockRegister();
