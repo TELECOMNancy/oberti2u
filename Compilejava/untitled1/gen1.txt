@@ -137,30 +137,21 @@ LDQ 10, R1
 STW R1, (BP)-4
 begin_cond_if728890494
 LDW R1, (BP)-4
-LDW R2, (BP)-4
+LDQ 0, R2
 CMP R1, R2
 BGE 4
 LDQ 1, R1
 BMP 2
 LDQ 0, R1
-// and
-LDW R2, (BP)-4
-LDQ 0, R3
-CMP R2, R3
-BGE 4
-LDQ 1, R2
-BMP 2
-LDQ 0, R2
-AND R1, R2, R1
 // cond
 TST R1
 JEQ #end_cond_if728890494-$-2
-// IF (i AND 0) THEN L:=1 ELSE L:=0;
+//L:=1
 LDQ 1, R1
 STW R1, (BP)-2
 JMP #end_cond_if_if728890494-$-2
 end_cond_if728890494
-// IF (i AND 0) THEN L:=1 ELSE L:=0;
+//L:=0
 LDQ 0, R0
 STW R0, (BP)-2
 end_cond_if_if728890494

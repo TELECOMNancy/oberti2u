@@ -259,11 +259,10 @@ public class Generator {
     
     
     private void generateFor(Tree forNode, tableDesSymboles currentSymbolTable) throws IOException {
-        Tree condition = forNode.getChild(1).getChild(0);
-        
+        Tree condition = forNode.getChild(0).getChild(1).getChild(0).getChild(1).getChild(1).getChild(0);//forNode.getChild(1).getChild(0);
         Tree assig= forNode.getChild(0);
 
-        Tree bloc = forNode.getChild(2);
+        Tree bloc = forNode.getChild(1);
         
         String label = "For" + forNode.hashCode();
         String beginLabel = "begin_cond_" + label;
@@ -377,8 +376,13 @@ public class Generator {
         SymboleVariable variableSymbol = temp.getValue();
 
             if(ASSIgNode.getChildCount() > 1) {
-                this.code
-                        .append("// " + this.sourceManager.getLine(ASSIgNode.getLine()));
+                if(this.sourceManager.getLine(ASSIgNode.getLine()).contains("IF")){
+                    this.code.append("//"+ASSIgNode.getChild(0).getText()+ASSIgNode.getText()+ASSIgNode.getChild(1).getText());
+                }
+                else {
+                    this.code
+                            .append("// " + this.sourceManager.getLine(ASSIgNode.getLine()));
+                }
 
 
                 if (ASSIgNode.getChild(1).getType()==AlgolLexer.STRING){
@@ -396,22 +400,35 @@ public class Generator {
                     .append("STW R" + r0 + ", (BP)" + bp + "");
                 }
                 else {
-                    this.generateExpr(ASSIgNode.getChild(1), currentSymbolTable);
-                   
-             
-                       int r0=this.registersManager.unlockRegister();
-                      
-                       String bp;
-                       if(offset < 0) {
-                           bp = String.valueOf(-offset);
-                       }
-                       else {
-                           bp = "-" + offset;
-                       }
+                    if (ASSIgNode.getChild(1).getText().equals("LISTFOR")) {
+                        this.generateExpr(ASSIgNode.getChild(1).getChild(0).getChild(0),currentSymbolTable);
+                        int r0 = this.registersManager.unlockRegister();
+                        String bp;
+                        if (offset < 0) {
+                            bp = String.valueOf(-offset);
+                        } else {
+                            bp = "-" + offset;
+                        }
 
                         this.code
                                 .append("STW R" + r0 + ", (BP)" + bp + "");
-                    
+                    }
+                    else {
+                        this.generateExpr(ASSIgNode.getChild(1), currentSymbolTable);
+
+                        int r0 = this.registersManager.unlockRegister();
+
+                        String bp;
+                        if (offset < 0) {
+                            bp = String.valueOf(-offset);
+                        } else {
+                            bp = "-" + offset;
+                        }
+
+                        this.code
+                                .append("STW R" + r0 + ", (BP)" + bp + "");
+
+                    }
                 }
             }
 
@@ -420,9 +437,13 @@ public class Generator {
     private void generateExpr(Tree exprNode, tableDesSymboles currentSymbolTable) throws IOException {
         switch(exprNode.getType()) {
             case AlgolLexer.AND:
-                System.out.println("iffff");
+                //System.out.println("iffff");
                 this.generateLogicalExpr(exprNode, currentSymbolTable);
                 break;
+            case AlgolLexer.LESS:
+                   this.generateLogicalExpr(exprNode,currentSymbolTable);
+                break;
+
             /*case tigerLexer.OR:
             case tigerLexer.AND:
             case tigerLexer.EQ:
@@ -490,9 +511,9 @@ public class Generator {
 
     private void generateFunctionCall(Tree functionCallNode, tableDesSymboles currentSymbolTable) throws IOException {
         String functionIdf = functionCallNode.getChild(0).getText();
-       System.out.println(functionIdf);
+      // System.out.println(functionIdf);
         if (functionIdf.equals("outinteger")){
-            System.out.println(functionIdf);
+            //System.out.println(functionIdf);
         	this.generatePrintCas(functionCallNode.getChild(1).getChild(1),currentSymbolTable);
         }
         else{
@@ -661,13 +682,13 @@ public class Generator {
             String op;
 
             switch (logicalExprNode.getType()) {
-                case tigerLexer.EQ:
+                case AlgolLexer.EQUAL: //tigerLexer.EQ:
                     op = "BNE";
                     break;
                 case tigerLexer.LE:
                     op = "BGT";
                     break; 
-                case tigerLexer.LT:
+                case AlgolLexer.LESS:
                     op = "BGE";
                     break;
                 case tigerLexer.GE:

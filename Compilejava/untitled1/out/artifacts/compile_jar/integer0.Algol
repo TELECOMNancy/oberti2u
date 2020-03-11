@@ -3,7 +3,7 @@
 	  INTEGER i;
       L:=10;
       i:=10;
-	  IF (i AND 0) THEN L:=1 ELSE L:=0;
+	  IF (i LESS 0) THEN L:=1 ELSE L:=0;
       outinteger(1,i)
     END
 
