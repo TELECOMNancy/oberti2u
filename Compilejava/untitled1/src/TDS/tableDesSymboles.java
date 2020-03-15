@@ -20,7 +20,7 @@ public class tableDesSymboles {
 	private  int nestingLevel;
 	private  int regionNum;
 	private int offsetCount;
-	private Map<Integer, tableDesSymboles> blocs;
+	public Map<Integer, tableDesSymboles> blocs;
 
 	public tableDesSymboles(tableDesSymboles parent, int nestingLevel) {
 	  //  System.out.println("SUUUUU");
@@ -184,14 +184,16 @@ public class tableDesSymboles {
 
 	private Symbole getSymbol(String key, boolean checkParent){
 
-
 	    Symbole symbol = symbols.get(key);
+	    if(this.getParent()==null && symbol==null){
+	        System.out.println("yo");
+            for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
+                    symbol=entry.getValue().getSymbol(key,false);
 
+            }
+        }
 	    if(symbol == null && checkParent && this.getParent() != null) {
-
-
-	    	return this.getParent().getSymbol(key,true);
-	   
+	        return this.getParent().getSymbol(key, true);
         }
         else {
 
@@ -290,7 +292,6 @@ str.append("|").append(Utils.padRight("NAME", tableDesSymboles.NAME_COL_WIDTH))
 		for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
 		    //str.append("\n").append(entry.getValue().getName());
 			str.append(entry.getValue().toTable());
-			
 		}
 
 		return str.toString();

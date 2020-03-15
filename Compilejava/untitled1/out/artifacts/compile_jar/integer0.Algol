@@ -1,10 +1,17 @@
     BEGIN
 	  INTEGER L;
 	  INTEGER i;
-      L:=10;
-      i:=10;
-	  IF (i LESS 0) THEN L:=1 ELSE L:=0;
-      outinteger(1,i)
+	  INTEGER j;
+	  INTEGER k;
+      L:=12;
+      i:=1;
+      j:=0;
+      FOR i := 1 STEP 1 UNTIL 5 DO
+      BEGIN
+      outinteger(1,L);
+      IF (j LESS 3) THEN L:=11
+      END;
+      outinteger(1,L)
     END
 
 

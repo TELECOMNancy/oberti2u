@@ -188,7 +188,9 @@ public class Generator {
                      this.code.append(functionIdf+"_end_end");
             	}
             	else {
-            	this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
+            	    System.out.println("wawawa");
+            	    this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
+            	//this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
             	}
                 break;
 
@@ -275,9 +277,9 @@ public class Generator {
 
         this.code
         .append(beginLabel);
-          	 this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
+          	 //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
           	 
-          	
+          	this.generateExpr(forNode.getChild(0).getChild(0),currentSymbolTable);
                this.generateExpr(condition, currentSymbolTable);
                int r2 = this.registersManager.unlockRegister();
                int r1 = this.registersManager.unlockRegister();
@@ -293,19 +295,23 @@ public class Generator {
 
        int r0 = this.registersManager.unlockRegister();
 
-        
+       //
+        //
+        //
+        //
+        //System.out.println("YOO"+bloc.getText());
         this.generateBloc(bloc, currentSymbolTable);
-        
-        this.code
-        .append("// " + condition.getParent().getParent().getChild(0).getChild(0).getText() +"="+condition.getParent().getParent().getChild(0).getChild(0).getText()+"+1") ;
-        this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0), currentSymbolTable);
+        System.out.println("YOO"+bloc.getText());
+        this.code.append("// " + forNode.getChild(0).getChild(0).getText() +"="+forNode.getChild(0).getChild(0).getText()+"+1") ;
+        System.out.println("ICCC"+bloc.getText());
+        this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
 
         String op1="ADQ";
         
        
         this.code
                 .append(op1 +" 1"+", R"+r1);
-        Pair<Integer, SymboleVariable> temp = this.getOffset(condition.getParent().getParent().getChild(0).getChild(0), currentSymbolTable);
+        Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
         int offset = temp.getKey();
         
         this.code
@@ -326,7 +332,7 @@ public class Generator {
         String idf = nodes.pop().getKey();
 
         SymboleVariable variableSymbol = currentSymbolTable.getVariableSymbol(idf, true);
-
+        ///currentSymbolTable.get
         offset += variableSymbol.getOffset();
 
         return new Pair<>(offset, variableSymbol);
@@ -371,6 +377,7 @@ public class Generator {
     }
 
     private void generateAssig(Tree ASSIgNode, tableDesSymboles currentSymbolTable) throws IOException {
+        System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
     	Pair<Integer, SymboleVariable> temp = this.getOffset(ASSIgNode.getChild(0), currentSymbolTable);
         int offset = temp.getKey();
         SymboleVariable variableSymbol = temp.getValue();

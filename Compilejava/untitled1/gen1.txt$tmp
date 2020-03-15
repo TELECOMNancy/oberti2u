@@ -50,27 +50,27 @@ ADI SP, SP, #2
 LDW SP, BP
 LDW BP, (SP)+
 RTS
-ITOA_I      equ 4      // offset du paramètre i
-ITOA_P      equ 6      // offset du paramètre p
-ITOA_B      equ 8      // offset du paramètre b
+ITOA_I      equ 4      // offset du paramC(tre i
+ITOA_P      equ 6      // offset du paramC(tre p
+ITOA_B      equ 8      // offset du paramC(tre b
 ASCII_MINUS equ 45     // code ASCII de -
 ASCII_PLUS  equ 43     // code ASCII de +
 ASCII_SP    equ 32     // code ASCII d'eSPace SP
-ASCII_0     equ 48     // code ASCII de zéro (les autres chiffres jusqu'à 9 suivent dans l'ordre)
-ASCII_A     equ 65     // code ASCII de A (les autres lettres jusqu'à Z suivent dans l'ordre alphabétique)
+ASCII_0     equ 48     // code ASCII de zC)ro (les autres chiffres jusqu'C  9 suivent dans l'ordre)
+ASCII_A     equ 65     // code ASCII de A (les autres lettres jusqu'C  Z suivent dans l'ordre alphabC)tique)
 itoa_
 stw BP, -(SP)
 ldw BP, SP
-// récupération des paramètres depuis pile vers registres
+// rC)cupC)ration des paramC(tres depuis pile vers registres
 ldw r0, (BP)ITOA_I    // r0 = i    
 ldw r1, (BP)ITOA_B    // r1 = b
-// gère le signe: normalement itoa gère des int c'est à dire des entiers signés, 
+// gC(re le signe: normalement itoa gC(re des int c'est C  dire des entiers signC)s, 
 // mais en fait seulement pour b=10;
 // dans ce cas calcule le signe dans r3 et charge r0 avec la valeur absolue de i
 ldq ASCII_SP, r3      // code ASCII de eSPace (SPace) -> r3
 ldq 10, WR            // 10 -> WR
 cmp r1, WR            // charge les indicateurs de b - 10
-bne NOSIGN-$-2        // si non égal (donc si b != 10) saute en NOSIGN, sinon calcule signe
+bne NOSIGN-$-2        // si non C)gal (donc si b != 10) saute en NOSIGN, sinon calcule signe
 ldq ASCII_PLUS, r3    // charge le code ASCII du signe plus + dans r3
 tst r0                // charge les indicateurs de r0 et donc de i
 bge POSIT-$-2         // saute en POSIT si i >= 0
@@ -78,15 +78,15 @@ neg r0, r0            // change le signe de r0
 ldq ASCII_MINUS, r3   // charge le code ASCII du signe moins - dans r3
 POSIT   NOP                   // r3 = code ASCII de signe: SP pour aucun, - ou +
 
-// convertit l'entier i en chiffres et les empile de droite à gauche
+// convertit l'entier i en chiffres et les empile de droite C  gauche
 NOSIGN  ldw r2, r0            // r2 <- r0
 CNVLOOP ldw r0, r2            // r0 <- r2
-// effectue "créativement" la division par b supposé pair (car l'instruction div est hélas signée ...)
+// effectue "crC)ativement" la division par b supposC) pair (car l'instruction div est hC)las signC)e ...)
 // d=2*d' , D = d * q + r  , D = 2*D'+r" , D' = d' * q + r' => r = 2*r'+r"
-// un bug apparaît avec SRL r0, r0 avec r0 = 2 : met CF à 1 !!
+// un bug apparaC.t avec SRL r0, r0 avec r0 = 2 : met CF C  1 !!
 srl r1, r1            // r1 = b/2
-ani r0, r4, #1        // ANd Immédiate entre r0 et 00...01 vers r4:
-				  // bit n°0 de r0 -> r4; r4 = reste" de r0/2
+ani r0, r4, #1        // ANd ImmC)diate entre r0 et 00...01 vers r4:
+				  // bit nB00 de r0 -> r4; r4 = reste" de r0/2
 srl r0, r0            // r0 / 2 -> r0
 div r0, r1, r2        // quotient = r0 / r1 -> r2, reste' = r0 % r1 -> r0
 shl r0, r0            // r0 = 2 * reste'
@@ -101,26 +101,26 @@ bmp STKCHR-$-2        // saute en STKCHR
 LETTER  adq ASCII_A, r0       // r0 = ASCII(A) pour chiffre = 10, ASCII(B) pour 11 ...
 				  // ajoute code ASCII de A => r = code ASCII de chiffre
 STKCHR  stw r0, -(SP)         // empile code ASCII du chiffre 
-				  // (sur un mot complet pour pas désaligner pile)
+				  // (sur un mot complet pour pas dC)saligner pile)
 tst r2                // charge les indicateurs en fonction du quotient ds r2)
 bne CNVLOOP-$-2       // boucle si quotient non nul; sinon sort
-// les caractères sont maintenant empilés : gauche en haut et droit en bas
-// recopie les caractères dans le tampon dans le bon ordre: de gauche à droite
-ldw r1, (BP)ITOA_P    // r1 pointe sur le début du tampon déjà alloué 
+// les caractC(res sont maintenant empilC)s : gauche en haut et droit en bas
+// recopie les caractC(res dans le tampon dans le bon ordre: de gauche C  droite
+ldw r1, (BP)ITOA_P    // r1 pointe sur le dC)but du tampon dC)jC  allouC) 
 stb r3, (r1)+         // copie le signe dans le tampon
-CPYLOOP ldw r0, (SP)+         // dépile code du chiffre gauche (sur un mot) dans r0
-stb r0, (r1)+         // copie code du chiffre dans un Byte du tampon de gauche à droite
-cmp SP, BP            // compare SP et sa valeur avant empilement des caractères qui était BP
+CPYLOOP ldw r0, (SP)+         // dC)pile code du chiffre gauche (sur un mot) dans r0
+stb r0, (r1)+         // copie code du chiffre dans un Byte du tampon de gauche C  droite
+cmp SP, BP            // compare SP et sa valeur avant empilement des caractC(res qui C)tait BP
 bne CPYLOOP-$-2       // boucle s'il reste au moins un chiffre sur la pile
 ldq 10, r0
 stb r0, (r1)+
-ldq NUL, r0           // charge le code du caractère NUL dans r0
-stb r0, (r1)+         // sauve code NUL pour terminer la chaîne de caractères
+ldq NUL, r0           // charge le code du caractC(re NUL dans r0
+stb r0, (r1)+         // sauve code NUL pour terminer la chaC.ne de caractC(res
 // termine
-ldw r0, (BP)ITOA_P    // retourne le pointeur sur la chaîne de caractères
+ldw r0, (BP)ITOA_P    // retourne le pointeur sur la chaC.ne de caractC(res
 // UNLINK: fermeture de l'environnement de la fonction itoa
 ldw SP, BP            // SP <- BP : abandonne infos locales; SP pointe sur ancinne valeur de BP
-ldw BP, (SP)+         // dépile ancienne valeur de BP dans BP; SP pointe sur adresse de retour
+ldw BP, (SP)+         // dC)pile ancienne valeur de BP dans BP; SP pointe sur adresse de retour
 rts                   // retourne au programme appelant
 IN_
 // Ouverture de l'environnement

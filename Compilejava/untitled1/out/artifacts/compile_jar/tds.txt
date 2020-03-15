@@ -3,3 +3,5 @@ Root|NAME                |OFFSET|SYMB           |TYPE           |
 |print               |0     |FUNC           |VOID           |
 |L                   |2     |VAR            |INTEGER        |
 |i                   |4     |VAR            |INTEGER        |
+|j                   |6     |VAR            |INTEGER        |
+|k                   |8     |VAR            |INTEGER        |

@@ -46,11 +46,12 @@ public class Main {
 
             File sourceFile = new File(source);
             File genFile = new File(out);
+           // System.out.println("hh"+symbolTable.blocs);
             Generator generator = new Generator(sourceFile, genFile, symbolTable);
             generator.generate(root);
-
+        //    System.out.println("hh"+symbolTable.getBloc(0).getName());
             Compiler compiler = new Compiler(genFile);
-            //compiler.compile();
+            compiler.compile();
         } catch (RecognitionException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
