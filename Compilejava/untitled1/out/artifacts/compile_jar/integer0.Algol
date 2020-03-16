@@ -6,12 +6,21 @@
       L:=12;
       i:=1;
       j:=0;
-      FOR i := 1 STEP 1 UNTIL 5 DO
+      FOR j := 1 STEP 1 UNTIL 5 DO
       BEGIN
       outinteger(1,L);
-      IF (j LESS 3) THEN L:=11
+      L:= L+3;
+      IF (j / 15 EQUAL 1) THEN i:=2
       END;
-      outinteger(1,L)
+      L:=L*3;
+      outinteger(1,L);
+      L:=L+3;
+      outinteger(1,L);
+      L:=L-3;
+      outinteger(1,L);
+      L:=L/2;
+      outinteger(1,L);
+      outinteger(1,i)
     END
 
 
