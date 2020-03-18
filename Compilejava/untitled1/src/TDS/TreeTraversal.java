@@ -195,12 +195,12 @@ public class TreeTraversal {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(0));
                     functionSymbol.addParam(symbVar);
 
-                   // this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 } else {
                     SymboleVariable symbVar = traverseParameter(functionNode.getChild(1).getChild(1).getChild(i), functionSymbol.getSymbolTable(), idf, typearg.get(i));
                     functionSymbol.addParam(symbVar);
 
-                    //this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
+                    this.gestionnaireTDS.getTableDesSymboles().addSymbol(symbVar);
                 }
 
             }
@@ -401,6 +401,7 @@ public class TreeTraversal {
         String types = "";
         SymboleVariable variableSymbol = null;
         String type = this.traverseExpr(variableNode.getChild(1));
+        System.out.println(variableNode.getChild(1).getText());
         String stringType2 = type;
 
         if(courant.getName().equals(idf)){
@@ -429,6 +430,7 @@ public class TreeTraversal {
                 else {
                     types = variableSymbol.getType();
                     if (!types.equals(type)) {
+                        System.out.println(variableSymbol.types+variableSymbol.getName());
                         System.out.println("Affectation impossibles car types incompatibles " + type + ". Ligne " + variableNode.getChild(1).getLine());
                     }
                 }

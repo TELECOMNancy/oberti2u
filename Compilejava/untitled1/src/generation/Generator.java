@@ -341,9 +341,9 @@ public class Generator {
         //
         //System.out.println("YOO"+bloc.getText());
         this.generateBloc(bloc, currentSymbolTable);
-        System.out.println("YOO"+bloc.getText());
+        //System.out.println("YOO"+bloc.getText());
         this.code.append("// " + forNode.getChild(0).getChild(0).getText() +"="+forNode.getChild(0).getChild(0).getText()+"+1") ;
-        System.out.println("ICCC"+bloc.getText());
+        //System.out.println("ICCC"+bloc.getText());
         this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
 
         String op1="ADQ";
@@ -417,7 +417,7 @@ public class Generator {
     }
 
     private void generateAssig(Tree ASSIgNode, tableDesSymboles currentSymbolTable) throws IOException {
-        System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
+        //System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
     	Pair<Integer, SymboleVariable> temp = this.getOffset(ASSIgNode.getChild(0), currentSymbolTable);
         int offset = temp.getKey();
         SymboleVariable variableSymbol = temp.getValue();
@@ -484,13 +484,33 @@ public class Generator {
     private void generateExpr(Tree exprNode, tableDesSymboles currentSymbolTable) throws IOException {
         switch(exprNode.getType()) {
             case AlgolLexer.AND:
-                //System.out.println("iffff");
-                this.generateLogicalExpr(exprNode, currentSymbolTable);
+                this.generateAnd(exprNode, currentSymbolTable);
+                break;
+            case AlgolLexer.OR:
+                this.generateOr(exprNode, currentSymbolTable);
                 break;
             case AlgolLexer.LESS:
-                   this.generateLogicalExpr(exprNode,currentSymbolTable);
+            case AlgolParser.NOTLESS:
+            case AlgolParser.GREATER:
+            case AlgolParser.NOTGREATER:
+            case AlgolParser.EQUAL:
+            case AlgolParser.NOTEQUAL:
+                this.generateLogicalExpr(exprNode, currentSymbolTable);
                 break;
-
+            case AlgolParser.NOT:
+                break;
+            case AlgolParser.ASSIGEMENT:
+                this.generateAssig(exprNode, currentSymbolTable);
+                break;
+            case AlgolParser.PLUS:
+            case AlgolParser.MINUS:
+            case AlgolParser.MULT:
+            case AlgolParser.DIV:
+                this.generateArithmeticExpr(exprNode, currentSymbolTable);
+                break;
+            case AlgolParser.CALL:
+                this.generateFunctionCall(exprNode, currentSymbolTable);
+                break;
             /*case tigerLexer.OR:
             case tigerLexer.AND:
             case tigerLexer.EQ:
@@ -569,15 +589,15 @@ public class Generator {
             this.genratedFunction.add(functionIdf);
             this.usedFunctions.push(currentSymbolTable.getFunctionSymbol(functionIdf, true));
         }
-        int nbParametre = functionCallNode.getChildCount()-1;
+        int nbParametre = functionCallNode.getChild(1).getChildCount()-1;
         this.code
                 .append("//Appel de la fonction : " + functionCallNode.getChild(0).getText())
                 .append("//Gestion des potentiels paramètres");
 
         if (nbParametre > 0){
-            for(int i = nbParametre; i>0; i--){
-                //System.out.println(this.registersManager.getreturnRegister().size());
-                this.generateExpr(functionCallNode.getChild(i), currentSymbolTable);
+            for(int i = nbParametre; i>=0; i--){
+                System.out.println("ici"+i+functionCallNode.getChild(1).getChildCount());
+                this.generateExpr(functionCallNode.getChild(1).getChild(i), currentSymbolTable);
                 
                 
                 int register = this.registersManager.unlockRegister();
@@ -658,18 +678,20 @@ public class Generator {
         String op;
 
         switch (arithmeticExprNode.getType()) {
-            case tigerLexer.PLUS:
+            case AlgolParser.PLUS:
                 op = "ADD";
                 break;
-            case tigerLexer.MOINS:
+            case AlgolParser.MINUS:
                 op = "SUB";
                 break;
-            case tigerLexer.MULT:
+            case AlgolParser.MULT:
                 op = "MUL";
                 break;
-            default:
+            case AlgolParser.DIV:
                 op = "DIV";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + arithmeticExprNode.getType());
         }
 
         this.code
@@ -729,20 +751,19 @@ public class Generator {
             String op;
 
             switch (logicalExprNode.getType()) {
-                case AlgolLexer.EQUAL: //tigerLexer.EQ:
+                case AlgolLexer.EQUAL:
                     op = "BNE";
                     break;
-                case tigerLexer.LE:
-                    op = "BGT";
-                    break; 
                 case AlgolLexer.LESS:
+                case AlgolParser.NOTGREATER:
                     op = "BGE";
                     break;
-                case tigerLexer.GE:
-                    op = "BLW";
-                    break;
-                case tigerLexer.GT:
+                case AlgolParser.NOTLESS:
+                case AlgolParser.GREATER:
                     op = "BLE";
+                    break;
+                case AlgolParser.NOTEQUAL:
+                    op = "BEQ";
                     break;
                 default:
                     op = "BEQ";

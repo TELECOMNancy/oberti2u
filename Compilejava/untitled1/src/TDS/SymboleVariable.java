@@ -46,7 +46,7 @@ public class SymboleVariable extends Symbole {
             str += "|" + "\n";
             //return str;
         } else {
-            str += "|" + Utils.padRight("ARG", tableDesSymboles.SYMBOL_TYPE_COL_WIDTH);
+            str += "|" + Utils.padRight("VAR", tableDesSymboles.SYMBOL_TYPE_COL_WIDTH);
             str += "|" + Utils.padRight(String.valueOf(this.types), tableDesSymboles.TYPE_COL_WIDTH);
 
             str += "|" + "\n";

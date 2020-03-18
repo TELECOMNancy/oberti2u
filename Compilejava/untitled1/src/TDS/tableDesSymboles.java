@@ -185,8 +185,9 @@ public class tableDesSymboles {
 	private Symbole getSymbol(String key, boolean checkParent){
 
 	    Symbole symbol = symbols.get(key);
+
 	    if(this.getParent()==null && symbol==null){
-	        System.out.println("yo");
+
             for(Map.Entry<Integer, tableDesSymboles> entry: this.blocs.entrySet()) {
                     symbol=entry.getValue().getSymbol(key,false);
 

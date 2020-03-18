@@ -129,9 +129,16 @@ LDW BP, SP
 // Reservation sur la pile des variables
 LDQ 0, R0
 SUB SP, R0, SP
-// S := 10
-LDQ 10, R0
-STW R0, (BP)-2
+// M :=N+1;
+LDW R0, (BP)4
+LDQ 1, R1
+ADD R0, R1, R0
+STW R0, (BP)6
+// outinteger(1,M)
+LDW R0, (BP)6
+STW R0, -(SP)
+JSR @printi_
+ADI SP, SP, #2
 SELECT_end
 // Fermeture de l'environnement
 LDW SP, BP
@@ -142,7 +149,7 @@ IN_
 STW BP, -(SP)
 LDW BP, SP
 // Reservation sur la pile des variables
-LDQ 8, R0
+LDQ 14, R0
 SUB SP, R0, SP
 // L:=12;
 LDQ 12, R1
@@ -150,26 +157,33 @@ STW R1, (BP)-2
 // i:=1;
 LDQ 1, R1
 STW R1, (BP)-4
-// j:=0;
-LDQ 0, R1
+// j:=2;
+LDQ 2, R1
 STW R1, (BP)-6
-// FOR i := 1 STEP 1 UNTIL 5 DO
-LDQ 1, R1
-STW R1, (BP)-4
-begin_cond_For1109371569
+//Appel de la fonction : SELECT
+//Gestion des potentiels paramC(tres
+LDW R1, (BP)-6
+STW R1, -(SP)       //On empile les paramC(tres de la fonction appelC)e
 LDW R1, (BP)-4
+STW R1, -(SP)       //On empile les paramC(tres de la fonction appelC)e
+LDW R1, (BP)-2
+STW R1, -(SP)       //On empile les paramC(tres de la fonction appelC)e
+JSR @SELECT_          //on appelle la fonction C  l'aide de son adresse
+ADQ 2*2, SP
+// FOR j := 1 STEP 1 UNTIL 5 DO
+LDQ 1, R1
+STW R1, (BP)-6
+begin_cond_For728890494
+LDW R1, (BP)-6
 LDQ 5, R2
 CMP R1, R2
-BGT end_cond_For1109371569-$-2
-// s:=0;
-LDQ 0, R1
-STW R1, (BP)-2
+BGT end_cond_For728890494-$-2
 // outinteger(1,L);
 LDW R1, (BP)-2
 STW R1, -(SP)
 JSR @printi_
 ADI SP, SP, #2
-begin_cond_if728890494
+begin_cond_if1558600329
 LDW R1, (BP)-6
 LDQ 3, R2
 CMP R1, R2
@@ -179,21 +193,85 @@ BMP 2
 LDQ 0, R1
 // cond
 TST R1
-JEQ #end_cond_if728890494-$-2
-//s:=11
+JEQ #end_cond_if1558600329-$-2
+//L:=11
 LDQ 11, R1
 STW R1, (BP)-2
-JMP #end_cond_if_if728890494-$-2
-end_cond_if728890494
-end_cond_if_if728890494
-// i=i+1
-LDW R1, (BP)-4
-ADQ 1, R1
+JMP #end_cond_if_if1558600329-$-2
+end_cond_if1558600329
+end_cond_if_if1558600329
+// L:= L+3;
+LDW R1, (BP)-2
+LDQ 3, R2
+ADD R1, R2, R1
+STW R1, (BP)-2
+begin_cond_if636718812
+LDW R1, (BP)-6
+LDQ 15, R2
+DIV R1, R2, R1
+LDQ 1, R2
+CMP R1, R2
+BNE 4
+LDQ 1, R1
+BMP 2
+LDQ 0, R1
+// cond
+TST R1
+JEQ #end_cond_if636718812-$-2
+//i:=2
+LDQ 2, R1
 STW R1, (BP)-4
-BMP begin_cond_For1109371569-$-2
-end_cond_For1109371569
-// outinteger(1,L)
+JMP #end_cond_if_if636718812-$-2
+end_cond_if636718812
+end_cond_if_if636718812
+// j=j+1
+LDW R1, (BP)-6
+ADQ 1, R1
+STW R1, (BP)-6
+BMP begin_cond_For728890494-$-2
+end_cond_For728890494
+// L:=L*3;
 LDW R2, (BP)-2
+LDQ 3, R3
+MUL R2, R3, R2
+STW R2, (BP)-2
+// outinteger(1,L);
+LDW R2, (BP)-2
+STW R2, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+// L:=L+3;
+LDW R2, (BP)-2
+LDQ 3, R3
+ADD R2, R3, R2
+STW R2, (BP)-2
+// outinteger(1,L);
+LDW R2, (BP)-2
+STW R2, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+// L:=L-3;
+LDW R2, (BP)-2
+LDQ 3, R3
+SUB R2, R3, R2
+STW R2, (BP)-2
+// outinteger(1,L);
+LDW R2, (BP)-2
+STW R2, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+// L:=L/2;
+LDW R2, (BP)-2
+LDQ 2, R3
+DIV R2, R3, R2
+STW R2, (BP)-2
+// outinteger(1,L);
+LDW R2, (BP)-2
+STW R2, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+// outinteger(1,i)
+LDW R2, (BP)-4
 STW R2, -(SP)
 JSR @printi_
 ADI SP, SP, #2
