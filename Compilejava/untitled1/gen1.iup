@@ -1,5 +1,5 @@
 f000  origine
-f0c4  debut d'execution
+f0d8  debut d'execution
 6f80   emplacement : 61440  (0xf000)  ligne n° 19	LDW SP, #STACK_ADDRS
 1000   emplacement : 61442  (0xf002) 
 6d80   emplacement : 61444  (0xf004)  ligne n° 20	LDW BP, #NIL
@@ -100,64 +100,77 @@ e040   emplacement : 61584  (0xf090)  ligne n° 93	add r0, r4, r0        // r0 = 
 0200   emplacement : 61634  (0xf0c2)  ligne n° 124	rts                   // retourne au programme appelant
 6d4f   emplacement : 61636  (0xf0c4)  ligne n° 127	STW BP, -(SP)
 6d9f   emplacement : 61638  (0xf0c6)  ligne n° 128	LDW BP, SP
-2008   emplacement : 61640  (0xf0c8)  ligne n° 130	LDQ 8, R0
+2000   emplacement : 61640  (0xf0c8)  ligne n° 130	LDQ 0, R0
 ff0f   emplacement : 61642  (0xf0ca)  ligne n° 131	SUB SP, R0, SP
-210c   emplacement : 61644  (0xf0cc)  ligne n° 133	LDQ 12, R1
-616d   emplacement : 61646  (0xf0ce)  ligne n° 134	STW R1, (BP)-2
+200a   emplacement : 61644  (0xf0cc)  ligne n° 133	LDQ 10, R0
+606d   emplacement : 61646  (0xf0ce)  ligne n° 134	STW R0, (BP)-2
 fffe   emplacement : 61648  (0xf0d0) 
-2101   emplacement : 61650  (0xf0d2)  ligne n° 136	LDQ 1, R1
-616d   emplacement : 61652  (0xf0d4)  ligne n° 137	STW R1, (BP)-4
-fffc   emplacement : 61654  (0xf0d6) 
-2100   emplacement : 61656  (0xf0d8)  ligne n° 139	LDQ 0, R1
-616d   emplacement : 61658  (0xf0da)  ligne n° 140	STW R1, (BP)-6
-fffa   emplacement : 61660  (0xf0dc) 
-2101   emplacement : 61662  (0xf0de)  ligne n° 142	LDQ 1, R1
-616d   emplacement : 61664  (0xf0e0)  ligne n° 143	STW R1, (BP)-4
-fffc   emplacement : 61666  (0xf0e2) 
-61ed   emplacement : 61668  (0xf0e4)  ligne n° 145	LDW R1, (BP)-4
-fffc   emplacement : 61670  (0xf0e6) 
-2205   emplacement : 61672  (0xf0e8)  ligne n° 146	LDQ 5, R2
-4f12   emplacement : 61674  (0xf0ea)  ligne n° 147	CMP R1, R2
-163a   emplacement : 61676  (0xf0ec)  ligne n° 148	BGT end_cond_For1109371569-$-2
-61ed   emplacement : 61678  (0xf0ee)  ligne n° 150	LDW R1, (BP)-2
-fffe   emplacement : 61680  (0xf0f0) 
-614f   emplacement : 61682  (0xf0f2)  ligne n° 151	STW R1, -(SP)
-0a50   emplacement : 61684  (0xf0f4)  ligne n° 152	JSR @printi_
-f01e   emplacement : 61686  (0xf0f6) 
-4eff   emplacement : 61688  (0xf0f8)  ligne n° 153	ADI SP, SP, #2
-0002   emplacement : 61690  (0xf0fa) 
-61ed   emplacement : 61692  (0xf0fc)  ligne n° 155	LDW R1, (BP)-6
-fffa   emplacement : 61694  (0xf0fe) 
-2203   emplacement : 61696  (0xf100)  ligne n° 156	LDQ 3, R2
-4f12   emplacement : 61698  (0xf102)  ligne n° 157	CMP R1, R2
-1404   emplacement : 61700  (0xf104)  ligne n° 158	BGE 4
-2101   emplacement : 61702  (0xf106)  ligne n° 159	LDQ 1, R1
-1102   emplacement : 61704  (0xf108)  ligne n° 160	BMP 2
-2100   emplacement : 61706  (0xf10a)  ligne n° 161	LDQ 0, R1
-0c11   emplacement : 61708  (0xf10c)  ligne n° 163	TST R1
-0280   emplacement : 61710  (0xf10e)  ligne n° 164	JEQ #end_cond_if728890494-$-2
-000c   emplacement : 61712  (0xf110) 
-210b   emplacement : 61714  (0xf112)  ligne n° 166	LDQ 11, R1
-616d   emplacement : 61716  (0xf114)  ligne n° 167	STW R1, (BP)-2
-fffe   emplacement : 61718  (0xf116) 
-0180   emplacement : 61720  (0xf118)  ligne n° 168	JMP #end_cond_if_if728890494-$-2
-0002   emplacement : 61722  (0xf11a) 
-61ed   emplacement : 61724  (0xf11c)  ligne n° 172	LDW R1, (BP)-4
-fffc   emplacement : 61726  (0xf11e) 
-3101   emplacement : 61728  (0xf120)  ligne n° 173	ADQ 1, R1
-616d   emplacement : 61730  (0xf122)  ligne n° 174	STW R1, (BP)-4
-fffc   emplacement : 61732  (0xf124) 
-11bc   emplacement : 61734  (0xf126)  ligne n° 175	BMP begin_cond_For1109371569-$-2
-62ed   emplacement : 61736  (0xf128)  ligne n° 178	LDW R2, (BP)-2
-fffe   emplacement : 61738  (0xf12a) 
-624f   emplacement : 61740  (0xf12c)  ligne n° 179	STW R2, -(SP)
-0a50   emplacement : 61742  (0xf12e)  ligne n° 180	JSR @printi_
-f01e   emplacement : 61744  (0xf130) 
-4eff   emplacement : 61746  (0xf132)  ligne n° 181	ADI SP, SP, #2
+6f9d   emplacement : 61650  (0xf0d2)  ligne n° 137	LDW SP, BP
+6dbf   emplacement : 61652  (0xf0d4)  ligne n° 138	LDW BP, (SP)+
+0200   emplacement : 61654  (0xf0d6)  ligne n° 139	RTS
+6d4f   emplacement : 61656  (0xf0d8)  ligne n° 142	STW BP, -(SP)
+6d9f   emplacement : 61658  (0xf0da)  ligne n° 143	LDW BP, SP
+2008   emplacement : 61660  (0xf0dc)  ligne n° 145	LDQ 8, R0
+ff0f   emplacement : 61662  (0xf0de)  ligne n° 146	SUB SP, R0, SP
+210c   emplacement : 61664  (0xf0e0)  ligne n° 148	LDQ 12, R1
+616d   emplacement : 61666  (0xf0e2)  ligne n° 149	STW R1, (BP)-2
+fffe   emplacement : 61668  (0xf0e4) 
+2101   emplacement : 61670  (0xf0e6)  ligne n° 151	LDQ 1, R1
+616d   emplacement : 61672  (0xf0e8)  ligne n° 152	STW R1, (BP)-4
+fffc   emplacement : 61674  (0xf0ea) 
+2100   emplacement : 61676  (0xf0ec)  ligne n° 154	LDQ 0, R1
+616d   emplacement : 61678  (0xf0ee)  ligne n° 155	STW R1, (BP)-6
+fffa   emplacement : 61680  (0xf0f0) 
+2101   emplacement : 61682  (0xf0f2)  ligne n° 157	LDQ 1, R1
+616d   emplacement : 61684  (0xf0f4)  ligne n° 158	STW R1, (BP)-4
+fffc   emplacement : 61686  (0xf0f6) 
+61ed   emplacement : 61688  (0xf0f8)  ligne n° 160	LDW R1, (BP)-4
+fffc   emplacement : 61690  (0xf0fa) 
+2205   emplacement : 61692  (0xf0fc)  ligne n° 161	LDQ 5, R2
+4f12   emplacement : 61694  (0xf0fe)  ligne n° 162	CMP R1, R2
+1640   emplacement : 61696  (0xf100)  ligne n° 163	BGT end_cond_For1109371569-$-2
+2100   emplacement : 61698  (0xf102)  ligne n° 165	LDQ 0, R1
+616d   emplacement : 61700  (0xf104)  ligne n° 166	STW R1, (BP)-2
+fffe   emplacement : 61702  (0xf106) 
+61ed   emplacement : 61704  (0xf108)  ligne n° 168	LDW R1, (BP)-2
+fffe   emplacement : 61706  (0xf10a) 
+614f   emplacement : 61708  (0xf10c)  ligne n° 169	STW R1, -(SP)
+0a50   emplacement : 61710  (0xf10e)  ligne n° 170	JSR @printi_
+f01e   emplacement : 61712  (0xf110) 
+4eff   emplacement : 61714  (0xf112)  ligne n° 171	ADI SP, SP, #2
+0002   emplacement : 61716  (0xf114) 
+61ed   emplacement : 61718  (0xf116)  ligne n° 173	LDW R1, (BP)-6
+fffa   emplacement : 61720  (0xf118) 
+2203   emplacement : 61722  (0xf11a)  ligne n° 174	LDQ 3, R2
+4f12   emplacement : 61724  (0xf11c)  ligne n° 175	CMP R1, R2
+1404   emplacement : 61726  (0xf11e)  ligne n° 176	BGE 4
+2101   emplacement : 61728  (0xf120)  ligne n° 177	LDQ 1, R1
+1102   emplacement : 61730  (0xf122)  ligne n° 178	BMP 2
+2100   emplacement : 61732  (0xf124)  ligne n° 179	LDQ 0, R1
+0c11   emplacement : 61734  (0xf126)  ligne n° 181	TST R1
+0280   emplacement : 61736  (0xf128)  ligne n° 182	JEQ #end_cond_if728890494-$-2
+000c   emplacement : 61738  (0xf12a) 
+210b   emplacement : 61740  (0xf12c)  ligne n° 184	LDQ 11, R1
+616d   emplacement : 61742  (0xf12e)  ligne n° 185	STW R1, (BP)-2
+fffe   emplacement : 61744  (0xf130) 
+0180   emplacement : 61746  (0xf132)  ligne n° 186	JMP #end_cond_if_if728890494-$-2
 0002   emplacement : 61748  (0xf134) 
-6f9d   emplacement : 61750  (0xf136)  ligne n° 183	LDW SP, BP
-6dbf   emplacement : 61752  (0xf138)  ligne n° 184	LDW BP, (SP)+
-0b00   emplacement : 61754  (0xf13a)  ligne n° 185	TRP #EXIT_EXC
-0040   emplacement : 61756  (0xf13c) 
-0950   emplacement : 61758  (0xf13e)  ligne n° 186	JEA @IN_
-f0c4   emplacement : 61760  (0xf140) 
+61ed   emplacement : 61750  (0xf136)  ligne n° 190	LDW R1, (BP)-4
+fffc   emplacement : 61752  (0xf138) 
+3101   emplacement : 61754  (0xf13a)  ligne n° 191	ADQ 1, R1
+616d   emplacement : 61756  (0xf13c)  ligne n° 192	STW R1, (BP)-4
+fffc   emplacement : 61758  (0xf13e) 
+11b6   emplacement : 61760  (0xf140)  ligne n° 193	BMP begin_cond_For1109371569-$-2
+62ed   emplacement : 61762  (0xf142)  ligne n° 196	LDW R2, (BP)-2
+fffe   emplacement : 61764  (0xf144) 
+624f   emplacement : 61766  (0xf146)  ligne n° 197	STW R2, -(SP)
+0a50   emplacement : 61768  (0xf148)  ligne n° 198	JSR @printi_
+f01e   emplacement : 61770  (0xf14a) 
+4eff   emplacement : 61772  (0xf14c)  ligne n° 199	ADI SP, SP, #2
+0002   emplacement : 61774  (0xf14e) 
+6f9d   emplacement : 61776  (0xf150)  ligne n° 201	LDW SP, BP
+6dbf   emplacement : 61778  (0xf152)  ligne n° 202	LDW BP, (SP)+
+0b00   emplacement : 61780  (0xf154)  ligne n° 203	TRP #EXIT_EXC
+0040   emplacement : 61782  (0xf156) 
+0950   emplacement : 61784  (0xf158)  ligne n° 204	JEA @IN_
+f0d8   emplacement : 61786  (0xf15a) 

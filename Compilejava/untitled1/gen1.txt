@@ -122,6 +122,21 @@ ldw r0, (BP)ITOA_P    // retourne le pointeur sur la chaîne de caractères
 ldw SP, BP            // SP <- BP : abandonne infos locales; SP pointe sur ancinne valeur de BP
 ldw BP, (SP)+         // dépile ancienne valeur de BP dans BP; SP pointe sur adresse de retour
 rts                   // retourne au programme appelant
+SELECT_
+// Ouverture de l'environnement
+STW BP, -(SP)
+LDW BP, SP
+// Reservation sur la pile des variables
+LDQ 0, R0
+SUB SP, R0, SP
+// S := 10
+LDQ 10, R0
+STW R0, (BP)-2
+SELECT_end
+// Fermeture de l'environnement
+LDW SP, BP
+LDW BP, (SP)+
+RTS
 IN_
 // Ouverture de l'environnement
 STW BP, -(SP)
@@ -146,6 +161,9 @@ LDW R1, (BP)-4
 LDQ 5, R2
 CMP R1, R2
 BGT end_cond_For1109371569-$-2
+// s:=0;
+LDQ 0, R1
+STW R1, (BP)-2
 // outinteger(1,L);
 LDW R1, (BP)-2
 STW R1, -(SP)
@@ -162,7 +180,7 @@ LDQ 0, R1
 // cond
 TST R1
 JEQ #end_cond_if728890494-$-2
-//L:=11
+//s:=11
 LDQ 11, R1
 STW R1, (BP)-2
 JMP #end_cond_if_if728890494-$-2

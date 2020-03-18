@@ -6,6 +6,7 @@ import grammar.AlgolParser;
 import grammar.AlgolLexer;
 import grammar.tigerParser;
 import javafx.util.Pair;
+import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 import TDS.tableDesSymboles;
 import TDS.SymbolFonction;
@@ -90,7 +91,23 @@ public class Generator {
             Tree child = root.getChild(0).getChild(i);
             
            
-           if ( child.getType()== AlgolLexer.PROCEDURE) {
+           if ( child.getType()== AlgolLexer.DEC) {
+               Tree Child=null;
+               if(child.getChildCount()>1){
+                   Child=child.getChild(1);
+               }
+               else{
+                   Child=child.getChild(0);
+               }
+               if(Child.getType()==AlgolLexer.PROCEDURE){
+
+                   String functionIdf = Child.getChild(0).getText();
+
+                   //this.code.append("JMP #"+functionIdf+"_end_end"+"-$-2");
+
+                   this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
+                //   this.code.append(functionIdf+"_end_end");
+               }
         	   //String functionIdf = child.getChild(0).getText();
 
               // this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
@@ -112,6 +129,7 @@ public class Generator {
                 region=root.getChild(0).getChild(i);
             }
         }
+
         for(int i = 0; i < region.getChildCount(); i++) {
             Tree child = region.getChild(i)/*.getChild(i)*/;
             
@@ -155,10 +173,12 @@ public class Generator {
         Environment environment = this.environmentManager.createEnvironment(functionSymbol.getSymbolTable().getEnvironmentSize());
         environment.openEnvironment(this.code);
 
-      
+        Tree prod=functionNode.getChild(functionNode.getChildCount()-1);
+        Tree wawa = new CommonTree();
+        wawa.addChild(prod.getChild(prod.getChildCount()-1));
         this.generateBloc(
-                functionNode.getChild(3),
-                functionSymbol.getSymbolTable()
+                wawa,
+                functionSymbol.tds
         );
         
         this.code
@@ -178,17 +198,37 @@ public class Generator {
             Tree child = blocNode.getChild(i);
             switch (child.getType()) {
             case AlgolLexer.BEGIN:
-            	if (child.getChild(0).getType()== AlgolLexer.PROCEDURE){
-            		
-            		 String functionIdf = child.getChild(0).getChild(0).getText();
-            		 
-            		 this.code.append("JMP #"+functionIdf+"_end_end"+"-$-2");
+            	if (child.getChildCount()>1){
+            	    for(int k=0;k<child.getChildCount();k++){
+            	        if(child.getChild(k).getType()==AlgolLexer.DEC){
+            	            Tree Child=null;
+                            if(child.getChildCount()>1){
+                                Child=child.getChild(1);
+                            }
+                            else{
+                                Child=child.getChild(0);
+                            }
+                            if(Child.getType()==AlgolLexer.PROCEDURE){
 
-                     this.generateFunction(child.getChild(0), currentSymbolTable.getFunctionSymbol(functionIdf, true));
-                     this.code.append(functionIdf+"_end_end");
+                                String functionIdf = Child.getChild(0).getText();
+
+                                this.code.append("JMP #"+functionIdf+"_end_end"+"-$-2");
+
+                                this.generateFunction(child, currentSymbolTable.getFunctionSymbol(functionIdf, true));
+                                this.code.append(functionIdf+"_end_end");
+                            }
+                        }
+                    }
+                    this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
+                    //String functionIdf = child.getChild(0).getChild(0).getText();
+            		 
+            		 //this.code.append("JMP #"+functionIdf+"_end_end"+"-$-2");
+
+                     //this.generateFunction(child.getChild(0), currentSymbolTable.getFunctionSymbol(functionIdf, true));
+                     //this.code.append(functionIdf+"_end_end");
             	}
             	else {
-            	    System.out.println("wawawa");
+            	   // System.out.println("wawawa");
             	    this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
             	//this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
             	}

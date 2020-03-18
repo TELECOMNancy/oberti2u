@@ -3,13 +3,22 @@
 	  INTEGER i;
 	  INTEGER j;
 	  INTEGER k;
+	  INTEGER PROCEDURE SELECT(N,M,K);
+            VALUE N, M, K;
+            INTEGER N, M, K;
+            BEGIN
+               INTEGER S;
+               S := 10
+            END;
       L:=12;
       i:=1;
       j:=0;
       FOR i := 1 STEP 1 UNTIL 5 DO
       BEGIN
+      INTEGER s;
+      s:=0;
       outinteger(1,L);
-      IF (j LESS 3) THEN L:=11
+      IF (j LESS 3) THEN s:=11
       END;
       outinteger(1,L)
     END

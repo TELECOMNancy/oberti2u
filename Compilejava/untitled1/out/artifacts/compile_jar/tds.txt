@@ -1,7 +1,17 @@
 
 Root|NAME                |OFFSET|SYMB           |TYPE           |
+|SELECT              |0     |FUNC           |INTEGER        |
 |print               |0     |FUNC           |VOID           |
 |L                   |2     |VAR            |INTEGER        |
 |i                   |4     |VAR            |INTEGER        |
 |j                   |6     |VAR            |INTEGER        |
 |k                   |8     |VAR            |INTEGER        |
+
+SELECT|NAME                |OFFSET|SYMB           |TYPE           |
+|K                   |-8    |ARG            |INTEGER        |
+|M                   |-6    |ARG            |INTEGER        |
+|N                   |-4    |ARG            |INTEGER        |
+|S                   |2     |VAR            |INTEGER        |
+
+Begin|NAME                |OFFSET|SYMB           |TYPE           |
+|s                   |2     |VAR            |INTEGER        |
