@@ -367,15 +367,29 @@ public class Generator {
 	    int offset = 0;
         Stack<Pair<String, Integer>> nodes = new Stack<>();
         Tree currentNode = variableNode;
+
         //System.out.println(currentNode.getText());
         nodes.push(new Pair<>(currentNode.getText(), 0));
         String idf = nodes.pop().getKey();
 
         SymboleVariable variableSymbol = currentSymbolTable.getVariableSymbol(idf, true);
-        ///currentSymbolTable.get
-        offset += variableSymbol.getOffset();
+        if(variableSymbol==null){
+            SymbolFonction fun=currentSymbolTable.getFunctionSymbol(idf,true);
+            if (fun!=null){
+                String typeF=fun.getReturn();
+                if(!typeF.equals("VOID")){
+                    return new Pair<>(2,null);
+                }
+                else{return new Pair<>(0,null);}
+            }
+        }
+        else {
+            ///currentSymbolTable.get
+            offset += variableSymbol.getOffset();
 
-        return new Pair<>(offset, variableSymbol);
+            return new Pair<>(offset, variableSymbol);
+        }
+        return null;
     }
 
     private void generateIf(Tree ifNode, tableDesSymboles currentSymbolTable) throws IOException {
