@@ -1,0 +1,16 @@
+    BEGIN
+	  INTEGER L;
+	  INTEGER i;
+	  INTEGER j;
+	  INTEGER k;
+      TESTLABEL :
+      	BEGIN
+        	k := 4;
+        	outinteger(1, k)
+        END;
+      L:=12;
+      i:=1;
+      j:=2;
+      outinteger(1,L);
+      GOTO TESTLABEL
+    END

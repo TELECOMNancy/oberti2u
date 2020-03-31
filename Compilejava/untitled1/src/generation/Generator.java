@@ -1,5 +1,6 @@
 package generation;
 
+import TDS.*;
 import antlr.actions.cpp.ActionLexer;
 import grammar.tigerLexer;
 import grammar.AlgolParser;
@@ -8,10 +9,6 @@ import grammar.tigerParser;
 import javafx.util.Pair;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
-import TDS.tableDesSymboles;
-import TDS.SymbolFonction;
-import TDS.SymboleStructure;
-import TDS.SymboleVariable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,6 +84,23 @@ public class Generator {
         this.generatePrintiFunction();
         this.generateItoaFunction();
         //System.out.println(root.getChild(0).getText());
+
+        for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
+            Tree child = root.getChild(0).getChild(i);
+
+            Tree childExplore = child;
+            while (childExplore.getChild(0) != null) {
+                childExplore = childExplore.getChild(0);
+                if (childExplore.getType() == AlgolLexer.LABEL) {
+                    String labelIdf = childExplore.getChild(0).getText();
+
+                    this.generateLabel(childExplore, this.symbolTable.getLabelSymbol(labelIdf, true), this.symbolTable);
+                    this.code.append(labelIdf + "_end_end");
+                }
+            }
+
+        }
+
         for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
             Tree child = root.getChild(0).getChild(i);
             
@@ -160,6 +174,23 @@ public class Generator {
 
     private List<String> genratedFunction = new ArrayList<>();
 
+    private void generateLabel(Tree labelNode, SymbolLABEL labelSymbol, tableDesSymboles tds) throws IOException{
+        this.currentFunction = labelSymbol.getName();
+        String nom = labelSymbol.getName();
+        String label = labelSymbol.getName() + "_";
+
+        this.code.append(label);
+
+
+        Environment environment = this.environmentManager.createEnvironment(labelSymbol.getSymbolTable().getEnvironmentSize());
+        environment.openEnvironment(this.code);
+
+        this.generateBloc(labelNode.getChild(1), tds);
+        this.code.append(nom + "_end");
+
+        this.environmentManager.closeEnvironment(this.code);
+        this.code.append("RTS");
+    }
 
     private void generateFunction(Tree functionNode, SymbolFonction functionSymbol) throws IOException {
         this.currentFunction = functionSymbol.getName();
@@ -253,15 +284,18 @@ public class Generator {
                 case AlgolLexer.CALL:
                     this.generateFunctionCall(child,currentSymbolTable);
                     break;
-                case tigerLexer.DO:
+                case AlgolLexer.GOTO:
+                    this.generateGoto(child, currentSymbolTable);
+                    break;
+                case AlgolLexer.BLOCK:
+                    this.generateBloc(child, currentSymbolTable);
+                    break;
+                /*case tigerLexer.DO:
                 case tigerLexer.IN:
                 case tigerLexer.BODY:
                 case tigerLexer.BLOCK:
                 //case tigerLexer.BLOCKF:
-                case tigerLexer.SEQEXP:
-
-                    this.generateBloc(child, currentSymbolTable);
-                    break;
+                case tigerLexer.SEQEXP:*/
 
                   default : this.generateExpr(child, currentSymbolTable);
                   break;
@@ -298,7 +332,15 @@ public class Generator {
                 .append(endLabel);
     }
 
+    private void generateGoto(Tree gotoCallNode, tableDesSymboles currentSymbolTable) throws IOException{
+        String labelIdf = gotoCallNode.getChild(0).getText();
+        String label = labelIdf + "_";
 
+        this.code
+                .append("//Appel du label : " + gotoCallNode.getChild(0).getText());
+        this.code
+                .append("JSR @"+ label +"          //on appelle le label à l'aide de son adresse");
+    }
 
     private void generateFor(Tree forNode, tableDesSymboles currentSymbolTable) throws IOException {
         Tree assig= forNode.getChild(0);
