@@ -297,69 +297,78 @@ public class Generator {
                 .append("JMP #" + beginLabel + "-$-2")
                 .append(endLabel);
     }
-    
-    
-    
+
+
+
     private void generateFor(Tree forNode, tableDesSymboles currentSymbolTable) throws IOException {
-        Tree condition = forNode.getChild(0).getChild(1).getChild(0).getChild(1).getChild(1).getChild(0);//forNode.getChild(1).getChild(0);
         Tree assig= forNode.getChild(0);
+        String label = "For" + forNode.hashCode();
+        String beginLabel = "begin_cond_" + "_" + label;
+        String endLabel = "end_cond_" + "_" + label;
+        this.generateAssig(assig, currentSymbolTable);
 
         Tree bloc = forNode.getChild(1);
-        
-        String label = "For" + forNode.hashCode();
-        String beginLabel = "begin_cond_" + label;
-        String endLabel = "end_cond_" + label;
+
+        for(int i = 0; i <forNode.getChild(0).getChild(1).getChildCount();i++) {
+            Tree condition = null;
+            Tree actualNode = forNode.getChild(0).getChild(1).getChild(i);
 
 
-        this.generateAssig(assig, currentSymbolTable);
-        
-        
+            this.code
+                    .append(beginLabel);
+            //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
+            if(actualNode.getChildCount() == 1)
+            {
+                if(actualNode.getChild(0).getText().equals("IF")){
+                    generateIf(actualNode.getChild(0),currentSymbolTable);
+                }
+                else{
+                    generateExpr(actualNode.getChild(0),currentSymbolTable);
+                }
+                this.generateBloc(bloc,currentSymbolTable);
+            }
+            else {
+                if (actualNode.getChild(1).getText().equals("PAS")) {
+                    condition = actualNode.getChild(1).getChild(1).getChild(0);
+                    this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    this.generateExpr(condition, currentSymbolTable);
+                    int r2 = this.registersManager.unlockRegister();
+                    int r1 = this.registersManager.unlockRegister();
 
-        this.code
-        .append(beginLabel);
-          	 //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
-          	 
-          	this.generateExpr(forNode.getChild(0).getChild(0),currentSymbolTable);
-               this.generateExpr(condition, currentSymbolTable);
-               int r2 = this.registersManager.unlockRegister();
-               int r1 = this.registersManager.unlockRegister();
+                    String op = "BGT ";
 
-               String op="BGT ";
-              
-              int r3 = this.registersManager.lockRegister();
+                    this.code
+                            .append("CMP R" + r1 + ", R" + r2)
+                            .append(op + endLabel + "-$-2");
+                    //int r0 = this.registersManager.unlockRegister();
 
-               this.code
-                       .append("CMP R" + r1 + ", R" + r2)
-                       .append(op + endLabel+ "-$-2");
+                    //System.out.println("YOO"+bloc.getText());
+                    this.generateBloc(bloc, currentSymbolTable);
+
+                    this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    this.generateExpr(actualNode.getChild(1).getChild(0),currentSymbolTable);
+                    int r3 = this.registersManager.unlockRegister();
+                    r1 = this.registersManager.unlockRegister();
+
+                    String op1 = "ADD ";
 
 
-       int r0 = this.registersManager.unlockRegister();
+                    this.code
+                            .append(op1 +"R" + r1 + ", R"+ r3 + ", R" + r1);
 
-       //
-        //
-        //
-        //
-        //System.out.println("YOO"+bloc.getText());
-        this.generateBloc(bloc, currentSymbolTable);
-        //System.out.println("YOO"+bloc.getText());
-        this.code.append("// " + forNode.getChild(0).getChild(0).getText() +"="+forNode.getChild(0).getChild(0).getText()+"+1") ;
-        //System.out.println("ICCC"+bloc.getText());
-        this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
 
-        String op1="ADQ";
-        
-       
-        this.code
-                .append(op1 +" 1"+", R"+r1);
-        Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
-        int offset = temp.getKey();
-        
-        this.code
-               .append("STW R" + r1 + ", (BP)-" + offset + "");
-      
-        this.code
-                .append("BMP " + beginLabel + "-$-2")
-                .append(endLabel);
+                    Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    int offset = temp.getKey();
+
+                    this.code
+                            .append("STW R" + r1 + ", (BP)-" + offset + "");
+                }
+            }
+            this.code
+                    .append("BMP " + beginLabel + "-$-2")
+                    .append(endLabel);
+
+        }
     }
     
 
