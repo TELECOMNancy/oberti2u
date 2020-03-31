@@ -488,6 +488,10 @@ public class Generator {
 
                         this.code
                                 .append("STW R" + r0 + ", (BP)" + bp + "");
+                        if(currentSymbolTable.getName().equals(ASSIgNode.getChild(0))){
+                            this.code.append("LDW R"+this.registersManager.unlockRegister()+", (BP)"+bp+"");
+                        }
+
 
                     }
                 }
