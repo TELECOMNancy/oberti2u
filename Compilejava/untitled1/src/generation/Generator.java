@@ -470,7 +470,7 @@ public class Generator {
         
         if (ifNode.getChildCount() > 2) {
         //    System.out.println("yoo"+this.registersManager.getreturnRegister().size());
-        	this.registersManager.unlockRegister();
+        	//this.registersManager.unlockRegister();
             //System.out.println("yoo"+this.registersManager.getreturnRegister().size());
             this.generateBloc(ifNode.getChild(2), currentSymbolTable);
            // System.out.println("yoo"+this.registersManager.getreturnRegister().size());
