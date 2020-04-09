@@ -9,6 +9,8 @@ Root|NAME                |OFFSET|SYMB           |TYPE           |
 |i                   |4     |VAR            |INTEGER        |
 |j                   |6     |VAR            |INTEGER        |
 |k                   |8     |VAR            |INTEGER        |
+|narr                |18    |ARRAY          |INTEGER        |
+|bb                  |68    |MATRICE        |INTEGER        |
 
 SELECT|NAME                |OFFSET|SYMB           |TYPE           |
 |K                   |-8    |VAR            |INTEGER        |

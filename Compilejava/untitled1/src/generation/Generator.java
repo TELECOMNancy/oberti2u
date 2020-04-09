@@ -1,5 +1,6 @@
 package generation;
 
+import TDS.*;
 import antlr.actions.cpp.ActionLexer;
 import grammar.tigerLexer;
 import grammar.AlgolParser;
@@ -8,10 +9,6 @@ import grammar.tigerParser;
 import javafx.util.Pair;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
-import TDS.tableDesSymboles;
-import TDS.SymbolFonction;
-import TDS.SymboleStructure;
-import TDS.SymboleVariable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -108,6 +105,10 @@ public class Generator {
                    this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
                 //   this.code.append(functionIdf+"_end_end");
                }
+
+               if(Child.getType()==AlgolLexer.ARRAY){
+                   this.generateArray(child,this.symbolTable);
+               }
         	   //String functionIdf = child.getChild(0).getText();
 
               // this.generateFunction(child, this.symbolTable.getFunctionSymbol(functionIdf, true));
@@ -192,6 +193,48 @@ public class Generator {
         
     }
 
+
+
+    private void generateArray (Tree array,tableDesSymboles currentSymbolTable)throws IOException{
+        String name= array.getChild(1).getChild(0).getText();
+        SymboleStructure arr=currentSymbolTable.getStructureSymbol(name,true);
+        this.code.append("ADI SP, SP , #"+ arr.getOffset());
+        //System.out.println(name);
+    }
+
+    private void generatearrayaccess(Tree arrass,tableDesSymboles current) throws  IOException{
+      int register= this.registersManager.unlockRegister();
+        SymboleStructure variableSymbol = current.getStructureSymbol(arrass.getChild(0).getText(), true);
+        int offset = variableSymbol.getOffset();
+        String bp;
+        String dep=" ";
+        String dep2=" ";
+        dep=arrass.getChild(1).getChild(0).getText();
+        if(arrass.getChild(1).getChildCount()>1){
+            dep2=arrass.getChild(1).getChild(1).getText();
+        }
+        if(offset < 0) {
+            bp = String.valueOf(-offset);
+        }
+        else {
+            //offset=offset-Integer.valueOf(dep)*2;
+            if(!dep2.equals(" ")){
+                int a=Integer.valueOf(variableSymbol.list.get(0).get(1));
+                int b=Integer.valueOf(variableSymbol.list.get(0).get(0));
+                offset=offset-(Integer.valueOf(dep)*(a-b+1)+Integer.valueOf(dep2))*2;
+            }
+            else{
+                offset=offset-Integer.valueOf(dep)*2;
+            }
+            bp = "-" + offset;
+        }
+
+        this.code
+                .append("LDW R" + register + ", (BP)" + bp);
+
+        this.registersManager.lockRegister();
+    }
+
     private void generateBloc(Tree blocNode, tableDesSymboles currentSymbolTable) throws IOException {
         for(int i = 0; i <blocNode.getChildCount(); i++) {
            // System.out.println("yoo"+blocNode.getChild(i).getText());
@@ -217,6 +260,9 @@ public class Generator {
                                 this.generateFunction(child, currentSymbolTable.getFunctionSymbol(functionIdf, true));
                                 this.code.append(functionIdf+"_end_end");
                             }
+                            if(Child.getType()==AlgolLexer.ARRAY){
+                              this.generateArray(child,currentSymbolTable);
+                            }
                         }
                     }
                     this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
@@ -233,7 +279,9 @@ public class Generator {
             	//this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
             	}
                 break;
+                case AlgolLexer.LABEL:
 
+                    break;
                 case AlgolLexer.ASSIGEMENT:
                     ///System.out.println("wawawa");
                     this.generateAssig(child, currentSymbolTable);
@@ -373,7 +421,15 @@ public class Generator {
 
         SymboleVariable variableSymbol = currentSymbolTable.getVariableSymbol(idf, true);
         ///currentSymbolTable.get
-        offset += variableSymbol.getOffset();
+       if(idf.equals("ARRAYACCESS")){
+
+           SymboleStructure struc =currentSymbolTable.getStructureSymbol(variableNode.getChild(0).getText(),true);
+           //this.generateExpr(variableNode.getChild(1).getChild(0),currentSymbolTable);
+           offset += struc.getOffset();
+       }
+       else {
+           offset += variableSymbol.getOffset();
+       }
 
         return new Pair<>(offset, variableSymbol);
     }
@@ -404,8 +460,8 @@ public class Generator {
 
         
         if (ifNode.getChildCount() > 2) {
-        //    System.out.println("yoo"+this.registersManager.getreturnRegister().size());
-        	this.registersManager.unlockRegister();
+           System.out.println("yoo"+this.registersManager.getreturnRegister().size());
+        	//this.registersManager.unlockRegister();
             //System.out.println("yoo"+this.registersManager.getreturnRegister().size());
             this.generateBloc(ifNode.getChild(2), currentSymbolTable);
            // System.out.println("yoo"+this.registersManager.getreturnRegister().size());
@@ -419,6 +475,7 @@ public class Generator {
     private void generateAssig(Tree ASSIgNode, tableDesSymboles currentSymbolTable) throws IOException {
         //System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
     	Pair<Integer, SymboleVariable> temp = this.getOffset(ASSIgNode.getChild(0), currentSymbolTable);
+
         int offset = temp.getKey();
         SymboleVariable variableSymbol = temp.getValue();
 
@@ -462,15 +519,24 @@ public class Generator {
                     }
                     else {
                         this.generateExpr(ASSIgNode.getChild(1), currentSymbolTable);
-
+                          String dep=" ";
                         int r0 = this.registersManager.unlockRegister();
+                        if(ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")){
+                             dep=ASSIgNode.getChild(0).getChild(1).getChild(0).getText();
+                            // this.generateExpr(ASSIgNode.getChild(0).getChild(1).getChild(0),currentSymbolTable);
+                        }
 
                         String bp;
                         if (offset < 0) {
                             bp = String.valueOf(-offset);
                         } else {
+                            if(!dep.equals(" ")){
+                                offset=offset-Integer.valueOf(dep)*2;
+                            }
+                           // offset=offset-Integer.valueOf(dep);
                             bp = "-" + offset;
                         }
+
 
                         this.code
                                 .append("STW R" + r0 + ", (BP)" + bp + "");
@@ -502,6 +568,10 @@ public class Generator {
             case AlgolParser.ASSIGEMENT:
                 this.generateAssig(exprNode, currentSymbolTable);
                 break;
+            case AlgolParser.ARRAYACCESS:
+                this.generatearrayaccess(exprNode,currentSymbolTable);
+              //  System.out.println("AHHHHHHHHHHHHHHHHHH");
+                        break;
             case AlgolParser.PLUS:
             case AlgolParser.MINUS:
             case AlgolParser.MULT:
@@ -596,7 +666,7 @@ public class Generator {
 
         if (nbParametre > 0){
             for(int i = nbParametre; i>=0; i--){
-                System.out.println("ici"+i+functionCallNode.getChild(1).getChildCount());
+               // System.out.println("ici"+i+functionCallNode.getChild(1).getChildCount());
                 this.generateExpr(functionCallNode.getChild(1).getChild(i), currentSymbolTable);
                 
                 

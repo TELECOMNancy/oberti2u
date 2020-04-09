@@ -60,7 +60,8 @@ public class tableDesSymboles {
 
     public void addStrut(SymboleStructure a){
 	    this.symbols.put(a.getHashName(),a);
-	    this.offsetCount+=getTableauxSymbolSize2(a);
+	   // System.out.println("OFFFFSETTT "+ getTableauxSymbolSize2(a));
+	    this.offsetCount= this.offsetCount+getTableauxSymbolSize2(a);
 	    a.setOffset(this.offsetCount);
     }
 
@@ -112,8 +113,18 @@ public class tableDesSymboles {
         int size = 0;
        String type= TableauxSymbol.type;
       for(int i=0;i<TableauxSymbol.list.size();i++){
+          System.out.println("VOICIIII"+TableauxSymbol.list.size());
           size= size+Integer.parseInt(TableauxSymbol.list.get(i).get(1))-Integer.parseInt(TableauxSymbol.list.get(i).get(0))+1;
           size=size*2;
+      }
+      if(TableauxSymbol.list.size()>1){
+          size=1;
+          for(int i=0;i<TableauxSymbol.list.size();i++){
+              //System.out.println("VOICIIII"+TableauxSymbol.list.size());
+              size= size*(Integer.parseInt(TableauxSymbol.list.get(i).get(1))-Integer.parseInt(TableauxSymbol.list.get(i).get(0))+1);
+              //size=size*2;
+          }
+         size=size*2;
       }
         return size;
     }
