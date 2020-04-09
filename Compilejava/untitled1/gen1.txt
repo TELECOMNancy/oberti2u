@@ -177,11 +177,11 @@ STW R0, (BP)-6
 // FOR i := 1 STEP 1 UNTIL 5 DO
 LDQ 1, R0
 STW R0, (BP)-4
-begin_cond_For1558600329
+begin_cond__For1558600329
 LDW R0, (BP)-4
 LDQ 5, R1
 CMP R0, R1
-BGT end_cond_For1558600329-$-2
+BGT end_cond__For1558600329-$-2
 // outinteger(1,L);
 LDW R0, (BP)-2
 STW R0, -(SP)
@@ -226,33 +226,28 @@ STW R0, (BP)-6
 JMP #end_cond_if_if445051633-$-2
 end_cond_if445051633
 end_cond_if_if445051633
-// i=i+1
 LDW R0, (BP)-4
-ADQ 1, R0
-STW R0, (BP)-4
-BMP begin_cond_For1558600329-$-2
-end_cond_For1558600329
-// narr[1]:= 17;
-LDQ 17, R1
-STW R1, (BP)-16
-// L:=L*3;
-LDW R1, (BP)-2
-LDQ 3, R2
-MUL R1, R2, R1
-STW R1, (BP)-2
-// L:=bb[1,2]+7;
-LDW R0, (BP)-54
-LDQ 7, R1
+LDQ 1, R1
 ADD R0, R1, R0
+STW R0, (BP)-4
+BMP begin_cond__For1558600329-$-2
+end_cond__For1558600329
+// narr[1]:= 17;
+LDQ 17, R0
+STW R0, (BP)-16
+// L:=bb[1,2]*3;
+LDW R0, (BP)-54
+LDQ 3, R1
+MUL R0, R1, R0
 STW R0, (BP)-2
 // outinteger(1,L);
 LDW R0, (BP)-2
 STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2
-// L:=L+3;
+// L:=L+narr[1];
 LDW R0, (BP)-2
-LDQ 3, R1
+LDW R1, (BP)-16
 ADD R0, R1, R0
 STW R0, (BP)-2
 // outinteger(1,L);
@@ -265,23 +260,8 @@ LDW R0, (BP)-2
 LDQ 3, R1
 SUB R0, R1, R0
 STW R0, (BP)-2
-// outinteger(1,L);
+// outinteger(1,L)
 LDW R0, (BP)-2
-STW R0, -(SP)
-JSR @printi_
-ADI SP, SP, #2
-// L:=L/2;
-LDW R0, (BP)-2
-LDQ 2, R1
-DIV R0, R1, R0
-STW R0, (BP)-2
-// outinteger(1,L);
-LDW R0, (BP)-2
-STW R0, -(SP)
-JSR @printi_
-ADI SP, SP, #2
-// outinteger(1,i)
-LDW R0, (BP)-4
 STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2

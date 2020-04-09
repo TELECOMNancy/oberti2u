@@ -84,6 +84,23 @@ public class Generator {
         this.generatePrintiFunction();
         this.generateItoaFunction();
         //System.out.println(root.getChild(0).getText());
+
+        for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
+            Tree child = root.getChild(0).getChild(i);
+
+            Tree childExplore = child;
+            while (childExplore.getChild(0) != null) {
+                childExplore = childExplore.getChild(0);
+                if (childExplore.getType() == AlgolLexer.LABEL) {
+                    String labelIdf = childExplore.getChild(0).getText();
+
+                    this.generateLabel(childExplore, this.symbolTable.getLabelSymbol(labelIdf, true), this.symbolTable);
+                    this.code.append(labelIdf + "_end_end");
+                }
+            }
+
+        }
+
         for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
             Tree child = root.getChild(0).getChild(i);
             
@@ -161,6 +178,23 @@ public class Generator {
 
     private List<String> genratedFunction = new ArrayList<>();
 
+    private void generateLabel(Tree labelNode, SymbolLABEL labelSymbol, tableDesSymboles tds) throws IOException{
+        this.currentFunction = labelSymbol.getName();
+        String nom = labelSymbol.getName();
+        String label = labelSymbol.getName() + "_";
+
+        this.code.append(label);
+
+
+        Environment environment = this.environmentManager.createEnvironment(labelSymbol.getSymbolTable().getEnvironmentSize());
+        environment.openEnvironment(this.code);
+
+        this.generateBloc(labelNode.getChild(1), tds);
+        this.code.append(nom + "_end");
+
+        this.environmentManager.closeEnvironment(this.code);
+        this.code.append("RTS");
+    }
 
     private void generateFunction(Tree functionNode, SymbolFonction functionSymbol) throws IOException {
         this.currentFunction = functionSymbol.getName();
@@ -203,7 +237,7 @@ public class Generator {
     }
 
     private void generatearrayaccess(Tree arrass,tableDesSymboles current) throws  IOException{
-      int register= this.registersManager.unlockRegister();
+      int register= this.registersManager.lockRegister();
         SymboleStructure variableSymbol = current.getStructureSymbol(arrass.getChild(0).getText(), true);
         int offset = variableSymbol.getOffset();
         String bp;
@@ -232,7 +266,7 @@ public class Generator {
         this.code
                 .append("LDW R" + register + ", (BP)" + bp);
 
-        this.registersManager.lockRegister();
+        //this.registersManager.lockRegister();
     }
 
     private void generateBloc(Tree blocNode, tableDesSymboles currentSymbolTable) throws IOException {
@@ -301,15 +335,18 @@ public class Generator {
                 case AlgolLexer.CALL:
                     this.generateFunctionCall(child,currentSymbolTable);
                     break;
-                case tigerLexer.DO:
+                case AlgolLexer.GOTO:
+                    this.generateGoto(child, currentSymbolTable);
+                    break;
+                case AlgolLexer.BLOCK:
+                    this.generateBloc(child, currentSymbolTable);
+                    break;
+                /*case tigerLexer.DO:
                 case tigerLexer.IN:
                 case tigerLexer.BODY:
                 case tigerLexer.BLOCK:
                 //case tigerLexer.BLOCKF:
-                case tigerLexer.SEQEXP:
-
-                    this.generateBloc(child, currentSymbolTable);
-                    break;
+                case tigerLexer.SEQEXP:*/
 
                   default : this.generateExpr(child, currentSymbolTable);
                   break;
@@ -345,69 +382,86 @@ public class Generator {
                 .append("JMP #" + beginLabel + "-$-2")
                 .append(endLabel);
     }
-    
-    
-    
+
+    private void generateGoto(Tree gotoCallNode, tableDesSymboles currentSymbolTable) throws IOException{
+        String labelIdf = gotoCallNode.getChild(0).getText();
+        String label = labelIdf + "_";
+
+        this.code
+                .append("//Appel du label : " + gotoCallNode.getChild(0).getText());
+        this.code
+                .append("JSR @"+ label +"          //on appelle le label à l'aide de son adresse");
+    }
+
     private void generateFor(Tree forNode, tableDesSymboles currentSymbolTable) throws IOException {
-        Tree condition = forNode.getChild(0).getChild(1).getChild(0).getChild(1).getChild(1).getChild(0);//forNode.getChild(1).getChild(0);
         Tree assig= forNode.getChild(0);
+        String label = "For" + forNode.hashCode();
+        String beginLabel = "begin_cond_" + "_" + label;
+        String endLabel = "end_cond_" + "_" + label;
+        this.generateAssig(assig, currentSymbolTable);
 
         Tree bloc = forNode.getChild(1);
-        
-        String label = "For" + forNode.hashCode();
-        String beginLabel = "begin_cond_" + label;
-        String endLabel = "end_cond_" + label;
+
+        for(int i = 0; i <forNode.getChild(0).getChild(1).getChildCount();i++) {
+            Tree condition = null;
+            Tree actualNode = forNode.getChild(0).getChild(1).getChild(i);
 
 
-        this.generateAssig(assig, currentSymbolTable);
-        
-        
+            this.code
+                    .append(beginLabel);
+            //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
+            if(actualNode.getChildCount() == 1)
+            {
+                if(actualNode.getChild(0).getText().equals("IF")){
+                    generateIf(actualNode.getChild(0),currentSymbolTable);
+                }
+                else{
+                    generateExpr(actualNode.getChild(0),currentSymbolTable);
+                }
+                this.generateBloc(bloc,currentSymbolTable);
+            }
+            else {
+                if (actualNode.getChild(1).getText().equals("PAS")) {
+                    condition = actualNode.getChild(1).getChild(1).getChild(0);
+                    this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    this.generateExpr(condition, currentSymbolTable);
+                    int r2 = this.registersManager.unlockRegister();
+                    int r1 = this.registersManager.unlockRegister();
 
-        this.code
-        .append(beginLabel);
-          	 //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
-          	 
-          	this.generateExpr(forNode.getChild(0).getChild(0),currentSymbolTable);
-               this.generateExpr(condition, currentSymbolTable);
-               int r2 = this.registersManager.unlockRegister();
-               int r1 = this.registersManager.unlockRegister();
+                    String op = "BGT ";
 
-               String op="BGT ";
-              
-              int r3 = this.registersManager.lockRegister();
+                    this.code
+                            .append("CMP R" + r1 + ", R" + r2)
+                            .append(op + endLabel + "-$-2");
+                    //int r0 = this.registersManager.unlockRegister();
 
-               this.code
-                       .append("CMP R" + r1 + ", R" + r2)
-                       .append(op + endLabel+ "-$-2");
+                    //System.out.println("YOO"+bloc.getText());
+                    this.generateBloc(bloc, currentSymbolTable);
+
+                    this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    this.generateExpr(actualNode.getChild(1).getChild(0),currentSymbolTable);
+                    int r3 = this.registersManager.unlockRegister();
+                    r1 = this.registersManager.unlockRegister();
+
+                    String op1 = "ADD ";
 
 
-       int r0 = this.registersManager.unlockRegister();
+                    this.code
+                            .append(op1 +"R" + r1 + ", R"+ r3 + ", R" + r1);
 
-       //
-        //
-        //
-        //
-        //System.out.println("YOO"+bloc.getText());
-        this.generateBloc(bloc, currentSymbolTable);
-        //System.out.println("YOO"+bloc.getText());
-        this.code.append("// " + forNode.getChild(0).getChild(0).getText() +"="+forNode.getChild(0).getChild(0).getText()+"+1") ;
-        //System.out.println("ICCC"+bloc.getText());
-        this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
 
-        String op1="ADQ";
-        
-       
-        this.code
-                .append(op1 +" 1"+", R"+r1);
-        Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
-        int offset = temp.getKey();
-        
-        this.code
-               .append("STW R" + r1 + ", (BP)-" + offset + "");
-      
-        this.code
-                .append("BMP " + beginLabel + "-$-2")
-                .append(endLabel);
+                    Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    int offset = temp.getKey();
+
+                    this.code
+                            .append("STW R" + r1 + ", (BP)-" + offset + "");
+                }
+            }
+            this.code
+                    .append("BMP " + beginLabel + "-$-2")
+                    .append(endLabel);
+
+        }
     }
     
 
@@ -415,6 +469,7 @@ public class Generator {
 	    int offset = 0;
         Stack<Pair<String, Integer>> nodes = new Stack<>();
         Tree currentNode = variableNode;
+
         //System.out.println(currentNode.getText());
         nodes.push(new Pair<>(currentNode.getText(), 0));
         String idf = nodes.pop().getKey();
@@ -430,7 +485,22 @@ public class Generator {
        else {
            offset += variableSymbol.getOffset();
        }
+       // if(variableSymbol==null){
+            //SymbolFonction fun=currentSymbolTable.getFunctionSymbol(idf,true);
+        ///    if (fun!=null){
+            //    String typeF=fun.getReturn();
+           //     if(!typeF.equals("VOID")){
+           //         return new Pair<>(2,null);
+          //      }
+         //       else{return new Pair<>(0,null);}
+       //     }
+       // }
+       // else {
+            ///currentSymbolTable.get
+          //  offset += variableSymbol.getOffset();
 
+            //return new Pair<>(offset, variableSymbol);
+       // }
         return new Pair<>(offset, variableSymbol);
     }
 
@@ -460,7 +530,10 @@ public class Generator {
 
         
         if (ifNode.getChildCount() > 2) {
-           System.out.println("yoo"+this.registersManager.getreturnRegister().size());
+
+          /// System.out.println("yoo"+this.registersManager.getreturnRegister().size());
+
+        //    System.out.println("yoo"+this.registersManager.getreturnRegister().size());
         	//this.registersManager.unlockRegister();
             //System.out.println("yoo"+this.registersManager.getreturnRegister().size());
             this.generateBloc(ifNode.getChild(2), currentSymbolTable);
@@ -540,6 +613,11 @@ public class Generator {
 
                         this.code
                                 .append("STW R" + r0 + ", (BP)" + bp + "");
+                        if(currentSymbolTable.getName().equals(ASSIgNode.getChild(0))){
+                            this.code.append("LDW R"+this.registersManager.unlockRegister()+", (BP)"+bp+"");
+                            this.registersManager.lockRegister();
+                        }
+
 
                     }
                 }
@@ -766,6 +844,9 @@ public class Generator {
 
         this.code
                 .append(op + " R" + r1 + ", R" + r2 + ", R" + r3 + "");
+       // this.registersManager.lockRegister();
+       // this.registersManager.lockRegister();
+       // this.registersManager.lockRegister();
     }
 
     private void generateLogicalExpr(Tree logicalExprNode, tableDesSymboles currentSymbolTable) throws IOException {

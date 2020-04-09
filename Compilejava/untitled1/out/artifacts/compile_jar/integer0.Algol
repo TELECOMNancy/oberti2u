@@ -24,16 +24,12 @@
       IF (i / 15 EQUAL 1) THEN j:=2
       END;
       narr[1]:= 17;
-      L:=L*3;
-      L:=bb[1,2]+7;
+      L:=bb[1,2]*3;
       outinteger(1,L);
-      L:=L+3;
+      L:=L+narr[1];
       outinteger(1,L);
       L:=L-3;
-      outinteger(1,L);
-      L:=L/2;
-      outinteger(1,L);
-      outinteger(1,i)
+      outinteger(1,L)
     END
 
 

@@ -1,0 +1,20 @@
+BEGIN
+INTEGER n; 
+INTEGER m;
+INTEGER pt;
+INTEGER i;
+n := 100;
+m := 5;
+pt := 0;
+
+FOR i := 0 STEP 1 UNTIL n DO
+BEGIN
+IF (i / m EQUAL 0) THEN
+BEGIN
+
+pt := pt + 1;
+outinteger(1, i)
+END
+END;
+outinteger(1, pt)
+END
