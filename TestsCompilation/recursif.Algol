@@ -1,0 +1,14 @@
+    BEGIN
+	  INTEGER L;
+	  INTEGER K;
+	  INTEGER PROCEDURE FIBO(N);
+	  		VALUE N;
+            INTEGER N;
+            BEGIN
+            	outinteger(1, N);
+            	IF (N LESS 2) THEN L := N
+            	ELSE FIBO(N - 1)
+            END;
+      L := 4;
+      FIBO(8)
+    END
