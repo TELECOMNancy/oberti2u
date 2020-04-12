@@ -19,7 +19,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException,  RecognitionException {
-        String source = "C:\\Users\\lataw\\FUCKINGFNALPCL\\Oberti2u\\Compilejava\\untitled1\\out\\artifacts\\compile_jar\\integer0.Algol";
+        String source = "C:\\Users\\lataw\\FUCKINGFNALPCL\\Oberti2u\\Compilejava\\untitled1\\out\\artifacts\\compile_jar\\Matrix1.Algol";
         String outSt = "C:\\Users\\lataw\\FUCKINGFNALPCL\\Oberti2u\\Compilejava\\untitled1\\out\\artifacts\\compile_jar\\tds.txt";
         String out = "gen1.txt";
 

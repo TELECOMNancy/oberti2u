@@ -243,9 +243,11 @@ public class Generator {
         String bp;
         String dep=" ";
         String dep2=" ";
+        //System.out.println("IIIIIII"+arrass.getChild(0).getText());
         dep=arrass.getChild(1).getChild(0).getText();
         if(arrass.getChild(1).getChildCount()>1){
             dep2=arrass.getChild(1).getChild(1).getText();
+            //System.out.println("iiiiiiiii"+dep2);
         }
         if(offset < 0) {
             bp = String.valueOf(-offset);
@@ -593,9 +595,13 @@ public class Generator {
                     else {
                         this.generateExpr(ASSIgNode.getChild(1), currentSymbolTable);
                           String dep=" ";
+                          String dep2=" ";
                         int r0 = this.registersManager.unlockRegister();
                         if(ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")){
                              dep=ASSIgNode.getChild(0).getChild(1).getChild(0).getText();
+                             if(ASSIgNode.getChild(0).getChild(1).getChildCount()>1){
+                                 dep2=ASSIgNode.getChild(0).getChild(1).getChild(1).getText();
+                             }
                             // this.generateExpr(ASSIgNode.getChild(0).getChild(1).getChild(0),currentSymbolTable);
                         }
 
@@ -603,13 +609,18 @@ public class Generator {
                         if (offset < 0) {
                             bp = String.valueOf(-offset);
                         } else {
-                            if(!dep.equals(" ")){
+                            if(!dep.equals(" ")&&dep2.equals(" ")){
                                 offset=offset-Integer.valueOf(dep)*2;
+                            }
+                            if(!dep.equals(" ")&& !dep2.equals(" ")){
+                                SymboleStructure s = currentSymbolTable.getStructureSymbol(ASSIgNode.getChild(0).getChild(0).getText(), true);
+                                int a=Integer.valueOf(s.list.get(0).get(1));
+                                int b=Integer.valueOf(s.list.get(0).get(0));
+                                offset=offset-(Integer.valueOf(dep)*(a-b+1)+Integer.valueOf(dep2))*2;
                             }
                            // offset=offset-Integer.valueOf(dep);
                             bp = "-" + offset;
                         }
-
 
                         this.code
                                 .append("STW R" + r0 + ", (BP)" + bp + "");
@@ -617,7 +628,6 @@ public class Generator {
                             this.code.append("LDW R"+this.registersManager.unlockRegister()+", (BP)"+bp+"");
                             this.registersManager.lockRegister();
                         }
-
 
                     }
                 }
