@@ -198,13 +198,13 @@ public class Generator {
         this.code.append(label);
 
 
-        Environment environment = this.environmentManager.createEnvironment(labelSymbol.getSymbolTable().getEnvironmentSize());
-        environment.openEnvironment(this.code);
+        //Environment environment = this.environmentManager.createEnvironment(labelSymbol.getSymbolTable().getEnvironmentSize());
+        //environment.openEnvironment(this.code);
 
         this.generateBloc(labelNode.getChild(1), tds);
         this.code.append(nom + "_end");
 
-        this.environmentManager.closeEnvironment(this.code);
+        //this.environmentManager.closeEnvironment(this.code);
         this.code.append("RTS");
     }
 

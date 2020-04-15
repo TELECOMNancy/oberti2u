@@ -96,6 +96,7 @@ public class tableDesSymboles {
 
         for(Symbole symbol: this.getSymbols().values()) {
             if(symbol instanceof SymboleVariable) {
+                System.out.println("NOMMMMM"+symbol.getName());
                 size += this.getVariableSize((SymboleVariable) symbol);
             }
             else if(symbol instanceof SymboleStructure) {
