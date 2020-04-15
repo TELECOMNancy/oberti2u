@@ -122,63 +122,142 @@ ldw r0, (BP)ITOA_P    // retourne le pointeur sur la chaC.ne de caractC(res
 ldw SP, BP            // SP <- BP : abandonne infos locales; SP pointe sur ancinne valeur de BP
 ldw BP, (SP)+         // dC)pile ancienne valeur de BP dans BP; SP pointe sur adresse de retour
 rts                   // retourne au programme appelant
-ADI SP, SP , #24
+ADI SP, SP , #18
+ADI SP, SP , #68
+SELECT_
+// Ouverture de l'environnement
+STW BP, -(SP)
+LDW BP, SP
+// Reservation sur la pile des variables
+LDQ 0, R0
+SUB SP, R0, SP
+// N :=N+1;
+LDW R0, (BP)4
+LDQ 1, R1
+ADD R0, R1, R0
+STW R0, (BP)4
+// outinteger(1,N)
+LDW R0, (BP)4
+STW R0, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+SELECT_end
+// Fermeture de l'environnement
+LDW SP, BP
+LDW BP, (SP)+
+RTS
 IN_
 // Ouverture de l'environnement
 STW BP, -(SP)
 LDW BP, SP
 // Reservation sur la pile des variables
-LDQ 24, R0
+LDQ 70, R0
 SUB SP, R0, SP
-// aa[0,0]:=1;
-LDQ 1, R1
-STW R1, (BP)-24
-// aa[0,1]:=2;
-LDQ 2, R1
-STW R1, (BP)-22
-// aa[0,2]:=3;
-LDQ 3, R1
-STW R1, (BP)-20
-// aa[1,0]:=4;
-LDQ 4, R1
-STW R1, (BP)-18
-// aa[1,1]:=5;
-LDQ 5, R1
-STW R1, (BP)-16
-// aa[1,2]:=5;
-LDQ 5, R1
-STW R1, (BP)-14
-// aa[2,0]:=7;
-LDQ 7, R1
-STW R1, (BP)-12
-// aa[2,1]:=8;
-LDQ 8, R1
-STW R1, (BP)-10
-// aa[2,2]:=9;
-LDQ 9, R1
-STW R1, (BP)-8
-// n:=aa[0,0];
-LDW R1, (BP)-24
+// L:=12;
+LDQ 12, R1
 STW R1, (BP)-2
-// i:=aa[1,0];
-LDW R1, (BP)-18
+// i:=1;
+LDQ 1, R1
 STW R1, (BP)-4
-// j:=aa[2,0];
-LDW R1, (BP)-12
+// j:=2;
+LDQ 2, R1
 STW R1, (BP)-6
-// outinteger(1,n);
+// j:=SELECT(L);
+//Appel de la fonction : SELECT
+//Gestion des potentiels paramC(tres
 LDW R1, (BP)-2
-STW R1, -(SP)
+STW R1, -(SP)       //On empile les paramC(tres de la fonction appelC)e
+JSR @SELECT_          //on appelle la fonction C  l'aide de son adresse
+STW R0, (BP)-6
+// FOR i := 1 STEP 1 UNTIL 5 DO
+LDQ 1, R0
+STW R0, (BP)-4
+begin_cond__For1558600329
+LDW R0, (BP)-4
+LDQ 5, R1
+CMP R0, R1
+BGT end_cond__For1558600329-$-2
+// outinteger(1,L);
+LDW R0, (BP)-2
+STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2
-// outinteger(1,i);
-LDW R1, (BP)-4
-STW R1, -(SP)
+begin_cond_if636718812
+LDW R0, (BP)-4
+LDQ 3, R1
+CMP R0, R1
+BGE 4
+LDQ 1, R0
+BMP 2
+LDQ 0, R0
+// cond
+TST R0
+JEQ #end_cond_if636718812-$-2
+//L:=11
+LDQ 11, R0
+STW R0, (BP)-2
+JMP #end_cond_if_if636718812-$-2
+end_cond_if636718812
+//L:=12
+LDQ 12, R0
+STW R0, (BP)-2
+end_cond_if_if636718812
+begin_cond_if445051633
+LDW R0, (BP)-4
+LDQ 15, R1
+DIV R0, R1, R0
+LDQ 1, R1
+CMP R0, R1
+BNE 4
+LDQ 1, R0
+BMP 2
+LDQ 0, R0
+// cond
+TST R0
+JEQ #end_cond_if445051633-$-2
+//j:=2
+LDQ 2, R0
+STW R0, (BP)-6
+JMP #end_cond_if_if445051633-$-2
+end_cond_if445051633
+end_cond_if_if445051633
+LDW R0, (BP)-4
+LDQ 1, R1
+ADD R0, R1, R0
+STW R0, (BP)-4
+BMP begin_cond__For1558600329-$-2
+end_cond__For1558600329
+// narr[1]:= 17;
+LDQ 17, R0
+STW R0, (BP)-16
+// L:=bb[1,2]*3;
+LDW R0, (BP)-54
+LDQ 3, R1
+MUL R0, R1, R0
+STW R0, (BP)-2
+// outinteger(1,L);
+LDW R0, (BP)-2
+STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2
-// outinteger(1,j)
-LDW R1, (BP)-6
-STW R1, -(SP)
+// L:=L+narr[1];
+LDW R0, (BP)-2
+LDW R1, (BP)-16
+ADD R0, R1, R0
+STW R0, (BP)-2
+// outinteger(1,L);
+LDW R0, (BP)-2
+STW R0, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+// L:=L-3;
+LDW R0, (BP)-2
+LDQ 3, R1
+SUB R0, R1, R0
+STW R0, (BP)-2
+// outinteger(1,L)
+LDW R0, (BP)-2
+STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2
 // Fermeture de l'environnement

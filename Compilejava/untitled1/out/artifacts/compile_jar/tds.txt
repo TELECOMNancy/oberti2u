@@ -1,7 +1,15 @@
 
 Root|NAME                |OFFSET|SYMB           |TYPE           |
+|N                   |-4    |VAR            |INTEGER        |
+|SELECT              |0     |FUNC           |INTEGER        |
 |print               |0     |FUNC           |VOID           |
-|n                   |2     |VAR            |INTEGER        |
+|L                   |2     |VAR            |INTEGER        |
 |i                   |4     |VAR            |INTEGER        |
 |j                   |6     |VAR            |INTEGER        |
-|aa                  |24    |MATRICE        |INTEGER        |
+|k                   |8     |VAR            |INTEGER        |
+|narr                |18    |ARRAY          |INTEGER        |
+|bb                  |68    |MATRICE        |INTEGER        |
+
+SELECT|NAME                |OFFSET|SYMB           |TYPE           |
+|N                   |-4    |VAR            |INTEGER        |
+|S                   |2     |VAR            |INTEGER        |

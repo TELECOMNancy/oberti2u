@@ -752,7 +752,7 @@ public class Generator {
                 .append("//Appel de la fonction : " + functionCallNode.getChild(0).getText())
                 .append("//Gestion des potentiels paramètres");
 
-        if (nbParametre > 0){
+        if (nbParametre >= 0){
             for(int i = nbParametre; i>=0; i--){
                // System.out.println("ici"+i+functionCallNode.getChild(1).getChildCount());
                 this.generateExpr(functionCallNode.getChild(1).getChild(i), currentSymbolTable);

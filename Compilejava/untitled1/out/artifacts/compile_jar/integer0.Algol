@@ -5,18 +5,18 @@
 	  INTEGER k;
 	  INTEGER ARRAY narr[1:5];
 	  INTEGER ARRAY bb[1:5,1:5];
-	  INTEGER PROCEDURE SELECT(N,M,K);
-            VALUE N, M, K;
-            INTEGER N, M, K;
+	  INTEGER PROCEDURE SELECT(N);
+            VALUE N;
+            INTEGER N;
             BEGIN
                INTEGER S;
-               M :=N+1;
-               outinteger(1,M)
+               N :=N+1;
+               outinteger(1,N)
             END;
       L:=12;
       i:=1;
       j:=2;
-      j:=SELECT(L,i,j);
+      j:=SELECT(L);
       FOR i := 1 STEP 1 UNTIL 5 DO
       BEGIN
       outinteger(1,L);
