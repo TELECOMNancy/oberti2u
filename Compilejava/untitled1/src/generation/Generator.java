@@ -84,18 +84,30 @@ public class Generator {
         this.generatePrintiFunction();
         this.generateItoaFunction();
         //System.out.println(root.getChild(0).getText());
-
         for(int i = 0; i < root.getChild(0).getChildCount(); i++) {
             Tree child = root.getChild(0).getChild(i);
-
+            System.out.println(child.getText());
             Tree childExplore = child;
+            if(child.getType()==AlgolLexer.BLOCK){
+                for(int z=0;z<child.getChildCount();z++){
+                    if(child.getChild(z).getType()==AlgolLexer.LABEL){
+                        String labelIdf = child.getChild(z).getChild(0).getText();
+                        System.out.println("wwwww"+labelIdf);
+
+                        this.generateLabel(child.getChild(z), this.symbolTable.getLabelSymbol(labelIdf, true), this.symbolTable);
+                        this.code.append(labelIdf + "_end_end");
+                    }
+                }
+            }
             while (childExplore.getChild(0) != null) {
                 childExplore = childExplore.getChild(0);
+                //System.out.println(childExplore.getText());
                 if (childExplore.getType() == AlgolLexer.LABEL) {
                     String labelIdf = childExplore.getChild(0).getText();
+                   // System.out.println("wwwww"+labelIdf);
 
-                    this.generateLabel(childExplore, this.symbolTable.getLabelSymbol(labelIdf, true), this.symbolTable);
-                    this.code.append(labelIdf + "_end_end");
+                    //this.generateLabel(childExplore, this.symbolTable.getLabelSymbol(labelIdf, true), this.symbolTable);
+                    //this.code.append(labelIdf + "_end_end");
                 }
             }
 
@@ -203,9 +215,8 @@ public class Generator {
 
         this.code
                 .append(functionLabel);
-
-       
-        Environment environment = this.environmentManager.createEnvironment(functionSymbol.getSymbolTable().getEnvironmentSize());
+        Environment environment = this.environmentManager.createEnvironment(functionSymbol.tds.getEnvironmentSize());
+        System.out.println("aaaaaaaaaaaaaa"+functionSymbol.tds.getEnvironmentSize());
         environment.openEnvironment(this.code);
 
         Tree prod=functionNode.getChild(functionNode.getChildCount()-1);
@@ -459,6 +470,9 @@ public class Generator {
                             .append("STW R" + r1 + ", (BP)-" + offset + "");
                 }
             }
+            //this.registersManager.lockRegister();
+            //this.registersManager.lockRegister();
+            //this.registersManager.lockRegister();
             this.code
                     .append("BMP " + beginLabel + "-$-2")
                     .append(endLabel);

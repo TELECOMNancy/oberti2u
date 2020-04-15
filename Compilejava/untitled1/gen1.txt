@@ -129,13 +129,37 @@ SELECT_
 STW BP, -(SP)
 LDW BP, SP
 // Reservation sur la pile des variables
-LDQ 0, R0
+LDQ 4, R0
 SUB SP, R0, SP
+// outinteger(1,S);
+LDW R0, (BP)-2
+STW R0, -(SP)
+JSR @printi_
+ADI SP, SP, #2
 // N :=N+1;
 LDW R0, (BP)4
 LDQ 1, R1
 ADD R0, R1, R0
 STW R0, (BP)4
+// FOR i := 0 STEP 1 UNTIL 5 DO
+LDQ 0, R0
+STW R0, (BP)-4
+begin_cond__For1558600329
+LDW R0, (BP)-4
+LDQ 5, R1
+CMP R0, R1
+BGT end_cond__For1558600329-$-2
+// outinteger(1,N)
+LDW R0, (BP)4
+STW R0, -(SP)
+JSR @printi_
+ADI SP, SP, #2
+LDW R0, (BP)-4
+LDQ 1, R1
+ADD R0, R1, R0
+STW R0, (BP)-4
+BMP begin_cond__For1558600329-$-2
+end_cond__For1558600329
 // outinteger(1,N)
 LDW R0, (BP)4
 STW R0, -(SP)
@@ -172,17 +196,17 @@ STW R0, (BP)-6
 // FOR i := 1 STEP 1 UNTIL 5 DO
 LDQ 1, R0
 STW R0, (BP)-4
-begin_cond__For1558600329
+begin_cond__For636718812
 LDW R0, (BP)-4
 LDQ 5, R1
 CMP R0, R1
-BGT end_cond__For1558600329-$-2
+BGT end_cond__For636718812-$-2
 // outinteger(1,L);
 LDW R0, (BP)-2
 STW R0, -(SP)
 JSR @printi_
 ADI SP, SP, #2
-begin_cond_if636718812
+begin_cond_if445051633
 LDW R0, (BP)-4
 LDQ 3, R1
 CMP R0, R1
@@ -192,17 +216,17 @@ BMP 2
 LDQ 0, R0
 // cond
 TST R0
-JEQ #end_cond_if636718812-$-2
+JEQ #end_cond_if445051633-$-2
 //L:=11
 LDQ 11, R0
 STW R0, (BP)-2
-JMP #end_cond_if_if636718812-$-2
-end_cond_if636718812
+JMP #end_cond_if_if445051633-$-2
+end_cond_if445051633
 //L:=12
 LDQ 12, R0
 STW R0, (BP)-2
-end_cond_if_if636718812
-begin_cond_if445051633
+end_cond_if_if445051633
+begin_cond_if1051754451
 LDW R0, (BP)-4
 LDQ 15, R1
 DIV R0, R1, R0
@@ -214,19 +238,19 @@ BMP 2
 LDQ 0, R0
 // cond
 TST R0
-JEQ #end_cond_if445051633-$-2
+JEQ #end_cond_if1051754451-$-2
 //j:=2
 LDQ 2, R0
 STW R0, (BP)-6
-JMP #end_cond_if_if445051633-$-2
-end_cond_if445051633
-end_cond_if_if445051633
+JMP #end_cond_if_if1051754451-$-2
+end_cond_if1051754451
+end_cond_if_if1051754451
 LDW R0, (BP)-4
 LDQ 1, R1
 ADD R0, R1, R0
 STW R0, (BP)-4
-BMP begin_cond__For1558600329-$-2
-end_cond__For1558600329
+BMP begin_cond__For636718812-$-2
+end_cond__For636718812
 // narr[1]:= 17;
 LDQ 17, R0
 STW R0, (BP)-16
