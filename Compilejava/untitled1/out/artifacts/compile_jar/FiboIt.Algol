@@ -1,0 +1,21 @@
+    BEGIN
+    INTEGER i;
+    INTEGER a;
+    INTEGER b;
+    INTEGER temp;
+	  INTEGER PROCEDURE FIBO(N);
+	  		VALUE N;
+            INTEGER N;
+            BEGIN
+            	a := 0;
+            	b := 1;
+            	FOR i:=1 STEP 1 UNTIL N DO
+            	    BEGIN
+            	        temp := a + b;
+            	        a := b;
+            	        b := temp;
+            	        outinteger(1,temp);
+            	END
+            END;
+      FIBO(8)
+    END
