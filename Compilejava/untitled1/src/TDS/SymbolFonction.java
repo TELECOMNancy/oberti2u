@@ -10,7 +10,7 @@ public class SymbolFonction extends CompositionTableDesSymboles {
 	private int NbrParametre=0;
 	public LinkedList<SymboleVariable> listparam;
 	public tableDesSymboles tds;
-	
+
 	public SymbolFonction(Tree node, String name, Scope scope, String types, tableDesSymboles symbolTable,int nbrParametre) {
 		super(node, EnumTypeSymbole.PROCEDURE, name, types,scope, symbolTable);
 		this.returnType = returnType;
@@ -18,6 +18,10 @@ public class SymbolFonction extends CompositionTableDesSymboles {
 		this.NbrParametre=nbrParametre;
 		this.tds=symbolTable;
 		this.listparam = new LinkedList<SymboleVariable>();
+	}
+
+	public tableDesSymboles gettds(){
+		return tds;
 	}
 
 	public void settds(tableDesSymboles  tds){
@@ -35,7 +39,7 @@ public class SymbolFonction extends CompositionTableDesSymboles {
 	public void setNombre(int nombre){
 		this.NbrParametre=nombre;
 	}
-	
+
 	public int getReturnNombre(){
 
 		if(this.listparam.size()==0){
@@ -45,36 +49,36 @@ public class SymbolFonction extends CompositionTableDesSymboles {
 			return this.NbrParametre;
 		}
 	}
-	
- public void addParam(SymboleVariable symb){
-	 this.listparam.add(symb);
-	 
- }
 
- public SymboleVariable getParam(int i){
+	public void addParam(SymboleVariable symb){
+		this.listparam.add(symb);
+
+	}
+
+	public SymboleVariable getParam(int i){
 		return this.listparam.get(i);
- }
-	
+	}
+
 	public LinkedList<SymboleVariable> returnParam(){
 		return this.listparam;
 	}
-	
+
 	public LinkedList<SymboleVariable> getParameters() {
 		LinkedList<SymboleVariable> parameters = new LinkedList<>();
 
 		for(String key: this.getSymbolTable().getSymbols().keySet()) {
-		    Symbole symbol = this.getSymbolTable().getSymbols().get(key);
+			Symbole symbol = this.getSymbolTable().getSymbols().get(key);
 
 			if(symbol instanceof SymboleVariable) {
-		        SymboleVariable variableSymbol = (SymboleVariable)symbol;
+				SymboleVariable variableSymbol = (SymboleVariable)symbol;
 
-		        if(variableSymbol.getOffset() < 0) {
-                    parameters.add(variableSymbol);
-                }
-            }
-        }
+				if(variableSymbol.getOffset() < 0) {
+					parameters.add(variableSymbol);
+				}
+			}
+		}
 
-        return parameters;
+		return parameters;
 	}
 
 	@Override
