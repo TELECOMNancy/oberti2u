@@ -210,7 +210,7 @@ public class Generator {
         String functionLabel = functionSymbol.getName() + "_";
         this.code
                 .append(functionLabel);
-        Environment environment = this.environmentManager.createEnvironment(functionSymbol.gettds().getEnvironmentSize()-functionSymbol.gettds().getOffsetCount());
+        Environment environment = this.environmentManager.createEnvironment(functionSymbol.tds.getEnvironmentSize());
 
         environment.openEnvironment(this.code);
 
@@ -307,13 +307,15 @@ public class Generator {
                                 }
                             }
                         }
-                        this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
-                        //String functionIdf = child.getChild(0).getChild(0).getText();
-
-                        //this.code.append("JMP #"+functionIdf+"_end_end"+"-$-2");
-
-                        //this.generateFunction(child.getChild(0), currentSymbolTable.getFunctionSymbol(functionIdf, true));
-                        //this.code.append(functionIdf+"_end_end");
+                        if(currentSymbolTable.blocs.isEmpty()) {
+                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable);
+                        }
+                        else{
+                            Environment environment3 = this.environmentManager.createEnvironment(currentSymbolTable.getBloc(0).getEnvironmentSize());
+                            environment3.openEnvironment(this.code);
+                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable.getBloc(0));
+                            environment3.closeEnvironment(this.code);
+                        }
                     }
                     else {
                         // System.out.println("wawawa");
@@ -461,14 +463,15 @@ public class Generator {
                     Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
                     int offset = temp.getKey();
 
-                    if (currentSymbolTable.symbolExists(temp.getValue(), false) || temp.getValue().getOffset()==0) {
-                        this.code
-                                .append("STW R" + r1 + ", (BP)-" + offset + "");
-                    }
-                    else{
+                    if(!currentSymbolTable.symbolExists(temp.getValue(),false)){
                         this.code.append("LDW WA, BP");
                         this.code.append("LDW WA,(WA)");
-                        this.code.append("STW R" + r1 + ", (WA)-" + offset  + "");
+                        this.code
+                                .append("STW R" + r1 + ", (WA)-" + offset + "");
+                    }
+                    else {
+                        this.code
+                                .append("STW R" + r1 + ", (BP)-" + offset + "");
                     }
 
 
@@ -608,36 +611,32 @@ public class Generator {
                 else {
                     bp = "-" + offset;
                 }
-                if (currentSymbolTable.symbolExists(temp.getValue(), false) || temp.getValue().getOffset()==0) {
-                    this.code
-                            .append("STW R" + r0 + ", (BP)" + bp + "");
-                }
-                else{
-                    this.code.append("LDW WA, BP");
-                    this.code.append("LDW WA,(WA)");
-                    this.code.append("STW R" + r0 + ", (WA)" + bp  + "");
-                }
+                this.code
+                        .append("STW R" + r0 + ", (BP)" + bp + "");
 
             }
             else {
                 if (ASSIgNode.getChild(1).getText().equals("LISTFOR")) {
                     this.generateExpr(ASSIgNode.getChild(1).getChild(0).getChild(0),currentSymbolTable);
                     int r0 = this.registersManager.unlockRegister();
+                    if(v==0) {
+
+                        this.code.append("LDW WA, BP");
+                        this.code.append("LDW WA,(WA)");
+                    }
                     String bp;
                     if (offset < 0) {
                         bp = String.valueOf(-offset);
                     } else {
                         bp = "-" + offset;
                     }
-
-                    if (currentSymbolTable.symbolExists(temp.getValue(), false) || temp.getValue().getOffset()==0) {
+                    if(v==0) {
                         this.code
-                                .append("STW R" + r0 + ", (BP)" + bp + "");
+                                .append("STW R" + r0 + ", (WA)" + bp + "");
                     }
                     else{
-                        this.code.append("LDW WA, BP");
-                        this.code.append("LDW WA,(WA)");
-                        this.code.append("STW R" + r0 + ", (WA)" + bp  + "");
+                        this.code
+                                .append("STW R" + r0 + ", (BP)" + bp + "");
                     }
 
                     //this.code.append("STW R" + r0 + ", (BP)" + bp + "");
@@ -653,7 +652,10 @@ public class Generator {
                     String dep2=" ";
                     System.out.println(ASSIgNode.getChild(1).getText());
                     System.out.println("hhhH2"+this.registersManager.getreturnRegister().size());
-                    int r0 = this.registersManager.unlockRegister();
+                    int r0 = 0;//this.registersManager.unlockRegister();
+                    if(ASSIgNode.getChild(0).getText().equals("ARRAYACCESS") || variableSymbol!=null){
+                        r0=this.registersManager.unlockRegister();
+                    }
                     if(ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")){
                         dep=ASSIgNode.getChild(0).getChild(1).getChild(0).getText();
                         if(ASSIgNode.getChild(0).getChild(1).getChildCount()>1){
@@ -682,8 +684,10 @@ public class Generator {
                     //  this.code
                     //         .append("STW R" + r0 + ", (BP)" + bp + "");
                     if(v==1) {
-                        this.code
-                                .append("STW R" + r0 + ", (BP)" + bp + "");
+                        System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
+                        if(variableSymbol!=null || ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")) {
+                            this.code.append("STW R" + r0 + ", (BP)" + bp + "");
+                        }
                         if (currentSymbolTable.getName().equals(ASSIgNode.getChild(0))) {
 
                             this.code.append("LDW R" + r0 + ", (BP)" + bp + "");
@@ -811,11 +815,11 @@ public class Generator {
 
             if (nbParametre >= 0){
                 for(int i = nbParametre; i>=0; i--){
-                    System.out.println("hhh"+this.registersManager.getreturnRegister().size());
+                    //System.out.println("hhh"+this.registersManager.getreturnRegister().size());
                     // System.out.println("ici"+i+functionCallNode.getChild(1).getChildCount());
                     this.generateExpr(functionCallNode.getChild(1).getChild(i), currentSymbolTable);
 
-                    System.out.println("hhh"+this.registersManager.getreturnRegister().size());
+                   // System.out.println("hhh"+this.registersManager.getreturnRegister().size());
 
                     int register = this.registersManager.unlockRegister();
 
@@ -830,6 +834,7 @@ public class Generator {
                     .append("JSR @"+ functionName +"          //on appelle la fonction à l'aide de son adresse");
 
             if (nbParametre>=0) {
+                nbParametre++;
                 this.code
                         .append("ADQ 2*" + nbParametre + ", SP");
             }
