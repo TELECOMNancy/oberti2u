@@ -174,7 +174,7 @@ public class Generator {
 
         }
 
-        this.generateBloc(region,this.symbolTable);
+        this.generateBloc(region,this.symbolTable,"");
         //this.generateBloc(newroot, this.symbolTable);
         this.environmentManager.closeEnvironment(this.code);
 
@@ -197,7 +197,7 @@ public class Generator {
         //Environment environment = this.environmentManager.createEnvironment(labelSymbol.getSymbolTable().getEnvironmentSize());
         //environment.openEnvironment(this.code);
 
-        this.generateBloc(labelNode.getChild(1), tds);
+        this.generateBloc(labelNode.getChild(1), tds,"");
         this.code.append(nom + "_end");
 
         //this.environmentManager.closeEnvironment(this.code);
@@ -219,7 +219,7 @@ public class Generator {
         wawa.addChild(prod.getChild(prod.getChildCount()-1));
         this.generateBloc(
                 wawa,
-                functionSymbol.tds
+                functionSymbol.tds,""
         );
 
         this.code
@@ -277,7 +277,7 @@ public class Generator {
         //this.registersManager.lockRegister();
     }
 
-    private void generateBloc(Tree blocNode, tableDesSymboles currentSymbolTable) throws IOException {
+    private void generateBloc(Tree blocNode, tableDesSymboles currentSymbolTable, String labelCompl) throws IOException {
         for(int i = 0; i <blocNode.getChildCount(); i++) {
             // System.out.println("yoo"+blocNode.getChild(i).getText());
             Tree child = blocNode.getChild(i);
@@ -308,18 +308,18 @@ public class Generator {
                             }
                         }
                         if(currentSymbolTable.blocs.isEmpty()) {
-                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable);
+                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable,labelCompl);
                         }
                         else{
                             Environment environment3 = this.environmentManager.createEnvironment(currentSymbolTable.getBloc(0).getEnvironmentSize());
                             environment3.openEnvironment(this.code);
-                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable.getBloc(0));
+                            this.generateBloc(child.getChild(child.getChildCount() - 1), currentSymbolTable.getBloc(0),labelCompl);
                             environment3.closeEnvironment(this.code);
                         }
                     }
                     else {
                         // System.out.println("wawawa");
-                        this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable);
+                        this.generateBloc(child.getChild(child.getChildCount()-1),currentSymbolTable,labelCompl);
                         //this.generateAssig(child.getChild(0).getChild(0),currentSymbolTable);
                     }
                     break;
@@ -338,7 +338,7 @@ public class Generator {
                     break;
                 case AlgolLexer.IF:
                     ///System.out.println("iffff");
-                    this.generateIf(child, currentSymbolTable);
+                    this.generateIf(child, currentSymbolTable,labelCompl);
                     System.out.println(this.registersManager.getreturnRegister().size());
                     break;
 
@@ -349,7 +349,7 @@ public class Generator {
                     this.generateGoto(child, currentSymbolTable);
                     break;
                 case AlgolLexer.BLOCK:
-                    this.generateBloc(child, currentSymbolTable);
+                    this.generateBloc(child, currentSymbolTable,labelCompl);
                     break;
                 /*case tigerLexer.DO:
                 case tigerLexer.IN:
@@ -386,7 +386,7 @@ public class Generator {
                 .append("TST R" +r0)
                 .append("JEQ #" + endLabel + "-$-2");
 
-        this.generateBloc(bloc, currentSymbolTable);
+        //this.generateBloc(bloc, currentSymbolTable);
 
         this.code
                 .append("JMP #" + beginLabel + "-$-2")
@@ -406,8 +406,6 @@ public class Generator {
     private void generateFor(Tree forNode, tableDesSymboles currentSymbolTable) throws IOException {
         Tree assig= forNode.getChild(0);
         String label = "For" + forNode.hashCode();
-        String beginLabel = "begin_cond_" + "_" + label;
-        String endLabel = "end_cond_" + "_" + label;
         this.generateAssig(assig, currentSymbolTable);
 
         Tree bloc = forNode.getChild(1);
@@ -416,27 +414,59 @@ public class Generator {
             Tree condition = null;
             Tree actualNode = forNode.getChild(0).getChild(1).getChild(i);
 
-
-            this.code
-                    .append(beginLabel);
             //this.generateExpr(condition.getParent().getParent().getChild(0).getChild(0),currentSymbolTable);
             if(actualNode.getChildCount() == 1)
             {
                 if(actualNode.getChild(0).getText().equals("IF")){
-                    generateIf(actualNode.getChild(0),currentSymbolTable);
+                    generateIf(actualNode.getChild(0),currentSymbolTable,"for_"+String.valueOf(i));
                 }
                 else{
+                    Pair<Integer, SymboleVariable> temp = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    String bp;
+                    if(temp.getKey() < 0)
+                        bp = String.valueOf(-temp.getKey());
+                    else
+                        bp = "-" + temp.getKey();
                     generateExpr(actualNode.getChild(0),currentSymbolTable);
+                    int r0 = this.registersManager.unlockRegister();
+                    if (currentSymbolTable.symbolExists(temp.getValue(), false) || temp.getValue().getOffset()==0) {
+                        this.code.append("STW R" + r0 + ", (BP)" + bp + "");
+                    }
+                    else
+                        this.code.append("STW R" + r0 + ", (WA)" + bp + "");
+
                 }
-                this.generateBloc(bloc,currentSymbolTable);
+                this.generateBloc(bloc,currentSymbolTable,String.valueOf(i));
             }
             else {
                 if (actualNode.getChild(1).getText().equals("PAS")) {
+                    Pair<Integer, SymboleVariable> varFor = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    String bp;
+                    if(varFor.getKey() < 0)
+                        bp = String.valueOf(-varFor.getKey());
+                    else
+                        bp = "-" + varFor.getKey();
+                    generateExpr(actualNode.getChild(0),currentSymbolTable);
+                    int r7 = this.registersManager.unlockRegister();
+                    if (currentSymbolTable.symbolExists(varFor.getValue(), false) || varFor.getValue().getOffset()==0) {
+                        this.code.append("STW R" + r7 + ", (BP)" + bp + "");
+                    }
+                    else {
+                        this.code.append("LDW WA, BP");
+                        this.code.append("LDW WA,(WA)");
+                        this.code.append("STW R" + r7 + ", (WA)" + bp + "");
+                    }
+                    String beginLabel = "begin_cond_" + "_" + label + "_" + i;
+                    String endLabel = "end_cond_" + "_" + label+ "_" + i;
+                    this.code
+                            .append(beginLabel);
+
                     condition = actualNode.getChild(1).getChild(1).getChild(0);
                     this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
                     this.generateExpr(condition, currentSymbolTable);
                     int r2 = this.registersManager.unlockRegister();
                     int r1 = this.registersManager.unlockRegister();
+
 
                     String op = "BGT ";
 
@@ -446,7 +476,7 @@ public class Generator {
                     //int r0 = this.registersManager.unlockRegister();
 
                     //System.out.println("YOO"+bloc.getText());
-                    this.generateBloc(bloc, currentSymbolTable);
+                    this.generateBloc(bloc, currentSymbolTable,String.valueOf(i));
 
                     this.generateExpr(forNode.getChild(0).getChild(0), currentSymbolTable);
                     this.generateExpr(actualNode.getChild(1).getChild(0),currentSymbolTable);
@@ -473,17 +503,78 @@ public class Generator {
                         this.code
                                 .append("STW R" + r1 + ", (BP)-" + offset + "");
                     }
+                    //this.registersManager.lockRegister();
+                    //this.registersManager.lockRegister();
+                    //this.registersManager.lockRegister();
+                    this.code
+                            .append("BMP " + beginLabel + "-$-2")
+                            .append(endLabel);
 
+                }
+                else if (actualNode.getChild(1).getText().equals("WHILE")) {
+                    Pair<Integer, SymboleVariable> varFor = this.getOffset(forNode.getChild(0).getChild(0), currentSymbolTable);
+                    String bp;
+                    if (varFor.getKey() < 0)
+                        bp = String.valueOf(-varFor.getKey());
+                    else
+                        bp = "-" + varFor.getKey();
+                    generateExpr(actualNode.getChild(0), currentSymbolTable);
+                    int r7 = this.registersManager.unlockRegister();
+                    if (currentSymbolTable.symbolExists(varFor.getValue(), false) || varFor.getValue().getOffset() == 0) {
+                        this.code.append("STW R" + r7 + ", (BP)" + bp + "");
+                    } else{
+                        this.code.append("LDW WA, BP");
+                        this.code.append("LDW WA,(WA)");
+                        this.code.append("STW R" + r7 + ", (WA)" + bp + "");
+                    }
+
+
+                    String beginLabel = "begin_cond_" + "_" + label + "_" + i;
+                    String endLabel = "end_cond_" + "_" + label + "_" + i;
+                    this.code
+                            .append(beginLabel);
+
+
+                    String op;
+
+                    switch (actualNode.getChild(1).getChild(0).getType()) {
+                        case AlgolLexer.EQUAL:
+                            op = "BNE ";
+                            break;
+                        case AlgolLexer.LESS:
+                        case AlgolParser.NOTGREATER:
+                            op = "BGE ";
+                            break;
+                        case AlgolParser.NOTLESS:
+                        case AlgolParser.GREATER:
+                            op = "BLE ";
+                            break;
+                        case AlgolParser.NOTEQUAL:
+                            op = "BEQ ";
+                            break;
+                        default:
+                            op = "BEQ ";
+                            break;
+                    }
+
+                    this.generateExpr(actualNode.getChild(1).getChild(0).getChild(0), currentSymbolTable);
+                    this.generateExpr(actualNode.getChild(1).getChild(0).getChild(1), currentSymbolTable);
+                    int r2 = this.registersManager.unlockRegister();
+                    int r1 = this.registersManager.unlockRegister();
+
+                    this.code
+                            .append("CMP R" + r1 + ", R" + r2)
+                            .append(op + endLabel + "-$-2");
+
+
+                    this.generateBloc(bloc, currentSymbolTable,String.valueOf(i));
+
+                    this.code
+                            .append("BMP " + beginLabel + "-$-2")
+                            .append(endLabel);
 
                 }
             }
-            //this.registersManager.lockRegister();
-            //this.registersManager.lockRegister();
-            //this.registersManager.lockRegister();
-            this.code
-                    .append("BMP " + beginLabel + "-$-2")
-                    .append(endLabel);
-
         }
     }
 
@@ -531,11 +622,11 @@ public class Generator {
         return new Pair<>(offset, variableSymbol);
     }
 
-    private void generateIf(Tree ifNode, tableDesSymboles currentSymbolTable) throws IOException {
+    private void generateIf(Tree ifNode, tableDesSymboles currentSymbolTable, String labelCompl) throws IOException {
         Tree condition = ifNode.getChild(0);
         Tree bloc = ifNode.getChild(1);
 
-        String label = "if" + ifNode.hashCode();
+        String label = "if" + ifNode.hashCode() + "_" + labelCompl;
         String beginLabel = "begin_cond_" + label;
         String endLabel = "end_cond_" + label;
         String endifLabel = "end_cond_if_" + label;
@@ -550,7 +641,7 @@ public class Generator {
                 .append("TST R" + r0)
                 .append("JEQ #" + endLabel + "-$-2");
 
-        this.generateBloc(bloc, currentSymbolTable);
+        this.generateBloc(bloc, currentSymbolTable, "if_"+labelCompl);
         this.code
                 .append("JMP #" + endifLabel + "-$-2")
                 .append(endLabel);
@@ -563,7 +654,7 @@ public class Generator {
             //this.registersManager.lockRegister();
             //this.registersManager.unlockRegister();
             //System.out.println("yoo"+this.registersManager.getreturnRegister().size());
-            this.generateBloc(ifNode.getChild(2), currentSymbolTable);
+            this.generateBloc(ifNode.getChild(2), currentSymbolTable,"if2_labelCompl");
             // System.out.println("yoo"+this.registersManager.getreturnRegister().size());
 
         }

@@ -19,7 +19,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException,  RecognitionException {
-        String source = "Goto.Algol";
+        String source = "src/com/company/Recursif3.algol";
         String outSt = "out/artifacts/compile_jar/tds.txt";
         String out = "out/artifacts/compile_jar/gen1.txt";
 
