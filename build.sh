@@ -1,2 +1,1 @@
-sed -i.bak 's/\r$//' CompileGradle/gradlew
-cd ./CompileGradle/ && ./Gradlew build
+sed -i.bak 's/\r$//' CompileGradle/gradlew && cd ./CompileGradle/ && ./gradlew build
