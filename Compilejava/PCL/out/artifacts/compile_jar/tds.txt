@@ -1,8 +1,0 @@
-
-Root|NAME                |OFFSET|SYMB           |TYPE           |
-|TESTLABEL           |0     |LABEL          |
-|print               |0     |FUNC           |VOID           |
-|Wawa                |0     |LABEL          |
-|L                   |2     |VAR            |INTEGER        |
-|i                   |4     |VAR            |INTEGER        |
-|k                   |6     |VAR            |INTEGER        |

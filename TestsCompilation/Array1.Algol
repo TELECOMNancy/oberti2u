@@ -1,0 +1,11 @@
+BEGIN
+	INTEGER n;
+	n := 48;
+	BEGIN
+	    INTEGER ARRAY nArr[1:50];
+		nArr[48] := 2;
+		n:=nArr[48]
+	END;
+
+	outinteger(1,n)
+END

@@ -1,16 +1,24 @@
     BEGIN
 	  INTEGER L;
 	  INTEGER i;
-	  INTEGER j;
 	  INTEGER k;
       TESTLABEL :
       	BEGIN
-        	k := 4;
-        	outinteger(1, k)
+      	     IF (i LESS 3) THEN L:=14 ELSE L:=12;
+      	     k:=4;
+        	  outinteger(1,L)
         END;
+        Wawa :
+        BEGIN
+        FOR i := 1 STEP 1 UNTIL 5 DO
+        BEGIN
+        outinteger(1,L)
+        END
+        END
+        ;
       L:=12;
       i:=1;
-      j:=2;
       outinteger(1,L);
-      GOTO TESTLABEL
+      GOTO TESTLABEL;
+      GOTO Wawa
     END

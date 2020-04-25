@@ -1,0 +1,26 @@
+BEGIN
+
+
+	INTEGER n, i, j;
+    INTEGER ARRAY aa[0:2,0:2];
+	aa[0,0]:=1;
+	aa[0,1]:=2;
+	aa[0,2]:=3;
+	aa[1,0]:=4;
+    aa[1,1]:=5;
+    aa[1,2]:=5;
+
+    aa[2,0]:=7;
+    aa[2,1]:=8;
+    aa[2,2]:=9;
+
+    n:=aa[0,0];
+    i:=aa[1,0];
+    j:=aa[2,0];
+
+    outinteger(1,n);
+    outinteger(1,i);
+    outinteger(1,j)
+
+
+END

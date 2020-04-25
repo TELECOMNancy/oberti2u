@@ -1,0 +1,30 @@
+    BEGIN
+	  INTEGER L;
+	  INTEGER i;
+	  INTEGER j;
+	  INTEGER k;
+	  INTEGER PROCEDURE SELECT(N);
+            VALUE N;
+            INTEGER N;
+            BEGIN
+               INTEGER S;
+               outinteger(1,S);
+               N :=N+1;
+               SELECT:=1+N
+            END;
+      L:=12;
+      i:=1;
+      j:=2;
+      j:=SELECT(L);
+      outinteger(1,j);
+      FOR i := 1 STEP 1 UNTIL 5 DO
+      BEGIN
+      outinteger(1,L);
+      IF (i LESS 3) THEN L:=11 ELSE L:=12;
+      IF (i / 15 EQUAL 1) THEN j:=2
+      END;
+
+      outinteger(1,L);
+      L:=L-3;
+      outinteger(1,L)
+    END

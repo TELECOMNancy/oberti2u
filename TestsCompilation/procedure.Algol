@@ -1,0 +1,13 @@
+BEGIN
+
+	INTEGER nf;
+	INTEGER nn;
+	INTEGER PROCEDURE factorial(n);
+	VALUE n; INTEGER n;
+	BEGIN
+		IF (n EQUAL 1) THEN factorial := 1
+		ELSE factorial:=factorial(n-1)*n
+	END;
+	nf := factorial(8);
+	outinteger(1,nf)
+END

@@ -1,0 +1,12 @@
+BEGIN
+    INTEGER n;
+    INTEGER m;
+	BEGIN
+	INTEGER k;
+	n:=10;
+	k:=1;
+	outinteger(1,k);
+	m:=n
+	END;
+	outinteger(1,n)
+END
