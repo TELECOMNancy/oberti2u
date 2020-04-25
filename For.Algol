@@ -1,0 +1,18 @@
+ 
+    BEGIN
+    INTEGER i;
+    INTEGER x;
+	  INTEGER PROCEDURE LOOP(MAX,INC,INIT);
+	  		VALUE MAX,INC,INIT;
+            INTEGER MAX,INC,INIT;
+            BEGIN
+                x:=0;
+            	FOR i:=5 WHILE x LESS 8,INIT STEP INC UNTIL MAX,27,35 DO
+            	    BEGIN
+            	        IF (i EQUAL 10) THEN i:=200;
+            	        x:= x + 1;
+            	        outinteger(1,i)
+            	END
+            END;
+      LOOP(10,1,0)
+    END
