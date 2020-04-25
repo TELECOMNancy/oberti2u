@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="javafx.base">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/resources/javafx.base.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/javafx.controls.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/java" />
+    </SOURCES>
+  </library>
+</component>

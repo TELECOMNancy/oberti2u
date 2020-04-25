@@ -1,0 +1,9 @@
+
+BEGIN
+    INTEGER n;
+    INTEGER m;
+	BEGIN
+	n:=10;
+	m:=n
+	END
+END

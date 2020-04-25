@@ -1,0 +1,23 @@
+ BEGIN
+    INTEGER c;
+    INTEGER z;
+    INTEGER u;
+    INTEGER h;
+	  INTEGER PROCEDURE FIBO(N);
+	  		VALUE N;
+            INTEGER N;
+            BEGIN
+            c:=0;
+            u:=1;
+            z:=1;
+            	FOR u := 1 STEP 1 UNTIL N DO
+            	BEGIN
+            	h:=c+z;
+            	c:=z;
+            	z:=h;
+            	outinteger(1,h)
+            END
+            END;
+      FIBO(7);
+      outinteger(1,c)
+    END

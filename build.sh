@@ -1,0 +1,1 @@
+cd ./CompileGradle/ && ./Gradlew build
