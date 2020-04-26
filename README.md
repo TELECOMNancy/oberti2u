@@ -44,6 +44,8 @@ Pour vérifier le retour d'une fonction il faut affecter une variable avec l'app
 Pour les tableaux un point important est que les accès doivent toujours être des entiers purs et non des variables. Nous n'avons pas eu le temps d'implémenter les autres cas. En outre, lorsqu'un tableaux ou une matrice est déclaré il ou elle est automatiquement initialisé avec des 0.
 De plus, nous n'avons pas implémenté l'accès en mémoire à un tableau situé dans un environnement de niveau supérieur(cas pour fonction et begin imbriqué sauf label).
 
+Ps: Nous avons implémenté de telle sorte que dans une fonction on ne puisse pas faire d'instruction après un retour(cela rend les résultats faux). C'est à dire rien après NomFoncion:=valeur;
+
 De manière plus globale, une majorité des limitations de notre travail sur la partie compilation, tient à une gestion de la mémoire parfois peu otpimisée conjuguée au faible nombre de registre géré par ASM.
 
 
