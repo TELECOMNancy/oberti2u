@@ -671,6 +671,9 @@ public class Generator {
 
         }
         else{
+            if(variableSymbol==null){
+                v=1;
+            }
             if(ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")){
                 v=1;
             }
@@ -770,13 +773,13 @@ public class Generator {
                     //  this.code
                     //         .append("STW R" + r0 + ", (BP)" + bp + "");
                     if(v==1) {
-                        System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
+                       // System.out.println("ICCi"+ASSIgNode.getChild(0).getText());
                         if(variableSymbol!=null || ASSIgNode.getChild(0).getText().equals("ARRAYACCESS")) {
                             this.code.append("STW R" + r0 + ", (BP)" + bp + "");
                         }
                         if (currentSymbolTable.getName().equals(ASSIgNode.getChild(0))) {
 
-                            this.code.append("LDW R" + r0 + ", (BP)" + bp + "");
+                           // this.code.append("LDW R" + r0 + ", (BP)" + bp + "");
 
                             // this.registersManager.lockRegister();
                         }
