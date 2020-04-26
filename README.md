@@ -11,6 +11,7 @@ Nous avons implémenté le print, donc nos tests afficheront des résultats pour
 ## PlusbeauTest
 
 Nous avons implémenté un code avec des GOTO, FOR,LABEL , IF , appel de fonction et des tabelaux. Ce code calcul une somme . La valeur final affichée 3 est la somme des i qui sont affectés aux cases du tableau dans les labels.
+Nous avons fait en bonus au niveau du FOR un FOR complexe avec des While,STEP et des entiers: le code se nomme For.Algol
 
 
 ## Quelques points sur l'utilisation de notre compilateur
