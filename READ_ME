@@ -14,9 +14,19 @@ Quelques points sur notre compilateur:
 
 
 Au niveau de notre implémentation des appels de fonction et de la gestion des registres, notre compilateur a du mal à générer des résultat correct lorsqu'il y'a trop d'appel rcursif dans un cocde.
-Par exemple pour le code facorielle.Algol que nous avons mis dans notre dossier TestsCompilation à partir de 8 appel récursif nous avons plus assez de registre pour avoir un résulat correct. Ceci est partiellement du au fait que nous utilisons quelques registres utilitaires en plus. du fait des divers points de difficultés citer dans notre rapport nous n'avons pa sue le temsp
+Par exemple pour le code facorielle.Algol que nous avons mis dans notre dossier TestsCompilation à partir de 8 appel récursif nous avons plus assez de registre pour avoir un résulat correct. 
+Ceci est partiellement du au fait que nous utilisons quelques registres utilitaires en plus. du fait des divers points de difficultés citer dans notre rapport nous n'avons pa sue le temsp
 de nous concerter correctement pour essayer d'améliorer ce point sur la gestion des registres.
+En général les fonctions récursives avec retour tels que factorielles(avec des opérations) ne sont pas parfaites du fait de ce problèmes de registre mais tous les autres fonctionnent parfaitement.
 
-Pour les tableaux un point un important est que les accès doivent toujours être des entiers pures et non des variables. Nous avions pas eu le temps d'implémenter les autres cas.
+Pour vérifier le retour d'une fonction il faut affecter une variable avec l'appel de cette fonction et afficher  cette variable.
+
+
+
+Pour les tableaux un point un important est que les accès doivent toujours être des entiers pures et non des variables. Nous avions pas eu le temps d'implémenter les autres cas. Et lorsqu'un tableaux ou une matrice est déclaré il ou elle est automatiquement 
+initialisé avec des 0.
+
+
+
 
 
