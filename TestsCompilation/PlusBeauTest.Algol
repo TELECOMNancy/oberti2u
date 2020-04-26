@@ -1,0 +1,39 @@
+BEGIN
+    INTEGER ARRAY tab[0:2];
+    INTEGER i;
+    INTEGER k;
+    INTEGER tab0;
+    INTEGER tab1;
+    INTEGER tab2;
+    INTEGER PROCEDURE SOMME(N);
+    VALUE N;
+    INTEGER N;
+    BEGIN
+        N:=tab0+tab1+tab2;
+        SOMME := N;
+    END;
+
+    L1: BEGIN
+        tab[0]:=i;
+        tab0 := tab[0];
+        END;
+    L2: BEGIN
+        tab[1]:=i;
+        tab1 := tab[1];
+        END;
+    L3: BEGIN
+        tab[2]:=i;
+        tab2 := tab[2];
+        END;
+
+    FOR i:=0 STEP 1 UNTIL 4 DO
+        BEGIN
+            IF (i EQUAL 0) THEN GOTO L1;
+            IF (i EQUAL 1) THEN GOTO L2;
+            IF (i EQUAL 2) THEN GOTO L3
+        END;
+
+    i:=SOMME(0);
+    outinteger(1,i)
+
+END
