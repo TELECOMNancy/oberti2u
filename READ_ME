@@ -2,6 +2,8 @@ Niveau atteint: 4
 
 Nous avons implémenté le print, donc nos tests afficheront des résultats pour attester de leur bon fonctionnement.
 
+
+
 GROS Test:
 
 
@@ -11,6 +13,8 @@ GROS Test:
 
 
 Quelques points sur notre compilateur:
+
+Pour lancer notre compilateur nous avons implémenter les scripts shell demandés. La subtilité pour le compile.sh est que les tests sont dans le dossier Testscompilation.
 
 
 Au niveau de notre implémentation des appels de fonction et de la gestion des registres, notre compilateur a du mal à générer des résultat correct lorsqu'il y'a trop d'appel rcursif dans un cocde.
