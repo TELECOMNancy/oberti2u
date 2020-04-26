@@ -8,6 +8,6 @@ BEGIN
 		IF (n EQUAL 1) THEN factorial := 1
 		ELSE factorial:=factorial(n-1)*n
 	END;
-	nf := factorial(8);
+	nf := factorial(4);
 	outinteger(1,nf)
 END
