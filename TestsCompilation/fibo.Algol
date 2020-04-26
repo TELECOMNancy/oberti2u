@@ -8,7 +8,7 @@
             INTEGER N;
             BEGIN
                 temp := 40;
-                outinteger(1,temp);
+                
                 i := 1;
             	outinteger(1, N);
             	a := 0;
