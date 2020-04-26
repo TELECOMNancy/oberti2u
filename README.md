@@ -8,6 +8,10 @@ Niveau 4
 
 Nous avons implémenté le print, donc nos tests afficheront des résultats pour attester de leur bon fonctionnement.
 
+## PlusbeauTest
+
+Nous avons implémenté un code avec des GOTO, FOR,LABEL , IF , appel de fonction et des tabelaux. Ce code calcul une somme . La valeur final affichée 3 est la somme des i qui sont affectés aux cases du tableau dans les labels.
+
 
 ## Quelques points sur l'utilisation de notre compilateur
 Pour lancer notre compilateur nous avons implémenter les scripts shell demandés. Une fois le dépot cloné, il suffit de se placer à la racine du projet pour éxécuter les scripts bash. Trois commandes sont disponibles :
