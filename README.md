@@ -35,7 +35,7 @@ Les tests que nous vous proposons sont présents dans le fichier Testscompilatio
 
 ## Quelques point concernant l'avancement et les limites du projet
 
-Au niveau de notre implémentation des appels de fonction et de la gestion des registres, notre compilateur a du mal à générer des résultat correct lorsqu'il y'a trop d'appel récursif dans un code. Par exemple pour le code facorielle. Algol que nous avons mis dans notre dossier TestsCompilation à partir de 8 appel récursif nous n'avons plus assez de registre pour avoir un résulat correct. Ceci est partiellement du au fait que nous utilisons quelques registres utilitaires en plus. Du fait des divers points de difficultés citées dans notre rapport nous n'avons pas eu le temps de nous concerter correctement pour essayer d'améliorer ce point sur la gestion des registres.
+Au niveau de notre implémentation des appels de fonction et de la gestion des registres, notre compilateur a du mal à générer des résultat correct lorsqu'il y'a trop d'appel récursif dans un code. Par exemple pour le code procedure.Algol que nous avons mis dans notre dossier TestsCompilation à partir de 8 appel récursif nous n'avons plus assez de registre pour avoir un résulat correct. Ceci est partiellement du au fait que nous utilisons quelques registres utilitaires en plus. Du fait des divers points de difficultés citées dans notre rapport nous n'avons pas eu le temps de nous concerter correctement pour essayer d'améliorer ce point sur la gestion des registres.
 
 En général les fonctions récursives avec retour tels que factorielles (avec des opérations) ne sont pas parfaites du fait de ce problème de registre mais tous les autres fonctionnent parfaitement.
 
